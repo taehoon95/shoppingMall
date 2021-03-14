@@ -16,4 +16,5 @@ public class saleMainService {
 	public List<Sale> selectMainByDate(Sale sale){
 		return dao.selectMainByDate(sale);
 	}
+	
 }

@@ -2,6 +2,7 @@ package shoppingMall.ui.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,6 +17,9 @@ public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private saleMainService service;
+	private MainTopPanel pTop;
+	private MainMidPanel pMid;
+	private MainBottomPanel pBottom;
 	
 	public MainFrame() {
 		service = new saleMainService();
@@ -31,14 +35,14 @@ public class MainFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		MainTopPanel pTop = new MainTopPanel();
+		pTop = new MainTopPanel();
 		contentPane.add(pTop, BorderLayout.NORTH);
 		
-		MainMidPanel pMid = new MainMidPanel();
+		pMid = new MainMidPanel();
 		pMid.loadData();
 		contentPane.add(pMid, BorderLayout.CENTER);
 		
-		MainBottomPanel pBottom = new MainBottomPanel();
+		pBottom = new MainBottomPanel();
 		contentPane.add(pBottom, BorderLayout.SOUTH);
 	}
 
