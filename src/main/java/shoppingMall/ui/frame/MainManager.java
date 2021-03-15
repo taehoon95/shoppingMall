@@ -29,8 +29,8 @@ public class MainManager extends JFrame implements ActionListener {
 	private MainTopPanel pTop;
 	private MainMidPanel pMid;
 	private MainBottomPanel pBottom;
-	private List<Sale> list;
 	
+	private List<Sale> list;
 	private DecimalFormat df = new DecimalFormat("0,000");
 	
 	public MainManager() {

@@ -124,7 +124,14 @@ public class ProductTopPanel extends JPanel {
 	}
 
 	public JComboBox<Product> getCmbProduct() {
+		vaildCheck();
 		return cmbProduct;
+	}
+
+	private void vaildCheck() {
+		if(cmbProduct.getSelectedItem() == null) {
+			throw new InvaildCheckException();
+		}
 	}
 
 	public void setCmbProduct(JComboBox<Product> cmbProduct) {

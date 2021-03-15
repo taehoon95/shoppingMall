@@ -16,7 +16,7 @@ import shoppingMall.service.saleService;
 
 public class ProductBottomPanel extends JPanel {
 	private JTextField tfTotalOrder;
-	private JTextField tfTotalSales;
+	private JTextField tfTotalProfit;
 	private saleService service;
 	
 	private DecimalFormat df = new DecimalFormat("0,000");
@@ -28,6 +28,14 @@ public class ProductBottomPanel extends JPanel {
 		setDataTotalProfit();
 	}
 
+	public JTextField getTfTotalProfit() {
+		return tfTotalProfit;
+	}
+
+	public void setTfTotalProfit(JTextField tfTotalProfit) {
+		this.tfTotalProfit = tfTotalProfit;
+	}
+
 	public JTextField getTfTotalOrder() {
 		return tfTotalOrder;
 	}
@@ -36,21 +44,13 @@ public class ProductBottomPanel extends JPanel {
 		this.tfTotalOrder = tfTotalOrder;
 	}
 
-	public JTextField getTfTotalSales() {
-		return tfTotalSales;
-	}
-
-	public void setTfTotalSales(JTextField tfTotalSales) {
-		this.tfTotalSales = tfTotalSales;
-	}
-
-	private void setDataTotalProfit() {
+	public void setDataTotalProfit() {
 		List<Sale> saleList = service.showProduct();
 		int totalProfit = saleList.parallelStream().mapToInt(Sale::getProfit).sum();
-		tfTotalSales.setText(df.format(totalProfit));
+		tfTotalProfit.setText(df.format(totalProfit));
 	}
 
-	private void setDataTotalOrder() {
+	public void setDataTotalOrder() {
 		List<Sale> saleList = service.showProduct();
 		int totalOrder = saleList.parallelStream().mapToInt(Sale::getSaleamount).sum();
 		tfTotalOrder.setText(totalOrder + "");
@@ -71,17 +71,17 @@ public class ProductBottomPanel extends JPanel {
 		add(tfTotalOrder);
 		tfTotalOrder.setColumns(10);
 
-		JLabel lblTotalSales = new JLabel("총 이익금액");
-		lblTotalSales.setOpaque(true);
-		lblTotalSales.setBackground(Color.WHITE);
-		lblTotalSales.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblTotalSales);
+		JLabel lblTotalProfit = new JLabel("총 이익금액");
+		lblTotalProfit.setOpaque(true);
+		lblTotalProfit.setBackground(Color.WHITE);
+		lblTotalProfit.setHorizontalAlignment(SwingConstants.CENTER);
+		add(lblTotalProfit);
 
-		tfTotalSales = new JTextField();
-		tfTotalSales.setFont(new Font("굴림", Font.BOLD, 15));
-		tfTotalSales.setHorizontalAlignment(SwingConstants.TRAILING);
-		tfTotalSales.setColumns(10);
-		add(tfTotalSales);
+		tfTotalProfit = new JTextField();
+		tfTotalProfit.setFont(new Font("굴림", Font.BOLD, 15));
+		tfTotalProfit.setHorizontalAlignment(SwingConstants.TRAILING);
+		tfTotalProfit.setColumns(10);
+		add(tfTotalProfit);
 	}
 
 }

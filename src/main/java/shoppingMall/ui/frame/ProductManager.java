@@ -4,16 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import shoppingMall.ui.panel.ProductTopPanel;
 import shoppingMall.ui.panel.ProductMidPanel;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
+import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.panel.ProductBottomPanel;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.awt.event.ActionEvent;
 
@@ -24,6 +27,9 @@ public class ProductManager extends JFrame implements ActionListener {
 	private ProductMidPanel pMid;
 	private ProductBottomPanel pBottom;
 	private saleService service;
+	
+	private List<Sale> list;
+	private DecimalFormat df = new DecimalFormat("0,000");
 	
 	public ProductManager() {
 		service = new saleService();
@@ -42,6 +48,7 @@ public class ProductManager extends JFrame implements ActionListener {
 		
 		pTop = new ProductTopPanel();
 		pTop.getBtnSearch().addActionListener(this);
+		pTop.getBtnAllsearch().addActionListener(this);
 		pTop.setService(service);
 		contentPane.add(pTop, BorderLayout.NORTH);
 		
@@ -54,13 +61,38 @@ public class ProductManager extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == pTop.getBtnSearch()) {
-			actionPerformedPTopBtnSearch(e);
+		if (e.getSource() == pTop.getBtnAllsearch()) {
+			actionPerformedPTopBtnAllsearch(e);
 		}
+		try {
+			if (e.getSource() == pTop.getBtnSearch()) {
+				actionPerformedPTopBtnSearch(e);
+			}	
+		}catch(InvaildCheckException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
+		}
+		
+	}
+	private void actionPerformedPTopBtnAllsearch(ActionEvent e) {
+		pMid.loadData();
+		pTop.tfClear();
+		pBottom.setDataTotalOrder();
+		pBottom.setDataTotalProfit();
+		
 	}
 	protected void actionPerformedPTopBtnSearch(ActionEvent e) {
 		Product prodInfo = (Product) pTop.getCmbProduct().getSelectedItem();
 		List<Sale> productByproInfoList = service.selectProductByProInfo(prodInfo);
 		pMid.selectList(productByproInfoList);
+		
+		int totalProfit = productByproInfoList.parallelStream().mapToInt(Sale::getProfit).sum();
+		pBottom.getTfTotalProfit().setText(df.format(totalProfit));
+		
+		int totalOrder = productByproInfoList.parallelStream().mapToInt(Sale::getSaleamount).sum();
+		pBottom.getTfTotalOrder().setText(totalOrder+"");
+		
 	}
+
+	
+	
 }
