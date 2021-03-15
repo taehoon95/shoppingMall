@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,13 +15,26 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import shoppingMall.dto.Product;
+import shoppingMall.dto.Sale;
 import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.service.productService;
+import shoppingMall.service.saleService;
 
-public class MainTopPanel extends JPanel implements ActionListener  {
+import javax.swing.border.TitledBorder;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import java.awt.event.ItemEvent;
+
+public class ProductTopPanel extends JPanel {
 	private JButton btnSearch;
 	private JPanel pBottomRight;
 	private JPanel pBottom;
-	private JDateChooser JDate;
+	private JComboBox<Product> cmbProduct;
 	private JPanel pBottomLeft;
 	private JPanel pTop;
 	private JButton btnAllsearch;
@@ -29,13 +43,17 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 	private JPanel pTopLeft;
 	private JButton btnProduct;
 	private JButton btnDetail;
-
-	public MainTopPanel() {
+	private productService service;
+	
+	
+	public ProductTopPanel() {
 
 		initialize();
 	}
 
 	private void initialize() {
+		setBackground(Color.WHITE);
+		setBorder(new TitledBorder(null, "\uC81C\uD488\uBCC4 \uC870\uD68C", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
 		pTop = new JPanel();
@@ -62,14 +80,13 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 		pTop.add(pTopRight);
 		pTopRight.setLayout(null);
 		
-		btnAllsearch = new JButton("\uC804\uCCB4\uC870\uD68C");
+		btnAllsearch = new JButton("전체조회");
 		btnAllsearch.setBackground(Color.GREEN);
 		btnAllsearch.setFont(new Font("굴림", Font.BOLD, 12));
 		btnAllsearch.setBounds(12, 30, 105, 23);
 		pTopRight.add(btnAllsearch);
 		
-		btnCancel = new JButton("\uCDE8\uC18C");
-		btnCancel.addActionListener(this);
+		btnCancel = new JButton("취소");
 		btnCancel.setBackground(Color.GREEN);
 		btnCancel.setFont(new Font("굴림", Font.BOLD, 12));
 		btnCancel.setBounds(129, 30, 70, 23);
@@ -81,30 +98,48 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 
 		pBottomLeft = new JPanel();
 		pBottomLeft.setBackground(Color.WHITE);
-		pBottomLeft.setBorder(new EmptyBorder(15, 0, 15, 10));
+		pBottomLeft.setBorder(new EmptyBorder(22, 0, 22, 10));
 		pBottom.add(pBottomLeft);
 		pBottomLeft.setLayout(new GridLayout(0, 2, 0, 0));
 
-		JLabel lblDate = new JLabel("날짜별 조회");
-		lblDate.setFont(new Font("굴림", Font.BOLD, 15));
-		lblDate.setHorizontalAlignment(SwingConstants.CENTER);
-		pBottomLeft.add(lblDate);
+		JLabel lblProduct = new JLabel("검색조건");
+		lblProduct.setFont(new Font("굴림", Font.BOLD, 15));
+		lblProduct.setHorizontalAlignment(SwingConstants.CENTER);
+		pBottomLeft.add(lblProduct);
 
-		JDate = new JDateChooser();
-		JDate.setBackground(Color.LIGHT_GRAY);
-		pBottomLeft.add(JDate);
+		cmbProduct = new JComboBox<>();
+		cmbProduct.setBackground(Color.WHITE);
+		pBottomLeft.add(cmbProduct);
 
 		pBottomRight = new JPanel();
+		pBottomRight.setBorder(new EmptyBorder(20, 40, 20, 160));
 		pBottomRight.setBackground(Color.WHITE);
-		pBottomRight.setBorder(new EmptyBorder(11, 0, 10, 150));
 		pBottom.add(pBottomRight);
-
+		pBottomRight.setLayout(new GridLayout(0, 2, 10, 0));
+		
 		btnSearch = new JButton("검색");
+		pBottomRight.add(btnSearch);
 		btnSearch.setBackground(Color.GREEN);
 		btnSearch.setFont(new Font("굴림", Font.BOLD, 12));
-		pBottomRight.add(btnSearch);
 	}
 
+	public JComboBox<Product> getCmbProduct() {
+		return cmbProduct;
+	}
+
+	public void setCmbProduct(JComboBox<Product> cmbProduct) {
+		this.cmbProduct = cmbProduct;
+	}
+
+	public void setService(productService service) {
+		this.service = service;
+	
+		List<Product> prodList = service.showProInfo();
+		DefaultComboBoxModel prodModel = new DefaultComboBoxModel<Product>(new Vector<>(prodList));
+		cmbProduct.setModel(prodModel);
+		cmbProduct.setSelectedIndex(-1);
+	}
+	
 	public JButton getBtnProduct() {
 		return btnProduct;
 	}
@@ -137,32 +172,14 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 		this.btnSearch = btnSearch;
 	}
 
-	public JDateChooser getJDate() {
-		vaildCheck();
-		return JDate;
-	}
-
-	private void vaildCheck() {
-		if(JDate.getDate() == null) {
-			throw new InvaildCheckException();
-		}
-	}
-
-	public void setJDate(JDateChooser JDate) {
-		this.JDate = JDate;
-	}
 
 	public void tfClear() {
-		JDate.setDate(null);
+		cmbProduct.setSelectedItem(null);
 	}
 	
-	
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnCancel) {
-			actionPerformedBtnCancel(e);
-		}
-	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		tfClear();
 	}
+	
+
 }

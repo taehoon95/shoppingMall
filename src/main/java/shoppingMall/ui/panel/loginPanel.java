@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import shoppingMall.ui.frame.MainFrame;
+import shoppingMall.ui.frame.MainManager;
 
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
@@ -64,7 +64,7 @@ public class loginPanel extends JPanel implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnLogin(ActionEvent e) {
-		MainFrame frame = new MainFrame();
+		MainManager frame = new MainManager();
 		frame.setVisible(true);
 	}
 }

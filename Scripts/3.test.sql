@@ -73,10 +73,9 @@ delete from customer where cusno = '12011';
 
 select * from customer;
 
+select * from product;
 
-
-
-
+select cusNo,date,procode,proName,saleamount,proprice,sales,profit from vw_all where procode = 'PA';
 
 
 

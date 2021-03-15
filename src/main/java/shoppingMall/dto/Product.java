@@ -53,8 +53,8 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return String.format("product [procode=%s, proname=%s, proprice=%s, stock=%s]", procode, proname, proprice,
-				stock);
+		return String.format("%s %s %s %s", procode, proname, proprice == 0 ? "" : proprice,
+				stock == 0 ? "" : stock);
 	}
 
 }

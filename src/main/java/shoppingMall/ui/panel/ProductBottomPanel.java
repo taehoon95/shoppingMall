@@ -14,18 +14,18 @@ import javax.swing.SwingConstants;
 import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 
-public class MainBottomPanel extends JPanel {
+public class ProductBottomPanel extends JPanel {
 	private JTextField tfTotalOrder;
 	private JTextField tfTotalSales;
 	private saleService service;
 	
 	private DecimalFormat df = new DecimalFormat("0,000");
 	
-	public MainBottomPanel() {
+	public ProductBottomPanel() {
 		service = new saleService();
 		initialize();
 		setDataTotalOrder();
-		setDataTotalSales();
+		setDataTotalProfit();
 	}
 
 	public JTextField getTfTotalOrder() {
@@ -44,14 +44,14 @@ public class MainBottomPanel extends JPanel {
 		this.tfTotalSales = tfTotalSales;
 	}
 
-	public void setDataTotalSales() {
-		List<Sale> saleList = service.showMain();
-		int totalSales = saleList.parallelStream().mapToInt(Sale::getSales).sum();
-		tfTotalSales.setText(df.format(totalSales));
+	private void setDataTotalProfit() {
+		List<Sale> saleList = service.showProduct();
+		int totalProfit = saleList.parallelStream().mapToInt(Sale::getProfit).sum();
+		tfTotalSales.setText(df.format(totalProfit));
 	}
 
-	public void setDataTotalOrder() {
-		List<Sale> saleList = service.showMain();
+	private void setDataTotalOrder() {
+		List<Sale> saleList = service.showProduct();
 		int totalOrder = saleList.parallelStream().mapToInt(Sale::getSaleamount).sum();
 		tfTotalOrder.setText(totalOrder + "");
 	}
@@ -71,7 +71,7 @@ public class MainBottomPanel extends JPanel {
 		add(tfTotalOrder);
 		tfTotalOrder.setColumns(10);
 
-		JLabel lblTotalSales = new JLabel("총 판매액");
+		JLabel lblTotalSales = new JLabel("총 이익금액");
 		lblTotalSales.setOpaque(true);
 		lblTotalSales.setBackground(Color.WHITE);
 		lblTotalSales.setHorizontalAlignment(SwingConstants.CENTER);

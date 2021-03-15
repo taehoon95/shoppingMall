@@ -36,6 +36,7 @@ public class shoppingMallMain extends JFrame {
 		initialize();
 	}
 	private void initialize() {
+		setTitle("로그인");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 475, 466);
 		contentPane = new JPanel();

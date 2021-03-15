@@ -1,32 +1,30 @@
 package shoppingMall.ui.panel;
 
-import java.util.List;
-
 import javax.swing.SwingConstants;
 
 import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
-public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
+public class ProductMidPanel extends AbstractCustomTablePanel<Sale> {
 
 	private saleService service;
 
 	@Override
 	public void initList() {
 		service = new saleService();
-		list = service.showMain();
+		list = service.showProduct();
 	}
 
 	@Override
 	protected void setAlignAndWidth() {
 
 		// 컬럼내용 정렬
-		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2, 3, 4);
-		setTableCellAlign(SwingConstants.RIGHT, 5, 6);
+		setTableCellAlign(SwingConstants.CENTER, 0, 1, 2);
+		setTableCellAlign(SwingConstants.RIGHT, 3, 4, 5, 6);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(150, 100, 100, 150, 50, 50, 150);
+		setTableCellWidth(120, 100, 100, 100, 100, 100, 100);
 
 	}
 
@@ -34,17 +32,18 @@ public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
 	public Object[] toArray(Sale t) {
 		return new Object[] { 
 				t.getDate(),
-				t.getCusno().getCusno(),
-				t.getCusno().getCusname(),
-				t.getCusno().getCallno(),
 				t.getProcode().getProcode(),
-				t.getSaleamount(), t.getSales()
+				t.getProcode().getProname(),
+				t.getSaleamount(),
+				t.getProcode().getProprice(),
+				t.getSales(),
+				t.getProfit()
 				};
 	}
 
 	@Override
 	public String[] getColumnNames() {
-		return new String[] { "날짜", "회원번호", "회원명", "휴대전화", "제품코드", "주문수량", "판매액" };
+		return new String[] { "날짜", "제품코드", "제품명", "주문수량", "단가", "판매액", "이익금액" };
 	}
 
 
