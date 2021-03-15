@@ -50,22 +50,6 @@ CREATE TABLE shopping.sale (
 )
 COMMENT '판매내역';
 
-
--- 회원관리
-CREATE TABLE shopping.TABLE (
-	cusID   VARCHAR(200) NOT NULL COMMENT 'ID', -- ID
-	cusPass VARCHAR(200) NOT NULL COMMENT '비밀번호', -- 비밀번호
-	cusno   VARCHAR(50)  NOT NULL COMMENT '회원번호' -- 회원번호
-)
-COMMENT '회원관리';
-
--- 회원관리
-ALTER TABLE shopping.TABLE
-	ADD CONSTRAINT PK_TABLE -- 회원관리 기본키
-		PRIMARY KEY (
-			cusID -- ID
-		);
-
 -- 판매내역
 ALTER TABLE shopping.sale
 	ADD CONSTRAINT FK_customer_TO_sale -- 회원 -> 판매내역
@@ -84,14 +68,4 @@ ALTER TABLE shopping.sale
 		)
 		REFERENCES shopping.product ( -- 제품정보
 			procode -- 제품코드
-		);
-
--- 회원관리
-ALTER TABLE shopping.TABLE
-	ADD CONSTRAINT FK_customer_TO_TABLE -- 회원 -> 회원관리
-		FOREIGN KEY (
-			cusno -- 회원번호
-		)
-		REFERENCES shopping.customer ( -- 회원
-			cusno -- 회원번호
 		);

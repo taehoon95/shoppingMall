@@ -81,6 +81,22 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 		setAlignAndWidth();
 	
 	}
+//////////////////////////////////////////// list를 받아오는 setList : 검색용으로 사용
+	public void selectList(List<T> list) {
+		Object[][] data = new Object[list.size()][];
+		for (int i = 0; i < data.length; i++) {
+			data[i] = toArray(list.get(i));
+		}
+
+		CustomTableModel model = new CustomTableModel(data, getColumnNames());
+		table.setModel(model);
+		
+		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
+		table.setRowSorter(sorter);
+		
+		setAlignAndWidth();
+	
+	}
 	/*
 	 *컬럼내용 정렬 
 	 *setTableCellAlign(SwingConstants.CENTER, 0, 1); 
