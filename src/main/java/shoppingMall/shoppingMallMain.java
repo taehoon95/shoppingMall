@@ -49,16 +49,16 @@ public class shoppingMallMain extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.WHITE);
-		panel.add(panel_1, BorderLayout.NORTH);
+		JPanel pTop = new JPanel();
+		pTop.setBackground(Color.WHITE);
+		panel.add(pTop, BorderLayout.NORTH);
 		
-		loginPanel panel_2 = new loginPanel();
-		panel.add(panel_2, BorderLayout.CENTER);
+		loginPanel pMid = new loginPanel();
+		panel.add(pMid, BorderLayout.CENTER);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.WHITE);
-		panel.add(panel_3, BorderLayout.SOUTH);
+		JPanel pBottom = new JPanel();
+		pBottom.setBackground(Color.WHITE);
+		panel.add(pBottom, BorderLayout.SOUTH);
 	}
 
 }

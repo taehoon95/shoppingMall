@@ -2,6 +2,7 @@ package shoppingMall.dao;
 
 import java.util.List;
 
+import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 
@@ -16,7 +17,8 @@ public interface SaleDao {
 	
 	//상세 조회 화면
 	List<Sale> selectDetailInfo();
-
+	List<Sale> selectDetailByCus(Customer cus);
+	
 	
 	int insertSale(Sale sale);
 	int updateSale(Sale sale);

@@ -1,4 +1,4 @@
-package shoppingMall.ui.panel;
+package shoppingMall.ui.panel.product;
 
 import javax.swing.SwingConstants;
 

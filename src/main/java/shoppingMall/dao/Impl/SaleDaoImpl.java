@@ -27,26 +27,36 @@ public class SaleDaoImpl implements SaleDao {
 
 	private Sale getSale(ResultSet rs) throws SQLException {
 		int profit = 0;
-		String date = rs.getString("date");
-		Customer cusno = new Customer(rs.getString("cusno"));
+		String date = null;
+		Customer cusno = null;
+		int saleamount = 0;
+		int sales = 0;
+		Product procode = null;
+		int orderno = 0;
 		
+		date = rs.getString("date");
+		cusno = new Customer(rs.getString("cusno"));
+		procode = new Product(rs.getString("procode"));
+		saleamount = rs.getInt("saleamount");
+		sales = rs.getInt("sales");
+		
+		try {
+			orderno = rs.getInt("orderno");	
+		}catch(SQLException e){}
 		try{
 			cusno.setCusname(rs.getString("cusName"));	
 		}catch (SQLException e) {}
 		try{
 			cusno.setCallno(rs.getString("callno"));
 		}catch (SQLException e) {}
-		Product procode = new Product(rs.getString("procode"));
 		try {
 			procode.setProname(rs.getString("proName"));
 			procode.setProprice(rs.getInt("proPrice"));
 		}catch (SQLException e) {}
-		int saleamount = rs.getInt("saleamount");
-		int sales = rs.getInt("sales");
 		try {
 			profit = rs.getInt("profit");
 		}catch (SQLException e) {}
-		return new Sale(date, cusno, procode, saleamount, sales, profit);
+		return new Sale(orderno, date, cusno, procode, saleamount, sales, profit);
 	}
 	
 
@@ -112,7 +122,7 @@ public class SaleDaoImpl implements SaleDao {
 
 	@Override
 	public List<Sale> selectDetailInfo() {
-		String sql = "select date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all";
+		String sql = "select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()){
@@ -179,11 +189,32 @@ public class SaleDaoImpl implements SaleDao {
 
 	@Override
 	public List<Sale> selectProductByProInfo(Product prod) {
-		String sql = "select cusNo,date,procode,proName"
+		String sql = "select orderno,cusNo,cusName,date,procode,proName"
 				+ ",saleamount,proprice,sales,profit from vw_all where procode = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, prod.getProcode());
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					ArrayList<Sale> list = new ArrayList<>();
+					do {
+						list.add(getSale(rs));
+					}while(rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Sale> selectDetailByCus(Customer cus) {
+		String sql = "select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all where cusNo = ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, cus.getCusno());
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs.next()) {
 					ArrayList<Sale> list = new ArrayList<>();

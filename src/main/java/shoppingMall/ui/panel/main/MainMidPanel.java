@@ -1,4 +1,4 @@
-package shoppingMall.ui.panel;
+package shoppingMall.ui.panel.main;
 
 import java.util.List;
 
@@ -7,8 +7,15 @@ import javax.swing.SwingConstants;
 import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
+import java.awt.Color;
 
 public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
+	public MainMidPanel() {
+		initialize();
+	}
+	private void initialize() {
+		setBackground(Color.WHITE);
+	}
 
 	private saleService service;
 

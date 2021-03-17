@@ -1,36 +1,29 @@
-package shoppingMall.ui.panel;
+package shoppingMall.ui.panel.product;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import com.toedter.calendar.JDateChooser;
+import javax.swing.border.TitledBorder;
 
 import shoppingMall.dto.Product;
-import shoppingMall.dto.Sale;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
-import shoppingMall.service.saleService;
+import shoppingMall.ui.frame.DetailManager;
+import shoppingMall.ui.frame.MainManager;
 
-import javax.swing.border.TitledBorder;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-import java.awt.event.ItemEvent;
-
-public class ProductTopPanel extends JPanel {
+public class ProductTopPanel extends JPanel implements ActionListener {
 	private JButton btnSearch;
 	private JPanel pBottomRight;
 	private JPanel pBottom;
@@ -53,7 +46,7 @@ public class ProductTopPanel extends JPanel {
 
 	private void initialize() {
 		setBackground(Color.WHITE);
-		setBorder(new TitledBorder(null, "\uC81C\uD488\uBCC4 \uC870\uD68C", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "제품별 조회", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
 		pTop = new JPanel();
@@ -65,12 +58,14 @@ public class ProductTopPanel extends JPanel {
 		pTopLeft.setBorder(new EmptyBorder(15, 0, 0, 0));
 		pTop.add(pTopLeft);
 
-		btnProduct = new JButton("제품별 조회");
+		btnProduct = new JButton("메인화면");
+		btnProduct.addActionListener(this);
 		btnProduct.setBackground(Color.GREEN);
 		btnProduct.setFont(new Font("굴림", Font.BOLD, 15));
 		pTopLeft.add(btnProduct);
 
 		btnDetail = new JButton("상세 조회");
+		btnDetail.addActionListener(this);
 		btnDetail.setBackground(Color.GREEN);
 		btnDetail.setFont(new Font("굴림", Font.BOLD, 15));
 		pTopLeft.add(btnDetail);
@@ -87,6 +82,7 @@ public class ProductTopPanel extends JPanel {
 		pTopRight.add(btnAllsearch);
 		
 		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
 		btnCancel.setBackground(Color.GREEN);
 		btnCancel.setFont(new Font("굴림", Font.BOLD, 12));
 		btnCancel.setBounds(129, 30, 70, 23);
@@ -132,10 +128,6 @@ public class ProductTopPanel extends JPanel {
 		if(cmbProduct.getSelectedItem() == null) {
 			throw new InvaildCheckException();
 		}
-	}
-
-	public void setCmbProduct(JComboBox<Product> cmbProduct) {
-		this.cmbProduct = cmbProduct;
 	}
 
 	public void setService(productService service) {
@@ -184,9 +176,27 @@ public class ProductTopPanel extends JPanel {
 		cmbProduct.setSelectedItem(null);
 	}
 	
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			actionPerformedBtnCancel(e);
+		}
+		if (e.getSource() == btnDetail) {
+			actionPerformedBtnDetail(e);
+		}
+		if (e.getSource() == btnProduct) {
+			actionPerformedBtnProduct(e);
+		}
+	}
+	protected void actionPerformedBtnProduct(ActionEvent e) {
+		MainManager frame = new MainManager();
+		frame.setVisible(true);
+	}
+	protected void actionPerformedBtnDetail(ActionEvent e) {
+		DetailManager frame = new DetailManager();
+		frame.setVisible(true);
+	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		tfClear();
 	}
-	
-
 }

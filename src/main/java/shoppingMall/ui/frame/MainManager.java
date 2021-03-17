@@ -17,9 +17,10 @@ import javax.swing.border.EmptyBorder;
 import shoppingMall.dto.Sale;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.saleService;
-import shoppingMall.ui.panel.MainBottomPanel;
-import shoppingMall.ui.panel.MainMidPanel;
-import shoppingMall.ui.panel.MainTopPanel;
+import shoppingMall.ui.panel.main.MainBottomPanel;
+import shoppingMall.ui.panel.main.MainMidPanel;
+import shoppingMall.ui.panel.main.MainTopPanel;
+
 import javax.swing.border.TitledBorder;
 
 public class MainManager extends JFrame implements ActionListener {
@@ -88,16 +89,16 @@ public class MainManager extends JFrame implements ActionListener {
 		Sale searchByDate = searchDate();
 		list = service.selectMainByDate(searchByDate);
 		pMid.selectList(list);
-		setDataTotalSales();
-		setDataTotalOrder();
+		setDataTotalSalesByDate();
+		setDataTotalOrderByDate();
 		pTop.tfClear();
 		
 	}
-	public void setDataTotalSales() {
+	public void setDataTotalSalesByDate() {
 		int totalSales = list.parallelStream().mapToInt(Sale::getSales).sum();
 		pBottom.getTfTotalSales().setText(df.format(totalSales));
 	}
-	public void setDataTotalOrder() {
+	public void setDataTotalOrderByDate() {
 		int totalOrder = list.parallelStream().mapToInt(Sale::getSaleamount).sum();
 		pBottom.getTfTotalOrder().setText(totalOrder+"");
 	}

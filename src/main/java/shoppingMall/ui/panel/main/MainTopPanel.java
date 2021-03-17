@@ -1,4 +1,4 @@
-package shoppingMall.ui.panel;
+package shoppingMall.ui.panel.main;
 
 import java.awt.Color;
 import java.awt.Font;

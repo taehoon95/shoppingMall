@@ -11,7 +11,7 @@ select * from sale;
 -- Main 화면 형식 sql문
 create view vw_all
 as
-select date_format(date, "%Y.%m.%d") as date ,
+select orderno ,date_format(date, "%Y.%m.%d") as date ,
 	   c.cusNo,
 	   c.passno,
 	   c.cusName,
@@ -27,6 +27,8 @@ select date_format(date, "%Y.%m.%d") as date ,
 
 drop view vw_all;
 
+select * from vw_all;
+
 select date,cusNo,cusName,callNo,procode,saleamount,sales from vw_all;
 
 -- Main 화면에서 날짜별 조회
@@ -38,7 +40,7 @@ select cusNo,`date`,procode,proName,saleamount,proprice,sales,profit from vw_all
 
 -- 상세 조회 
  
-select date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all;
+select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all;
 
 -- sale테이블에서 insert,update,delete
 insert into sale (date,cusno ,procode ,saleamount) values ('20210314','12004','PB',10);
@@ -71,11 +73,13 @@ update customer set cusname ='이태훈', callno = '010-1545-6351' where cusno =
 
 delete from customer where cusno = '12011';
 
-select * from customer;
 
-select * from product;
+select cusno,passno,cusname,birth,callno,sex from customer;
+
+-- 제품코드 검색(제품별 조회에서)
 
 select cusNo,date,procode,proName,saleamount,proprice,sales,profit from vw_all where procode = 'PA';
 
+-- 회원번호 검색(상세 정보에서)
 
-
+select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all where cusNo = 12001;

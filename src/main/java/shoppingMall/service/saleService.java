@@ -4,6 +4,7 @@ import java.util.List;
 
 import shoppingMall.dao.SaleDao;
 import shoppingMall.dao.Impl.SaleDaoImpl;
+import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 
@@ -26,8 +27,17 @@ public class saleService {
 		return dao.selectProduct();
 	}
 	
-	public List<Sale> selectProductByProInfo(Product prod){
+	public List<Sale> selectProductByProInfo(Product prod){ 
 		return dao.selectProductByProInfo(prod);
 	}
 	
+	/////////////////////////////////////// 상세 조회
+	
+	public List<Sale> showDetail(){
+		return dao.selectDetailInfo();
+	}
+	
+	public List<Sale> selectDetailByCutomer(Customer cus){
+		return dao.selectDetailByCus(cus);
+	}
 }

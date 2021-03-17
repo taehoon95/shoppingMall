@@ -2,13 +2,24 @@ package shoppingMall.dao.Impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import shoppingMall.dao.CustomerDao;
 import shoppingMall.database.JdbcConn;
 import shoppingMall.dto.Customer;
 
 public class CustomerDaoImpl implements CustomerDao {
+
+	private static final CustomerDaoImpl instance = new CustomerDaoImpl();
+	
+	private CustomerDaoImpl() {}
+	
+	public static CustomerDaoImpl getInstance() {
+		return instance;
+	}
 
 	@Override
 	public int insertCustomer(Customer customer) {
@@ -53,6 +64,45 @@ public class CustomerDaoImpl implements CustomerDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public List<Customer> selectCustomer() {
+		String sql = "select cusno,cusname from customer";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			if(rs.next()) {
+				ArrayList<Customer> list = new ArrayList<>();
+				do {
+					list.add(getCustomer(rs));
+				}while(rs.next());
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	private Customer getCustomer(ResultSet rs) throws SQLException {
+		
+		String cusno = null;
+		String cusname = null;
+		String birth = null;
+		String callno = null;
+		int sex = 0;
+
+		try {
+			cusno = rs.getString("cusno");
+			cusname = rs.getString("cusname");
+			birth = rs.getString("birth");
+			callno = rs.getString("callno");
+			sex = rs.getInt("sex");
+		}catch(SQLException e) {}
+		
+		return new Customer(cusno, cusname, birth, callno, sex);
 	}
 
 }

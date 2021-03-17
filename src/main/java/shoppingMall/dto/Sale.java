@@ -9,6 +9,18 @@ public class Sale {
 	private int sales;
 	private int profit;
 
+	
+	
+	public Sale(int orderno, String date, Customer cusno, Product procode, int saleamount, int sales, int profit) {
+		this.orderno = orderno;
+		this.date = date;
+		this.cusno = cusno;
+		this.procode = procode;
+		this.saleamount = saleamount;
+		this.sales = sales;
+		this.profit = profit;
+	}
+
 	public Sale(String date, Customer cusno, Product procode, int saleamount, int sales, int profit) {
 		this.date = date;
 		this.cusno = cusno;

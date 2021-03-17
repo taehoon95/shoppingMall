@@ -74,8 +74,8 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return String.format("customer [cusno=%s, cusname=%s, birth=%s, callno=%s, sex=%s]", cusno, cusname, birth,
-				callno, sex);
+		return String.format("%s %s %s %s %s", cusno, cusname, birth == null ? "" : birth,
+				callno == null ? "" : callno, sex == 0 ? "" : sex);
 	}
 
 }

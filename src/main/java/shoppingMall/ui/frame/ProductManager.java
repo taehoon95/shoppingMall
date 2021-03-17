@@ -7,14 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import shoppingMall.ui.panel.ProductTopPanel;
-import shoppingMall.ui.panel.ProductMidPanel;
+
+import shoppingMall.ui.panel.product.ProductBottomPanel;
+import shoppingMall.ui.panel.product.ProductMidPanel;
+import shoppingMall.ui.panel.product.ProductTopPanel;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
-import shoppingMall.ui.panel.ProductBottomPanel;
+
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.List;

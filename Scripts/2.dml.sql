@@ -1,12 +1,12 @@
 select user(),database();
 
-use shoppingmall;
+use shopping;
 
 desc customer;
 desc product;
 desc sale;
 
-insert into customer 
+insert into customer (cusno, passno, cusname, birth, callno, sex)
      values ('12001',123,'홍길동','19770405','010-9741-5821',1),
      	    ('12002',123,'김연수','19850301','010-4568-5581',2),
      	    ('12003',123,'김지원','19860708','010-9111-5556',2),
@@ -22,7 +22,7 @@ insert into customer
      	
 select * from customer;
 
-insert into product 
+insert into product (procode, proname, proprice, stock)
      values ('PA','책상',10000,100),
      	    ('PB','냉장고',36000,40),
      	    ('PC','세탁기',22000,80),
@@ -34,7 +34,7 @@ insert into product
      	    
 select * from product;
 
-insert into sale (date,cusno ,procode ,saleamount)
+insert into sale (date, cusno, procode, saleamount)
 	 values ('2021.01.24','12003','PA',2),
 	        ('2021.01.27','12001','PA',1),
 	        ('2021.02.03','12009','PC',1),

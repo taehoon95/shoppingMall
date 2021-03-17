@@ -14,11 +14,10 @@
 				"url": "jdbc:mysql://localhost:3306/",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
 				"type": "dev",
-				"auth-model": "native",
-				"handlers": {}
+				"auth-model": "native"
 			}
 		},
-		"mysql5-1782ebf4be0-d67153392fce96a": {
+		"mysql5-178400c1af0-23d28f86a582e494": {
 			"provider": "mysql",
 			"driver": "mysql5",
 			"name": "shopping(user_shopping)",

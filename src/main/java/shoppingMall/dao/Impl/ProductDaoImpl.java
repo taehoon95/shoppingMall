@@ -15,7 +15,7 @@ public class ProductDaoImpl implements ProductDao {
 	
 	private static final ProductDaoImpl instance = new ProductDaoImpl();
 	
-	public ProductDaoImpl() {}
+	private ProductDaoImpl() {}
 	
 	public static ProductDaoImpl getInstance() {
 		return instance;

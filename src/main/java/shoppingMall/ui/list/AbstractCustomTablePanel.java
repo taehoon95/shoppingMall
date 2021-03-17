@@ -67,6 +67,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	}
 
 	public void setList() {
+		
 		Object[][] data = new Object[list.size()][];
 		for (int i = 0; i < data.length; i++) {
 			data[i] = toArray(list.get(i));
