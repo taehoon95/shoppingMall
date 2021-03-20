@@ -83,3 +83,6 @@ select cusNo,date,procode,proName,saleamount,proprice,sales,profit from vw_all w
 -- 회원번호 검색(상세 정보에서)
 
 select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all where cusNo = 12001;
+
+-- 회원번호 , 제품코드 둘다 검색(상세정보에서)
+select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all where cusNo = 12001 and procode = 'PA';

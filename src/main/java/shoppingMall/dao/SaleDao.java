@@ -18,6 +18,7 @@ public interface SaleDao {
 	//상세 조회 화면
 	List<Sale> selectDetailInfo();
 	List<Sale> selectDetailByCus(Customer cus);
+	List<Sale> selectDetailByProdAndCus(Customer cus,Product prod);
 	
 	
 	int insertSale(Sale sale);

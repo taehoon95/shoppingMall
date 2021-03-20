@@ -230,5 +230,27 @@ public class SaleDaoImpl implements SaleDao {
 		return null;
 	}
 
+	@Override
+	public List<Sale> selectDetailByProdAndCus(Customer cus, Product prod) {
+		String sql = "select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all where cusNo = ? and procode = ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, cus.getCusno());
+			pstmt.setString(2, prod.getProcode());
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					ArrayList<Sale> list = new ArrayList<Sale>();
+					do {
+						list.add(getSale(rs));
+					}while(rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 }
