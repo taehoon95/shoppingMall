@@ -86,3 +86,24 @@ select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cus
 
 -- 회원번호 , 제품코드 둘다 검색(상세정보에서)
 select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all where cusNo = 12001 and procode = 'PA';
+
+
+-- 회원가입
+insert into customer (cusno, passno, cusname, birth, callno, sex)
+     values ('12011',password(123),'홍동','19990405','010-9741-5881',1);
+
+select * from customer; 
+
+delete  from customer where cusno = 12011;
+
+-- 제품구입
+insert into customer (cusno, passno, cusname, birth, callno, sex)
+     values ('12011',password(123),'홍동','19990405','010-9741-5881',1);
+insert into sale (date, cusno, procode, saleamount)
+	 values ('2021.03.20','12011','PA',2);
+	 
+select * from vw_all;
+
+-- 제품 환불
+delete from sale where cusno = '12011';
+select * from vw_all;

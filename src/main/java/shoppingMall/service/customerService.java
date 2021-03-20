@@ -13,5 +13,9 @@ public class customerService {
 	public List<Customer> showCustomer(){
 		return dao.selectCustomer();
 	}
+	
+	public void insertCustomer(Customer customer) {
+		dao.insertCustomer(customer);
+	}
 
 }

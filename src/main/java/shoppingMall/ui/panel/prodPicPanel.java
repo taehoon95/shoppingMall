@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-public class JoinPicPanel extends JPanel {
+public class prodPicPanel extends JPanel {
 
-	public JoinPicPanel() {
+	public prodPicPanel() {
 
 		initialize();
 	}
@@ -20,7 +20,7 @@ public class JoinPicPanel extends JPanel {
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setPreferredSize(new Dimension(120, 150));
+		lblNewLabel.setPreferredSize(new Dimension(200, 150));
 		panel.add(lblNewLabel, BorderLayout.CENTER);
 		
 		JButton btnNewButton = new JButton("\uBD88\uB7EC\uC624\uAE30");

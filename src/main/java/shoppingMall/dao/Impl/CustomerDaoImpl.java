@@ -23,7 +23,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public int insertCustomer(Customer customer) {
-		String sql = "insert into customer values(?,?,'이태훈','19950304','01045105881',1)";
+		String sql = "insert into customer values(?,password(?),?,?,?,?)";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, customer.getCusno());
