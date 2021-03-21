@@ -14,9 +14,6 @@ import javax.swing.JTextField;
 public class ProductDetailUI extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
 
 	public ProductDetailUI() {
 		initialize();
@@ -29,33 +26,12 @@ public class ProductDetailUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(0, 2, 0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1);
+		JPanel pPic = new JPanel();
+		contentPane.add(pPic);
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel);
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
-		
-		JLabel lblProcode = new JLabel("New label");
-		panel.add(lblProcode);
-		
-		textField = new JTextField();
-		panel.add(textField);
-		textField.setColumns(10);
-		
-		JLabel label = new JLabel("New label");
-		panel.add(label);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		panel.add(textField_1);
-		
-		JLabel label_1 = new JLabel("New label");
-		panel.add(label_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		panel.add(textField_2);
+		JPanel pInfo = new JPanel();
+		contentPane.add(pInfo);
+		pInfo.setLayout(new GridLayout(0, 2, 0, 0));
 	}
 
 }
