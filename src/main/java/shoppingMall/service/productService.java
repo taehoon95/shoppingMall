@@ -21,4 +21,8 @@ public class productService {
 	public List<Sale> selectProductByProInfo(Product prod){
 		return sDao.selectProductByProInfo(prod);
 	}
+	
+	public Product selectProductByProcode(Product prod) {
+		return dao.selectProductByProCode(prod);
+	}
 }

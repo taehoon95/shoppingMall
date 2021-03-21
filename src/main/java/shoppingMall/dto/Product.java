@@ -5,18 +5,24 @@ public class Product {
 	private String proname;
 	private int proprice;
 	private int stock;
-
+	private int salePrice;
+	
 	public Product() {}
 
-	public Product(String procode, String proname, int proprice, int stock) {
+	public Product(String procode, String proname, int proprice, int stock, int salePrice) {
 		this.procode = procode;
 		this.proname = proname;
 		this.proprice = proprice;
 		this.stock = stock;
+		this.salePrice = salePrice;
 	}
 
 	public Product(String procode) {
 		this.procode = procode;
+	}
+
+	public int getSalePrice() {
+		return salePrice;
 	}
 
 	public String getProcode() {
@@ -49,6 +55,33 @@ public class Product {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((procode == null) ? 0 : procode.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (procode == null) {
+			if (other.procode != null)
+				return false;
+		} else if (!procode.equals(other.procode))
+			return false;
+		return true;
 	}
 
 	@Override

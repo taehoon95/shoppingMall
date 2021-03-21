@@ -1,13 +1,12 @@
 package shoppingMall.ui.panel.main;
 
-import java.util.List;
+import java.awt.Color;
 
 import javax.swing.SwingConstants;
 
 import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
-import java.awt.Color;
 
 public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
 	public MainMidPanel() {
@@ -33,7 +32,7 @@ public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
 		setTableCellAlign(SwingConstants.RIGHT, 5, 6);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(150, 100, 100, 150, 50, 50, 150);
+		setTableCellWidth(150, 100, 100, 130, 80, 80, 130);
 
 	}
 

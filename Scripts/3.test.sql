@@ -105,28 +105,33 @@ insert into sale (date, cusno, procode, saleamount)
 select * from vw_all;
 
 -- 제품 환불
-delete from sale where cusno = '12011';
+select * from customer;
+delete from customer where cusno = '0';
 select * from vw_all;
 
 
 select cusno,passno,cusname,birth,callno,sex from customer;
 
-delete from customer where cusno = 12;
+delete from customer where cusno = 77777;
 
 
-select cusno,passno from customer where cusno = '12001' and passno = password(123);
+select cusno,passno from customer where cusno = '00000' and passno = password(123);
 
 
+insert into customer (cusno, passno, cusname, birth, callno, sex)
+     values ('00000',password(123),'이태훈','2999.01.01','010########',1);
+
+select procode, proname, 1.1*proprice,stock as saleprice from product;
 
 
+-- 제품구입
+insert into customer (cusno, passno, cusname, birth, callno, sex)
+     values ('12011',password(123),'홍동','19990405','010-9741-5881',1);
+insert into sale (date, cusno, procode, saleamount)
+	 values ('2021.03.20','12011','PA',2);
+	
 
-
-
-
-
-
-
-
+select procode,proname,stock from product where procode = 'PA';
 
 
 
