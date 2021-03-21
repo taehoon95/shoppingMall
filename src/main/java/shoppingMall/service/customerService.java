@@ -18,4 +18,7 @@ public class customerService {
 		dao.insertCustomer(customer);
 	}
 
+	public Customer loginCustomer(Customer customer) {
+		return dao.LoginCustomer(customer);
+	}
 }

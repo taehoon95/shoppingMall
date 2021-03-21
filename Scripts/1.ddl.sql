@@ -10,7 +10,7 @@ CREATE TABLE shopping.customer (
 	passno  VARCHAR(41) NOT NULL COMMENT '비밀번호', -- 비밀번호
 	cusname VARCHAR(20) NOT NULL COMMENT '회원이름', -- 회원이름
 	birth   DATE        NULL     COMMENT '생년월일', -- 생년월일
-	callno  VARCHAR(13) NULL     COMMENT '휴대전화번호', -- 휴대전화번호
+	callno  VARCHAR(11) NULL     COMMENT '휴대전화번호', -- 휴대전화번호
 	sex     INT         NULL     COMMENT '성별' -- 성별
 )
 COMMENT '회원';

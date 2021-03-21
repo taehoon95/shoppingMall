@@ -23,7 +23,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public int insertCustomer(Customer customer) {
-		String sql = "insert into customer values(?,password(?),?,?,?,?)";
+		String sql = "insert into customer (cusno,passno,cusname,birth,callno,sex) values(?,password(?),?,?,?,?)";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, customer.getCusno());
@@ -103,6 +103,24 @@ public class CustomerDaoImpl implements CustomerDao {
 		}catch(SQLException e) {}
 		
 		return new Customer(cusno, cusname, birth, callno, sex);
+	}
+
+	@Override
+	public Customer LoginCustomer(Customer customer) {
+		String sql = "select cusno,passno from customer where cusno = ? and passno = password(?)";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, customer.getCusno());
+			pstmt.setString(2, customer.getPassno());
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					return getCustomer(rs);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

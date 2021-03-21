@@ -10,12 +10,12 @@ select * from sale;
 
 -- Main 화면 형식 sql문
 create view vw_all
-as
+as;
 select orderno ,date_format(date, "%Y.%m.%d") as date ,
 	   c.cusNo,
 	   c.passno,
 	   c.cusName,
-	   callNo,
+	   c.callNo,
 	   p.procode,
 	   p.proname,
 	   p.proprice,
@@ -27,7 +27,7 @@ select orderno ,date_format(date, "%Y.%m.%d") as date ,
 
 drop view vw_all;
 
-select * from vw_all;
+select * from vw_all va ;
 
 select date,cusNo,cusName,callNo,procode,saleamount,sales from vw_all;
 
@@ -107,3 +107,35 @@ select * from vw_all;
 -- 제품 환불
 delete from sale where cusno = '12011';
 select * from vw_all;
+
+
+select cusno,passno,cusname,birth,callno,sex from customer;
+
+delete from customer where cusno = 12;
+
+
+select cusno,passno from customer where cusno = '12001' and passno = password(123);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,19 +1,27 @@
 package shoppingMall.ui.panel;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JRadioButton;
-import com.toedter.calendar.JDateChooser;
-import javax.swing.JPasswordField;
-import javax.swing.border.TitledBorder;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.ButtonGroup;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
+import com.toedter.calendar.JDateChooser;
+
+import shoppingMall.dto.Customer;
+import shoppingMall.exception.InvaildCheckException;
 
 public class JoinItemPanel extends JPanel {
 	private JTextField tfCusno;
@@ -25,6 +33,7 @@ public class JoinItemPanel extends JPanel {
 	private JDateChooser dcBirth;
 	private JRadioButton rdbtnmale;
 	private JRadioButton rdbtnFemale;
+	private JLabel lblConfirm;
 
 	public JoinItemPanel() {
 
@@ -56,6 +65,7 @@ public class JoinItemPanel extends JPanel {
 		add(lblPass1);
 		
 		pfPass1 = new JPasswordField();
+		pfPass1.getDocument().addDocumentListener(listener);
 		add(pfPass1);
 		
 		JLabel lblPass2 = new JLabel("비밀번호 확인");
@@ -63,7 +73,18 @@ public class JoinItemPanel extends JPanel {
 		add(lblPass2);
 		
 		pfPass2 = new JPasswordField();
+		pfPass2.getDocument().addDocumentListener(listener);
 		add(pfPass2);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		add(panel);
+		
+		lblConfirm = new JLabel();
+		lblConfirm.setForeground(Color.RED);
+		lblConfirm.setFont(new Font("굴림", Font.BOLD, 12));
+		lblConfirm.setHorizontalAlignment(SwingConstants.CENTER);
+		add(lblConfirm);
 		
 		JLabel lblSex = new JLabel("성별");
 		lblSex.setHorizontalAlignment(SwingConstants.CENTER);
@@ -83,7 +104,7 @@ public class JoinItemPanel extends JPanel {
 		rdbtnmale.setBackground(Color.WHITE);
 		pSex.add(rdbtnmale);
 		
-		JLabel lblCall = new JLabel("휴대전화(010-0000-0000)");
+		JLabel lblCall = new JLabel("\uD734\uB300\uC804\uD654(\uC22B\uC790\uB9CC\uC785\uB825(-\uC5C6\uC774))");
 		lblCall.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblCall);
 		
@@ -109,4 +130,57 @@ public class JoinItemPanel extends JPanel {
 		tfCall.setText("");
 		dcBirth.setDate(new Date());
 	}
+	
+	public Customer getJoinItem() {
+		validCheck();
+		String cusno = tfCusno.getText().trim();
+		String cusname = tfCusname.getText().trim();
+		
+		String passno = String.valueOf(pfPass1.getPassword());
+		
+		SimpleDateFormat birthDate = new SimpleDateFormat("yyyy.MM.dd");
+		String birth = birthDate.format(dcBirth.getDate());
+		
+		String callno = tfCall.getText().trim();
+		int sex = rdbtnFemale.isSelected()?2:1;
+		return new Customer(cusno, passno,cusname, birth, callno, sex);
+	}
+	private void validCheck() {
+		if(tfCusno.getText().equals("") || tfCusname.getText().equals("")||
+				dcBirth.getDate() == null || tfCall.getText().equals("")||
+				lblConfirm.getText().equals("불일치")) {
+			throw new InvaildCheckException();
+		}
+	}
+	
+	DocumentListener listener = new DocumentListener() {
+		
+		@Override
+		public void removeUpdate(DocumentEvent e) {
+			getMessage();
+			
+		}
+		
+		@Override
+		public void insertUpdate(DocumentEvent e) {
+			getMessage();
+			
+		}
+		
+		@Override
+		public void changedUpdate(DocumentEvent e) {
+			getMessage();
+			
+		}
+		
+		private void getMessage() {
+			String pw1 = new String(pfPass1.getPassword());
+			String pw2 = new String(pfPass2.getPassword());
+			if(pw1.equals(pw2)) {
+				lblConfirm.setText("일치");
+			}else {
+				lblConfirm.setText("불일치");
+			}
+		}
+	};
 }

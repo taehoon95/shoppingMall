@@ -11,6 +11,12 @@ public class Customer {
 	public Customer() {}
 
 
+	public Customer(String cusno, String passno) {
+		this.cusno = cusno;
+		this.passno = passno;
+	}
+
+
 	public Customer(String cusno, String cusname, String birth, String callno, int sex) {
 		this.cusno = cusno;
 		this.cusname = cusname;
@@ -18,6 +24,16 @@ public class Customer {
 		this.callno = callno;
 		this.sex = sex;
 	}
+
+	public Customer(String cusno, String passno, String cusname, String birth, String callno, int sex) {
+		this.cusno = cusno;
+		this.passno = passno;
+		this.cusname = cusname;
+		this.birth = birth;
+		this.callno = callno;
+		this.sex = sex;
+	}
+
 
 	public Customer(String cusno) {
 		this.cusno = cusno;

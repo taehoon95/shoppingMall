@@ -4,10 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.Color;
+
+import shoppingMall.dto.Customer;
+import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.service.customerService;
 import shoppingMall.ui.panel.JoinItemPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -19,7 +24,7 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 	private JButton btnCancel;
 	private JoinItemPanel pMid;
 	private JButton btnAdd;
-	
+	private customerService service;
 
 	public JoinMembershipManager() {
 		initialize();
@@ -52,16 +57,27 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnAdd) {
-			actionPerformedBtnAdd(e);
-		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
+		}	
+		try {
+			if (e.getSource() == btnAdd) {
+				actionPerformedBtnAdd(e);
+			}
+		}catch (InvaildCheckException e1) {
+			JOptionPane.showMessageDialog(null, "공백이나 비밀번호가 일치한지 확인해주세요","회원가입 오류", JOptionPane.WARNING_MESSAGE);
+			pMid.tfClear();
 		}
+		
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		pMid.tfClear();
 	}
 	protected void actionPerformedBtnAdd(ActionEvent e) {
+		Customer newCustomer = pMid.getJoinItem();
+		service = new customerService();
+		service.insertCustomer(newCustomer);
+		JOptionPane.showMessageDialog(null, "감사드립니다. 가입 완료 되었습니다.","회원가입완료",JOptionPane.PLAIN_MESSAGE);
+		dispose();
 	}
 }
