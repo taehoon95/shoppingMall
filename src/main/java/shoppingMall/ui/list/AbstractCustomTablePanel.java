@@ -56,6 +56,10 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
 	}
+	
+	public JTable getTable() {
+		return table;
+	}
 
 	public DefaultTableModel getModel() {
 		CustomTableModel model = new CustomTableModel(getData(), getColumnNames());

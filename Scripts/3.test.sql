@@ -125,8 +125,8 @@ select procode, proname, 1.1*proprice,stock as saleprice from product;
 
 
 -- 제품구입
-insert into customer (cusno, passno, cusname, birth, callno, sex)
-     values ('12011',password(123),'홍동','19990405','010-9741-5881',1);
+insert into customer (cusno, cusname, callno)
+     values ('12011', '홍동','010-9741-5881');
 insert into sale (date, cusno, procode, saleamount)
 	 values ('2021.03.20','12011','PA',2);
 	
@@ -134,6 +134,57 @@ insert into sale (date, cusno, procode, saleamount)
 select procode,proname,stock from product where procode = 'PA';
 
 select procode,proname,proprice,stock,prodPic from product;
+
+
+
+
+
+-- orderno 자동, date 자동
+select `date`,cusNo,cusName,callNo,procode,proname,proprice,saleamount from vw_all where cusNo = 12001;
+
+	
+select orderno,`date`,cusNo, cusName,callNo,procode,proname,proprice,saleamount,sales,profit from vw_all;
+
+
+
+-- 구매
+
+insert into sale (date, cusno, procode, saleamount)
+	 values ('2021.03.20','12008','PA',2);
+
+update product set stock = stock - 2 where procode = "PA";
+
+
+select * from vw_all va ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

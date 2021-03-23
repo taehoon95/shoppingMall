@@ -44,4 +44,6 @@ public class saleService {
 	public List<Sale> selectDetailByProdAndCus(Customer cus,Product prod){
 		return dao.selectDetailByProdAndCus(cus, prod);
 	}
+	
+	
 }

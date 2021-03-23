@@ -6,7 +6,7 @@ import shoppingMall.dto.Product;
 
 public interface ProductDao {
 	int insertProduct(Product product);
-	int updateProduct(Product product);
+	
 	int deleteProduct(int product);
 	
 ///////////////////////////// 제품검색(고객 구매 테이블)
@@ -14,4 +14,7 @@ public interface ProductDao {
 	
 //////////////////////////// 제품 정보(고객 구매 테이블)
 	Product selectProductByProCode(Product product);
+	
+//////////////////////////// 구매용
+	int updateProduct(Product product);
 }

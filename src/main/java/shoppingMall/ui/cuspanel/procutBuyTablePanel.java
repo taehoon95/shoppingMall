@@ -12,13 +12,13 @@ import shoppingMall.ui.cusframe.ProductDetailUI;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
 @SuppressWarnings("serial")
-public class procutBuyTablePanel extends AbstractCustomTablePanel<Product>/* implements MouseListener */ {
+public class procutBuyTablePanel extends AbstractCustomTablePanel<Product>  {
 	
 	public procutBuyTablePanel() {
 		initialize();
 	}
 	private void initialize() {
-//		table.addMouseListener(this);
+
 	}
 
 	private productService service;
@@ -29,8 +29,6 @@ public class procutBuyTablePanel extends AbstractCustomTablePanel<Product>/* imp
 		list = service.showProInfo();
 	}
 
-	
-	
 	@Override
 	protected void setAlignAndWidth() {
 		// 컬럼내용 정렬
@@ -66,23 +64,7 @@ public class procutBuyTablePanel extends AbstractCustomTablePanel<Product>/* imp
 		
 		return list.get(list.indexOf(new Product(proCode)));
 	}
-	
-	
-//	public void mouseClicked(MouseEvent e) {
-//		if (e.getSource() == table) {
-//			mouseClickedThisTable(e);
-//		}
-//	}
-//	public void mouseEntered(MouseEvent e) {
-//	}
-//	public void mouseExited(MouseEvent e) {
-//	}
-//	public void mousePressed(MouseEvent e) {
-//	}
-//	public void mouseReleased(MouseEvent e) {
-//	}
-//	protected void mouseClickedThisTable(MouseEvent e) {
-//		ProductDetailUI frame = new ProductDetailUI();
-//		frame.setVisible(true);
-//	}
+
+
+
 }

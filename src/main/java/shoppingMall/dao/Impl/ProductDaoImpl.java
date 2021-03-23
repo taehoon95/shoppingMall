@@ -28,6 +28,14 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public int updateProduct(Product product) {
+		String sql = "update product set stock = ? where procode = ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, product.getStock()+"");
+			pstmt.setString(2, product.getProcode());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 

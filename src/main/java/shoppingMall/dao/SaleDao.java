@@ -20,7 +20,12 @@ public interface SaleDao {
 	List<Sale> selectDetailByCus(Customer cus);
 	List<Sale> selectDetailByProdAndCus(Customer cus,Product prod);
 	
+	// 제품 구입용
 	int insertSale(Sale sale);
+	
+	
 	int updateSale(Sale sale);
+	
+	
 	int deleteSale(Sale sale);
 }
