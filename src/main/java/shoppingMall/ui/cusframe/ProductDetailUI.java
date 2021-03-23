@@ -1,19 +1,19 @@
 package shoppingMall.ui.cusframe;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+
+import shoppingMall.dto.Product;
+import shoppingMall.ui.cuspanel.productInfoDetailPanel;
 
 @SuppressWarnings("serial")
 public class ProductDetailUI extends JFrame {
 
 	private JPanel contentPane;
+	private productInfoDetailPanel pInfo;
 
 	public ProductDetailUI() {
 		initialize();
@@ -24,14 +24,19 @@ public class ProductDetailUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(0, 2, 0, 0));
+		contentPane.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel pPic = new JPanel();
-		contentPane.add(pPic);
-		
-		JPanel pInfo = new JPanel();
+		pInfo = new productInfoDetailPanel();
 		contentPane.add(pInfo);
 		pInfo.setLayout(new GridLayout(0, 2, 0, 0));
 	}
 
+	
+	public void setDetailItem(Product prod) {
+		pInfo.setItem(prod);
+	}
+	
+	public void prohibitionBtn() {
+		pInfo.prohibitionBtn();
+	}
 }

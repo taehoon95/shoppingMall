@@ -25,6 +25,7 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 	private JoinItemPanel pMid;
 	private JButton btnAdd;
 	private customerService service;
+	private JButton btnClose;
 
 	public JoinMembershipManager() {
 		initialize();
@@ -52,11 +53,19 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 		btnCancel.setBackground(Color.GREEN);
 		pBottom.add(btnCancel);
 		
+		btnClose = new JButton("\uB098\uAC00\uAE30");
+		btnClose.addActionListener(this);
+		btnClose.setBackground(Color.GREEN);
+		pBottom.add(btnClose);
+		
 		pMid = new JoinItemPanel();
 		contentPane.add(pMid, BorderLayout.CENTER);
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnClose) {
+			actionPerformedBtnClose(e);
+		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}	
@@ -78,6 +87,9 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 		service = new customerService();
 		service.insertCustomer(newCustomer);
 		JOptionPane.showMessageDialog(null, "감사드립니다. 가입 완료 되었습니다.","회원가입완료",JOptionPane.PLAIN_MESSAGE);
+		dispose();
+	}
+	protected void actionPerformedBtnClose(ActionEvent e) {
 		dispose();
 	}
 }

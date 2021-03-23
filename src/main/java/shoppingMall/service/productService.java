@@ -22,6 +22,7 @@ public class productService {
 		return sDao.selectProductByProInfo(prod);
 	}
 	
+	// 제품 목록
 	public Product selectProductByProcode(Product prod) {
 		return dao.selectProductByProCode(prod);
 	}

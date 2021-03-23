@@ -28,7 +28,7 @@ CREATE TABLE shopping.product (
 	proname  VARCHAR(200) NULL     COMMENT '제품명', -- 제품명
 	proprice INT          NULL     COMMENT '제품단가', -- 제품단가
 	stock    INT          NULL     COMMENT '재고', -- 재고
-	prodPic  LONGBLOB     NULL     COMMENT '상품사진' -- 상품사진
+	prodPic  VARCHAR(50)     NULL     COMMENT '상품사진' -- 상품사진
 )
 COMMENT '제품정보';
 

@@ -23,10 +23,12 @@ public class ProductManager extends JFrame {
 	private productService service;
 	
 	public ProductManager() {
+		service = new productService();
 		initialize();
 	}
 	private void initialize() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("제품 목록");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -62,11 +64,17 @@ public class ProductManager extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			Product prod = pMid.getItem();
 			Product prodDetail = service.selectProductByProcode(prod);
-			ProductDetailUI frame = new ProductDetailUI();
-			frame.setTitle(prod+"");
+			System.out.println(prodDetail);
+			ProductDetailUI frame;
+			if(prodDetail == null) {
+				frame = new ProductDetailUI();
+			}else {
+				frame = new ProductDetailUI();
+				frame.setDetailItem(prodDetail);
+				frame.prohibitionBtn();
+			}
 			
-			
-			JOptionPane.showMessageDialog(null, "감사합니다.");
+			frame.setVisible(true);
 		}
 	};
 	

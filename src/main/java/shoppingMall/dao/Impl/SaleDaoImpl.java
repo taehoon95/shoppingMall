@@ -251,8 +251,4 @@ public class SaleDaoImpl implements SaleDao {
 		}
 		return null;
 	}
-
-
-
-
 }

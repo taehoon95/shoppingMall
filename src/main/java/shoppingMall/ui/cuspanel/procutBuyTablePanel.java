@@ -12,13 +12,13 @@ import shoppingMall.ui.cusframe.ProductDetailUI;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
 @SuppressWarnings("serial")
-public class procutBuyTablePanel extends AbstractCustomTablePanel<Product> implements MouseListener {
+public class procutBuyTablePanel extends AbstractCustomTablePanel<Product>/* implements MouseListener */ {
 	
 	public procutBuyTablePanel() {
 		initialize();
 	}
 	private void initialize() {
-		table.addMouseListener(this);
+//		table.addMouseListener(this);
 	}
 
 	private productService service;
@@ -68,21 +68,21 @@ public class procutBuyTablePanel extends AbstractCustomTablePanel<Product> imple
 	}
 	
 	
-	public void mouseClicked(MouseEvent e) {
-		if (e.getSource() == table) {
-			mouseClickedThisTable(e);
-		}
-	}
-	public void mouseEntered(MouseEvent e) {
-	}
-	public void mouseExited(MouseEvent e) {
-	}
-	public void mousePressed(MouseEvent e) {
-	}
-	public void mouseReleased(MouseEvent e) {
-	}
-	protected void mouseClickedThisTable(MouseEvent e) {
-		ProductDetailUI frame = new ProductDetailUI();
-		frame.setVisible(true);
-	}
+//	public void mouseClicked(MouseEvent e) {
+//		if (e.getSource() == table) {
+//			mouseClickedThisTable(e);
+//		}
+//	}
+//	public void mouseEntered(MouseEvent e) {
+//	}
+//	public void mouseExited(MouseEvent e) {
+//	}
+//	public void mousePressed(MouseEvent e) {
+//	}
+//	public void mouseReleased(MouseEvent e) {
+//	}
+//	protected void mouseClickedThisTable(MouseEvent e) {
+//		ProductDetailUI frame = new ProductDetailUI();
+//		frame.setVisible(true);
+//	}
 }

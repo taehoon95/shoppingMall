@@ -22,15 +22,15 @@ insert into customer (cusno, passno, cusname, birth, callno, sex)
      	
 select * from customer;
 
-insert into product (procode, proname, proprice, stock)
-     values ('PA','책상',10000,100),
-     	    ('PB','냉장고',36000,40),
-     	    ('PC','세탁기',22000,80),
-     	    ('PD','킥보드',30000,100),
-     	    ('PE','자전거',90000,60),
-     	    ('PF','시계',6000,10),
-     	    ('PG','TV',8000,50),
-     	    ('PH','마스크',3000,100);
+insert into product (procode, proname, proprice, stock, prodPic)
+     values ('PA','책상',10000,100, '학교책상의자.png'),
+     	    ('PB','냉장고',36000,40, '냉장고.png'),
+     	    ('PC','세탁기',22000,80, '세탁기.png'),
+     	    ('PD','킥보드',30000,100, '킥보드.png'),
+     	    ('PE','자전거',90000,60, '자전거.png'),
+     	    ('PF','시계',6000,10, '시계.png'),
+     	    ('PG','TV',8000,50, 'TV.png'),
+     	    ('PH','마스크',3000,100, 'mask.png');
      	    
 select * from product;
 

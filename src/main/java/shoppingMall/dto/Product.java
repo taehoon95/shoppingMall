@@ -6,14 +6,44 @@ public class Product {
 	private int proprice;
 	private int stock;
 	private int salePrice;
+	private String prodpic;
+	
 	
 	public Product() {}
+
+	public Product(String procode, String proname, int proprice, int stock, int salePrice, String prodpic) {
+		this.procode = procode;
+		this.proname = proname;
+		this.proprice = proprice;
+		this.stock = stock;
+		this.salePrice = salePrice;
+		this.prodpic = prodpic;
+	}
 
 	public Product(String procode, String proname, int proprice, int stock, int salePrice) {
 		this.procode = procode;
 		this.proname = proname;
 		this.proprice = proprice;
 		this.stock = stock;
+		this.salePrice = salePrice;
+	}
+	
+	public Product(String procode, String proname, int stock, String prodpic) {
+		this.procode = procode;
+		this.proname = proname;
+		this.stock = stock;
+		this.prodpic = prodpic;
+	}
+
+	public String getProdpic() {
+		return prodpic;
+	}
+
+	public void setProdpic(String prodpic) {
+		this.prodpic = prodpic;
+	}
+
+	public void setSalePrice(int salePrice) {
 		this.salePrice = salePrice;
 	}
 

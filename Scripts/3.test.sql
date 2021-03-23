@@ -133,7 +133,7 @@ insert into sale (date, cusno, procode, saleamount)
 
 select procode,proname,stock from product where procode = 'PA';
 
-
+select procode,proname,proprice,stock,prodPic from product;
 
 
 

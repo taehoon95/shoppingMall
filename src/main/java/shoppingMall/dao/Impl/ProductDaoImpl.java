@@ -61,6 +61,7 @@ public class ProductDaoImpl implements ProductDao {
 		int proprice = 0;
 		int stock = 0;
 		int salePrice = 0;
+		String prodpic = null;
 		
 		try {
 			procode = rs.getString("procode");
@@ -77,12 +78,15 @@ public class ProductDaoImpl implements ProductDao {
 		try {
 			stock = rs.getInt("stock");	
 		}catch(SQLException e) {}
-		return new Product(procode, proname, proprice, stock, salePrice);
+		try {
+			prodpic = rs.getString("prodpic");
+		}catch(SQLException e) {}
+		return new Product(procode, proname, proprice, stock, salePrice, prodpic);
 	}
 
 	@Override
 	public Product selectProductByProCode(Product product) {
-		String sql = "select procode,proname,stock from product where procode = ?";
+		String sql = "select procode,proname,proprice,stock,prodPic from product where procode = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, product.getProcode());
