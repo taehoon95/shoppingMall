@@ -26,7 +26,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		String sql = "insert into customer (cusno,passno,cusname,birth,callno,sex) values(?,password(?),?,?,?,?)";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setString(1, customer.getCusno());
+			pstmt.setInt(1, customer.getCusno());
 			pstmt.setString(2, customer.getPassno());
 			pstmt.setString(3, customer.getCusname());
 			pstmt.setString(4, customer.getBirth());
@@ -46,7 +46,7 @@ public class CustomerDaoImpl implements CustomerDao {
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, customer.getCusname());
 			pstmt.setString(2, customer.getCallno());
-			pstmt.setString(3, customer.getCusno());
+			pstmt.setInt(3, customer.getCusno());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,14 +88,14 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	private Customer getCustomer(ResultSet rs) throws SQLException {
 		
-		String cusno = null;
+		int cusno = 0;
 		String cusname = null;
 		String birth = null;
 		String callno = null;
 		int sex = 0;
 
 		try {
-			cusno = rs.getString("cusno");
+			cusno = rs.getInt("cusno");
 			cusname = rs.getString("cusname");
 			birth = rs.getString("birth");
 			callno = rs.getString("callno");
@@ -110,7 +110,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		String sql = "select cusno,passno from customer where cusno = ? and passno = password(?)";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setString(1, customer.getCusno());
+			pstmt.setInt(1, customer.getCusno());
 			pstmt.setString(2, customer.getPassno());
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs.next()) {

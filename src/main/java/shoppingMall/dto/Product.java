@@ -11,6 +11,16 @@ public class Product {
 	
 	public Product() {}
 
+	
+	
+	public Product(String procode, String proname, int stock) {
+		this.procode = procode;
+		this.proname = proname;
+		this.stock = stock;
+	}
+
+
+
 	public Product(String procode, String proname, int proprice, int stock, int salePrice, String prodpic) {
 		this.procode = procode;
 		this.proname = proname;

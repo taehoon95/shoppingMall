@@ -54,7 +54,7 @@ public class loginPanel extends JPanel implements ActionListener {
 	}
 	
 	public Customer loginItem() {
-		String cusno = tfCusno.getText();
+		int cusno = Integer.parseInt(tfCusno.getText());
 		String passno = String.valueOf(tfPass.getPassword());
 		return new Customer(cusno, passno);
 	}

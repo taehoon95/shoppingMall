@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.OptionalInt;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
@@ -22,9 +23,10 @@ import com.toedter.calendar.JDateChooser;
 
 import shoppingMall.dto.Customer;
 import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.service.customerService;
 
 public class JoinItemPanel extends JPanel {
-	private JTextField tfCusno;
+	private JLabel lblCusId;
 	private JTextField tfCusname;
 	private JPasswordField pfPass1;
 	private JTextField tfCall;
@@ -34,23 +36,32 @@ public class JoinItemPanel extends JPanel {
 	private JRadioButton rdbtnmale;
 	private JRadioButton rdbtnFemale;
 	private JLabel lblConfirm;
-
+	private customerService service = new customerService();
+	
 	public JoinItemPanel() {
 
 		initialize();
 	}
+	
+	private void cusId() {
+		OptionalInt cusno = service.showCustomer().parallelStream().mapToInt(Customer::getCusno).max();
+		int newCusno = cusno.getAsInt()+1;
+		lblCusId.setText(newCusno+"");
+	}	
+	
 	private void initialize() {
 		setBackground(Color.WHITE);
-		setBorder(new TitledBorder(new EmptyBorder(20, 0, 20, 0), "\uD68C\uC6D0 \uAC00\uC785", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		setBorder(new TitledBorder(new EmptyBorder(20, 0, 20, 0), "회원가입", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setLayout(new GridLayout(0, 2, 0, 20));
 		
-		JLabel lblCusno = new JLabel("\uC544\uC774\uB514(\uD68C\uC6D0 \uBC88\uD638)");
+		JLabel lblCusno = new JLabel("아이디(회원번호)");
 		lblCusno.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblCusno);
 		
-		tfCusno = new JTextField();
-		add(tfCusno);
-		tfCusno.setColumns(10);
+		lblCusId = new JLabel();
+		lblCusId.setHorizontalAlignment(SwingConstants.LEFT);
+		cusId();
+		add(lblCusId);
 		
 		JLabel lbCusname = new JLabel("회원 명");
 		lbCusname.setHorizontalAlignment(SwingConstants.CENTER);
@@ -81,7 +92,6 @@ public class JoinItemPanel extends JPanel {
 		add(panel);
 		
 		lblConfirm = new JLabel();
-		lblConfirm.setForeground(Color.RED);
 		lblConfirm.setFont(new Font("굴림", Font.BOLD, 12));
 		lblConfirm.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblConfirm);
@@ -104,7 +114,7 @@ public class JoinItemPanel extends JPanel {
 		rdbtnmale.setBackground(Color.WHITE);
 		pSex.add(rdbtnmale);
 		
-		JLabel lblCall = new JLabel("\uD734\uB300\uC804\uD654(\uC22B\uC790\uB9CC\uC785\uB825(-\uC5C6\uC774))");
+		JLabel lblCall = new JLabel("휴대전화(숫자만입력(-없이))");
 		lblCall.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblCall);
 		
@@ -120,20 +130,23 @@ public class JoinItemPanel extends JPanel {
 		add(dcBirth);
 	}
 
+	
 	public void tfClear() {
-		tfCusno.setText("");
 		tfCusname.setText("");
 		pfPass1.setText("");
 		pfPass2.setText("");
+		lblConfirm.setText("");
 		rdbtnFemale.setSelected(false);
 		rdbtnmale.setSelected(false);
 		tfCall.setText("");
 		dcBirth.setDate(new Date());
 	}
 	
+
+	
 	public Customer getJoinItem() {
 		validCheck();
-		String cusno = tfCusno.getText().trim();
+		int cusno = Integer.parseInt(lblCusId.getText().trim());
 		String cusname = tfCusname.getText().trim();
 		
 		String passno = String.valueOf(pfPass1.getPassword());
@@ -146,8 +159,8 @@ public class JoinItemPanel extends JPanel {
 		return new Customer(cusno, passno,cusname, birth, callno, sex);
 	}
 	private void validCheck() {
-		if(tfCusno.getText().equals("") || tfCusname.getText().equals("")||
-				dcBirth.getDate() == null || tfCall.getText().equals("")||
+		if(lblCusId.getText().equals("") || tfCusname.getText().equals("")||
+				dcBirth.getDate() == null || tfCall.getText().equals("") || tfCall.getText().length() != 11 ||
 				lblConfirm.getText().equals("불일치")) {
 			throw new InvaildCheckException();
 		}
@@ -178,7 +191,9 @@ public class JoinItemPanel extends JPanel {
 			String pw2 = new String(pfPass2.getPassword());
 			if(pw1.equals(pw2)) {
 				lblConfirm.setText("일치");
+				lblConfirm.setForeground(Color.GREEN);
 			}else {
+				lblConfirm.setForeground(Color.RED);
 				lblConfirm.setText("불일치");
 			}
 		}

@@ -1,7 +1,7 @@
 package shoppingMall.dto;
 
 public class Customer {
-	private String cusno;
+	private int cusno;
 	private String passno;
 	private String cusname;
 	private String birth;
@@ -11,13 +11,13 @@ public class Customer {
 	public Customer() {}
 
 
-	public Customer(String cusno, String passno) {
+	public Customer(int cusno, String passno) {
 		this.cusno = cusno;
 		this.passno = passno;
 	}
 
 
-	public Customer(String cusno, String cusname, String birth, String callno, int sex) {
+	public Customer(int cusno, String cusname, String birth, String callno, int sex) {
 		this.cusno = cusno;
 		this.cusname = cusname;
 		this.birth = birth;
@@ -25,7 +25,7 @@ public class Customer {
 		this.sex = sex;
 	}
 
-	public Customer(String cusno, String passno, String cusname, String birth, String callno, int sex) {
+	public Customer(int cusno, String passno, String cusname, String birth, String callno, int sex) {
 		this.cusno = cusno;
 		this.passno = passno;
 		this.cusname = cusname;
@@ -35,15 +35,15 @@ public class Customer {
 	}
 
 
-	public Customer(String cusno) {
+	public Customer(int cusno) {
 		this.cusno = cusno;
 	}
 
-	public String getCusno() {
+	public int getCusno() {
 		return cusno;
 	}
 
-	public void setCusno(String cusno) {
+	public void setCusno(int cusno) {
 		this.cusno = cusno;
 	}
 
@@ -90,7 +90,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s %s %s %s", cusno, cusname, birth == null ? "" : birth,
+		return String.format("%d %s %s %s %s", cusno, cusname, birth == null ? "" : birth,
 				callno == null ? "" : callno, sex == 0 ? "" : sex);
 	}
 

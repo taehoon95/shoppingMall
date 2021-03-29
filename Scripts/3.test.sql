@@ -157,11 +157,13 @@ update product set stock = stock - 2 where procode = "PA";
 
 select * from vw_all va ;
 
+select * from customer c ;
+
+select * from product p ;
 
 
 
-
-
+update product set stock = 10 where procode ='PF';
 
 
 

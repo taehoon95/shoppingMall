@@ -53,7 +53,7 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 		btnCancel.setBackground(Color.GREEN);
 		pBottom.add(btnCancel);
 		
-		btnClose = new JButton("\uB098\uAC00\uAE30");
+		btnClose = new JButton("나가기");
 		btnClose.addActionListener(this);
 		btnClose.setBackground(Color.GREEN);
 		pBottom.add(btnClose);
@@ -74,7 +74,7 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 				actionPerformedBtnAdd(e);
 			}
 		}catch (InvaildCheckException e1) {
-			JOptionPane.showMessageDialog(null, "공백이나 비밀번호가 일치한지 확인해주세요","회원가입 오류", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(null, "공백이나 비밀번호가 일치한지 확인해주세요","회원가입 오류", JOptionPane.CANCEL_OPTION);
 			pMid.tfClear();
 		}
 		

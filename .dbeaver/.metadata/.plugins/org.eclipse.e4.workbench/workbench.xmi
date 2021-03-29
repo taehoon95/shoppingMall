@@ -28,6 +28,7 @@
           <tags>persp.viewSC:org.jkiss.dbeaver.core.queryManager</tags>
           <tags>persp.viewSC:org.eclipse.pde.runtime.LogView</tags>
           <tags>persp.newWizSC:org.jkiss.dbeaver.erd.ui.navigator.DiagramCreateWizard</tags>
+          <tags>persp.actionSet:org.eclipse.ui.edit.text.actionSet.annotationNavigation</tags>
           <children xsi:type="basic:PartSashContainer" xmi:id="_pxiZsYlIEeulINibod8bKw" selectedElement="_pxiZsolIEeulINibod8bKw" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_pxiZsolIEeulINibod8bKw" containerData="3000" selectedElement="_pxiZs4lIEeulINibod8bKw">
               <children xsi:type="basic:PartStack" xmi:id="_pxiZs4lIEeulINibod8bKw" elementId="navigation" containerData="7000" selectedElement="_pxiZtYlIEeulINibod8bKw">
@@ -1681,7 +1682,7 @@
   <addons xmi:id="_pkNIY4lIEeulINibod8bKw" elementId="MinMax Addon" contributorURI="platform:/plugin/org.jkiss.dbeaver.ui.app.standalone" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_pkNIZIlIEeulINibod8bKw" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.jkiss.dbeaver.ui.app.standalone" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_pkSA0IlIEeulINibod8bKw" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_N8l_wY6xEeuXaZMrK3mPJA" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_pkjtoIlIEeulINibod8bKw" elementId="org.eclipse.team.ui.category.team" name="&#xd300;" description="&#xd300;&#xacfc; &#xd568;&#xaed8; &#xc791;&#xc5c5;&#xd560; &#xb54c; &#xc801;&#xc6a9;&#xb418;&#xb294; &#xc870;&#xce58;&#xc785;&#xb2c8;&#xb2e4;."/>
   <categories xmi:id="_pkjtoYlIEeulINibod8bKw" elementId="org.eclipse.ui.category.views" name="&#xbcf4;&#xae30;" description="&#xbcf4;&#xae30;&#xb97c; &#xc5f4;&#xae30; &#xc704;&#xd55c; &#xba85;&#xb839;&#xc785;&#xb2c8;&#xb2e4;."/>

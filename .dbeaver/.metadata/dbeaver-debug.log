@@ -1,17 +1,16 @@
-2021-03-20 15:51:08.043 - Create display
-> Start Eclipse 통합 개발 환경 사용자 인터페이스 [org.eclipse.ui.ide 3.18.0.v20201119-1132]
-2021-03-20 15:51:08.123 - DBeaver 7.3.2.202101032114 is starting
-2021-03-20 15:51:08.125 - OS: Windows 10 10.0 (amd64)
-2021-03-20 15:51:08.125 - Java version: 11.0.5 by AdoptOpenJDK (64bit)
-2021-03-20 15:51:08.126 - Install path: 'file:/C:/Program Files/DBeaver/'
-2021-03-20 15:51:08.126 - Instance path: 'file:/C:/workspace_java/shoppingMall/.dbeaver/'
-2021-03-20 15:51:08.126 - Memory available 64Mb/1024Mb
-2021-03-20 15:51:08.139 - Starting RMI server at 28920
-2021-03-20 15:51:08.207 - Run workbench
+2021-03-27 13:02:14.828 - Create display
+2021-03-27 13:02:14.892 - DBeaver 7.3.2.202101032114 is starting
+2021-03-27 13:02:14.893 - OS: Windows 10 10.0 (amd64)
+2021-03-27 13:02:14.894 - Java version: 11.0.5 by AdoptOpenJDK (64bit)
+2021-03-27 13:02:14.894 - Install path: 'file:/C:/Program Files/DBeaver/'
+2021-03-27 13:02:14.895 - Instance path: 'file:/C:/workspace_java/shoppingMall/.dbeaver/'
+2021-03-27 13:02:14.895 - Memory available 64Mb/1024Mb
+2021-03-27 13:02:14.912 - Starting RMI server at 55345
+2021-03-27 13:02:15.003 - Run workbench
 > Start Eclipse 통합 개발 환경 사용자 인터페이스 응용 프로그램 [org.eclipse.ui.ide.application 1.3.900.v20201102-2031]
 > Start Eclipse e4 작업영역 SWT [org.eclipse.e4.ui.workbench.swt 0.15.0.v20201103-0952]
-> Start Eclipse 컨텍스트 [org.eclipse.e4.core.contexts 1.8.400.v20191217-1710]
 > Start Eclipse 응용 프로그램 서비스 [org.eclipse.e4.core.services 2.2.500.v20200928-2213]
+> Start Eclipse 컨텍스트 [org.eclipse.e4.core.contexts 1.8.400.v20191217-1710]
 > Start Eclipse 사용자 인터페이스 응용 프로그램 서비스 [org.eclipse.e4.ui.services 1.4.0.v20201014-0944]
 > Start ICU4J Base [com.ibm.icu.base 58.2.0.v20170418-1837]
 > Start EMF 공통 [org.eclipse.emf.common 2.21.0.v20200917-1439]
@@ -45,11 +44,11 @@ Warning: NLS unused message: Util_listNull in: org.eclipse.ui.internal.messages
 > Start Eclipse CSS SWT 지원 [org.eclipse.e4.ui.css.swt 0.14.0.v20201103-0952]
 > Start Eclipse CSS SWT 테마 지원 [org.eclipse.e4.ui.css.swt.theme 0.13.0.v20201026-1147]
 > Start DBeaver UI [org.jkiss.dbeaver.ui 5.1.63.202101032114]
-2021-03-20 15:51:09.186 - Configure workbench window
+2021-03-27 13:02:17.540 - Configure workbench window
 > Start 도움말 시스템 코어 [org.eclipse.help 3.8.800.v20200525-0755]
-2021-03-20 15:51:09.292 - Create actions
-2021-03-20 15:51:09.299 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
-2021-03-20 15:51:09.299 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
+2021-03-27 13:02:17.710 - Create actions
+2021-03-27 13:02:17.711 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
+2021-03-27 13:02:17.712 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
 Warning: NLS unused message: actions_ContentAssistTip_description in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: actions_navigator__objects in: org.jkiss.dbeaver.core.CoreResources
 Warning: NLS unused message: actions_navigator_copy_object_copy_node in: org.jkiss.dbeaver.core.CoreResources
@@ -86,8 +85,8 @@ Warning: NLS unused message: OpenWorkspaceAction_errorMessage in: org.eclipse.ui
 Warning: NLS unused message: IDEApplication_workspaceInUse_Cancel in: org.eclipse.ui.internal.ide.messages
 Warning: NLS unused message: QuickAccess_EnterSearch in: org.eclipse.ui.internal.quickaccess.messages
 Warning: NLS unused message: QuickAccess_SelectedString in: org.eclipse.ui.internal.quickaccess.messages
-2021-03-20 15:51:10.563 - Initialize workbench window
-2021-03-20 15:51:10.567 - Finish initialization
+2021-03-27 13:02:18.512 - Initialize workbench window
+2021-03-27 13:02:18.518 - Finish initialization
 > Start Equinox Provisioning 플랫폼 자동 업데이트 지원 [org.eclipse.equinox.p2.ui.sdk.scheduler 1.5.0.v20201012-1421]
 > Start Equinox Provisioning 메타데이터 [org.eclipse.equinox.p2.metadata 2.5.100.v20200908-1020]
 > Start Equinox Provisioning 업데이트 검사기 [org.eclipse.equinox.p2.updatechecker 1.2.300.v20200222-1600]
@@ -97,42 +96,18 @@ Warning: NLS unused message: QuickAccess_SelectedString in: org.eclipse.ui.inter
 > Start DBeaver Oracle Support [org.jkiss.dbeaver.ext.oracle 2.1.133.202101032114]
 > Start DBeaver PostgreSQL Support [org.jkiss.dbeaver.ext.postgresql 2.1.121.202101032114]
 > Start DBeaver SQLite Support [org.jkiss.dbeaver.ext.sqlite 1.0.97.202101032114]
-2021-03-20 15:51:11.138 - Total database drivers: 86 (86)
+2021-03-27 13:02:19.630 - Loading user drivers configuration from 'C:\workspace_java\shoppingMall\.dbeaver\.metadata\.plugins\org.jkiss.dbeaver.core\drivers.xml'
+2021-03-27 13:02:19.644 - Total database drivers: 86 (86)
 > Start 기본 문서 편집기 [org.eclipse.ui.editors 3.13.400.v20200923-1238]
 > Start 텍스트 편집기 프레임워크 [org.eclipse.ui.workbench.texteditor 3.15.100.v20201116-1727]
 > Start DBeaver UI Editors - Base [org.jkiss.dbeaver.ui.editors.base 1.0.48.202101032114]
 > Start DBeaver UI Editors - SQL [org.jkiss.dbeaver.ui.editors.sql 1.0.48.202101032114]
 Warning: NLS unused message: controls_resultset_viewer_action_reset_value in: org.jkiss.dbeaver.ui.controls.resultset.internal.ResultSetMessages
 > Start DBeaver UI Editors - Data [org.jkiss.dbeaver.ui.editors.data 1.0.48.202101032114]
-> Start DBeaver ERD UI [org.jkiss.dbeaver.erd.ui 3.0.8.202101032114]
-> Start DBeaver ERD Model [org.jkiss.dbeaver.erd.model 1.0.8.202101032114]
 > Start DBeaver Sample Database [org.jkiss.dbeaver.ext.sample.database 1.0.85.202101032114]
 > Start DBeaver Tip of the day [org.jkiss.dbeaver.ext.ui.tipoftheday 1.0.54.202101032114]
-2021-03-20 15:51:13.839 - Open [https://dbeaver.io/product/version.xml]
-> Start DBeaver UI Editors - Connections [org.jkiss.dbeaver.ui.editors.connection 1.0.39.202101032114]
-> Start DBeaver MySQL UI Support [org.jkiss.dbeaver.ext.mysql.ui 1.0.40.202101032114]
-> Start Java Native Access [com.sun.jna 4.5.1.v20190425-1842]
-> Start DBeaver SSH tunnels [org.jkiss.dbeaver.net.ssh.ui 1.0.69.202101032114]
-> Start DBeaver SSH tunnels [org.jkiss.dbeaver.net.ssh 1.0.69.202101032114]
-2021-03-20 15:51:20.806 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
-> Start Equinox Java Authentication and Authorization Service (JAAS) [org.eclipse.equinox.security 1.3.500.v20200114-1637]
-2021-03-20 15:51:26.319 - Connect with 'localhost' (mysql8-1784e670da6-44a1e459f568c253)
-2021-03-20 15:51:26.342 - Execution context opened (localhost; Main; 0)
-2021-03-20 15:51:26.469 - Open [https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.pom]
-2021-03-20 15:51:27.118 - Open [https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.6.1/protobuf-java-3.6.1.pom]
-2021-03-20 15:51:27.282 - Open [https://repo1.maven.org/maven2/com/google/protobuf/protobuf-parent/3.6.1/protobuf-parent-3.6.1.pom]
-2021-03-20 15:51:27.447 - Open [https://repo1.maven.org/maven2/com/google/google/1/google-1.pom]
-2021-03-20 15:51:28.503 - Open [https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.17/mysql-connector-java-8.0.17.jar]
-2021-03-20 15:51:29.664 - Open [https://repo1.maven.org/maven2/com/google/protobuf/protobuf-java/3.6.1/protobuf-java-3.6.1.jar]
-2021-03-20 15:51:30.388 - Error connecting without serverTimezone. Trying to set serverTimezone=UTC. Original error: The server time zone value '????α? ????' is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the serverTimezone configuration property) to use a more specifc time zone value if you want to utilize time zone support.
-2021-03-20 15:51:30.423 - Execution context opened (localhost; Metadata; 1)
-2021-03-20 15:51:30.473 - Connected (mysql8-1784e670da6-44a1e459f568c253, MySQL Connector/J [mysql-connector-java-8.0.17 (Revision: 16a712ddb3f826a1933ab42b0039f7fb9eebc6ec)])
-> Start Equinox Provisioning 핵심 [org.eclipse.equinox.p2.core 2.6.300.v20200211-1504]
-> Start Equinox Provisioning 엔진 [org.eclipse.equinox.p2.engine 2.6.700.v20200511-1530]
-> Start Equinox Provisioning 메타데이터 저장소 [org.eclipse.equinox.p2.metadata.repository 1.3.400.v20191211-1528]
-> Start Equinox Provisioning 저장소 [org.eclipse.equinox.p2.repository 2.5.0.v20201013-0853]
-> Start Equinox Provisioning 사용자 인터페이스 지원 [org.eclipse.equinox.p2.ui 2.6.100.v20200731-1005]
-> Start DBeaver Generic Plug-in [org.jkiss.dbeaver.ext.generic 2.3.134.202101032114]
-2021-03-20 15:59:37.933 - DBeaver is stopping
-2021-03-20 15:59:37.933 - Stop RMI server
-2021-03-20 15:59:37.935 - DBeaver shutdown completed
+> Start DBeaver ERD UI [org.jkiss.dbeaver.erd.ui 3.0.8.202101032114]
+> Start DBeaver ERD Model [org.jkiss.dbeaver.erd.model 1.0.8.202101032114]
+2021-03-27 13:02:21.947 - DBeaver is stopping
+2021-03-27 13:02:21.948 - Stop RMI server
+2021-03-27 13:02:21.949 - DBeaver shutdown completed

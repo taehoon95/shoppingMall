@@ -24,6 +24,7 @@ import shoppingMall.service.productService;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+@SuppressWarnings("serial")
 public class productBuyCusInfoPanel extends JPanel implements ChangeListener{
 	private JTextField tfCusno;
 	private JTextField tfCusname;
@@ -104,6 +105,7 @@ public class productBuyCusInfoPanel extends JPanel implements ChangeListener{
 		panel_3.add(lblCusno);
 		
 		tfCusno = new JTextField();
+		tfCusno.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_3.add(tfCusno);
 		tfCusno.setColumns(10);
 		
@@ -112,6 +114,7 @@ public class productBuyCusInfoPanel extends JPanel implements ChangeListener{
 		panel_3.add(lblCusname);
 		
 		tfCusname = new JTextField();
+		tfCusname.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_3.add(tfCusname);
 		tfCusname.setColumns(10);
 		
@@ -120,13 +123,14 @@ public class productBuyCusInfoPanel extends JPanel implements ChangeListener{
 		panel_3.add(lblTel);
 		
 		tfTel = new JTextField();
+		tfTel.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfTel.setColumns(10);
 		panel_3.add(tfTel);
 	}
 
 	public Sale getBuyProd() {
 		String date = searchDateFormat.format(new Date());
-		Customer cusno = new Customer(tfCusno.getText().trim());
+		Customer cusno = new Customer(Integer.parseInt(tfCusno.getText().trim()));
 		Product procode = new Product(lblProcode.getText().trim());
 		int saleamount = (int) spinsaleamount.getValue();
 		return new Sale(date, cusno, procode, saleamount);

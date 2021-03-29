@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import shoppingMall.dao.ProductDao;
 import shoppingMall.dao.SaleDao;
 import shoppingMall.dao.Impl.ProductDaoImpl;
@@ -12,6 +14,7 @@ import shoppingMall.dao.Impl.SaleDaoImpl;
 import shoppingMall.database.JdbcConn;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
+import shoppingMall.ui.cusframe.ProductManager;
 
 public class productService {
 	private ProductDao dao = ProductDaoImpl.getInstance();
@@ -34,8 +37,7 @@ public class productService {
 	////////////////// 구매
 	
 	public int buyProductTransaction(Sale sale,Product product) {
-		String saleInsert = "insert into sale (date,cusno ,procode ,saleamount)\r\n" + 
-				"	 values (?,?,?,?)";
+		String saleInsert = "insert into sale (date,cusno ,procode ,saleamount) values (?,?,?,?)";
 		String prodUpdate = "update product set stock = ? where procode = ?";
 		
 		Connection con = null;
@@ -46,18 +48,26 @@ public class productService {
 			con = JdbcConn.getConnection();
 			con.setAutoCommit(false);
 			
+			sPstmt = con.prepareStatement(saleInsert);
 			sPstmt.setString(1, sale.getDate());
-			sPstmt.setString(2, sale.getCusno().getCusno());
+			sPstmt.setInt(2, sale.getCusno().getCusno());
 			sPstmt.setString(3, sale.getProcode().getProcode());
 			sPstmt.setInt(4, sale.getSaleamount());
 			res = res + sPstmt.executeUpdate();
-			System.out.println("res "+ res);
 			
-			pPstmt.setString(1, product.getStock()+"");
+			pPstmt = con.prepareStatement(prodUpdate);
+			pPstmt.setInt(1, product.getStock()-sale.getSaleamount());
 			pPstmt.setString(2, product.getProcode());
-			res = res + pPstmt.executeUpdate();
-			System.out.println("res "+ res);
 			
+			if((product.getStock()-sale.getSaleamount()) < 0) {
+				JOptionPane.showMessageDialog(null, "죄송합니다. " + product.getStock() +" 만큼 남았습니다.","재고 오류",JOptionPane.CANCEL_OPTION);
+				res = 0;
+			}else {
+				JOptionPane.showMessageDialog(null, product.getProname() + "을(를) " +sale.getSaleamount()+"개 주문하셨습니다.");
+				ProductManager frame = new ProductManager();
+				frame.setVisible(true);
+			}
+			res = res + pPstmt.executeUpdate();
 			if(res == 2) {
 				con.commit();								
 			}else {

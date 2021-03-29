@@ -68,7 +68,7 @@ public class saleDaoTest {
 	@Test
 	public void test05Insert() {
 		System.out.println("testInsert");
-		Sale newSale = new Sale("2021.03.14", new Customer("12004"), new Product("PB"), 10);
+		Sale newSale = new Sale("2021.03.14", new Customer(12004), new Product("PB"), 10);
 		int res = dao.insertSale(newSale);
 		Assert.assertEquals(1, res);
 		System.out.println(dao.selectDetailInfo());
@@ -77,7 +77,7 @@ public class saleDaoTest {
 	@Test
 	public void test06Update() {
 		System.out.println("testUpdate");
-		Sale modiSale = new Sale("2021.03.14", new Customer("12003"), new Product("PA"),8);
+		Sale modiSale = new Sale("2021.03.14", new Customer(12003), new Product("PA"),8);
 		int res = dao.updateSale(modiSale);
 		Assert.assertEquals(1, res);
 		System.out.println(dao.selectDetailInfo());
@@ -86,7 +86,7 @@ public class saleDaoTest {
 	@Test
 	public void test07Delete() {
 		System.out.println("testDelete");
-		Sale delSale = new Sale("2021.03.14", new Customer("12003"), new Product("PA"));
+		Sale delSale = new Sale("2021.03.14", new Customer(12003), new Product("PA"));
 		int res = dao.deleteSale(delSale);
 		Assert.assertEquals(1, res);
 		System.out.println(delSale);

@@ -42,7 +42,7 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 		
 		pMid = new procutBuyTablePanel();
 		pMid.getTable().addMouseListener(this);
-		pMid.loadData();
+		tableLoadData();
 		contentPane.add(pMid, BorderLayout.CENTER);
 		
 		JPanel pBottom = new JPanel();
@@ -60,6 +60,9 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 		pTop = new productInfoDetailPanel();
 		pTop.setBackground(Color.WHITE);
 		contentPane.add(pTop, BorderLayout.NORTH);
+	}
+	public void tableLoadData() {
+		pMid.loadData();
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -104,6 +107,9 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 		ProductBuyUI frame = new ProductBuyUI();
 		frame.setProd(select);
 		frame.setVisible(true);
+		if(select.getStock() < 0) {
+			JOptionPane.showMessageDialog(null, "죄송합니다. " + select.getStock() +" 만큼 남았습니다.","재고 오류",JOptionPane.CANCEL_OPTION);
+		}
 	}
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == pMid.getTable()) {

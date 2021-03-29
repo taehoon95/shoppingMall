@@ -35,7 +35,7 @@ public class SaleDaoImpl implements SaleDao {
 		int orderno = 0;
 		
 		date = rs.getString("date");
-		cusno = new Customer(rs.getString("cusno"));
+		cusno = new Customer(rs.getInt("cusno"));
 		procode = new Product(rs.getString("procode"));
 		saleamount = rs.getInt("saleamount");
 		sales = rs.getInt("sales");
@@ -146,7 +146,7 @@ public class SaleDaoImpl implements SaleDao {
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, sale.getDate());
-			pstmt.setString(2, sale.getCusno().getCusno());
+			pstmt.setInt(2, sale.getCusno().getCusno());
 			pstmt.setString(3, sale.getProcode().getProcode());
 			pstmt.setInt(4, sale.getSaleamount());
 			return pstmt.executeUpdate();
@@ -164,7 +164,7 @@ public class SaleDaoImpl implements SaleDao {
 			pstmt.setString(1, sale.getDate());
 			pstmt.setString(2, sale.getProcode().getProcode());
 			pstmt.setInt(3, sale.getSaleamount());
-			pstmt.setString(4, sale.getCusno().getCusno());
+			pstmt.setInt(4, sale.getCusno().getCusno());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -178,7 +178,7 @@ public class SaleDaoImpl implements SaleDao {
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, sale.getDate());
-			pstmt.setString(2, sale.getCusno().getCusno());
+			pstmt.setInt(2, sale.getCusno().getCusno());
 			pstmt.setString(3, sale.getProcode().getProcode());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -214,7 +214,7 @@ public class SaleDaoImpl implements SaleDao {
 		String sql = "select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all where cusNo = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setString(1, cus.getCusno());
+			pstmt.setInt(1, cus.getCusno());
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs.next()) {
 					ArrayList<Sale> list = new ArrayList<>();
@@ -235,7 +235,7 @@ public class SaleDaoImpl implements SaleDao {
 		String sql = "select orderno,date,procode,proName,cusName,saleamount,proPrice,sales,profit,cusno from vw_all where cusNo = ? and procode = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setString(1, cus.getCusno());
+			pstmt.setInt(1, cus.getCusno());
 			pstmt.setString(2, prod.getProcode());
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs.next()) {
