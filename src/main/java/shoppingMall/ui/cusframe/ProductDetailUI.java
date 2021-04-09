@@ -40,6 +40,6 @@ public class ProductDetailUI extends JFrame {
 	}
 	
 	public void prohibitionBtn() {
-		pInfo.prohibitionBtn();
+//		pInfo.prohibitionBtn();
 	}
 }

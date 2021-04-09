@@ -13,7 +13,9 @@ import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 
+import shoppingMall.shoppingMallMain;
 import shoppingMall.dto.Product;
+import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
 import shoppingMall.ui.cuspanel.procutBuyTablePanel;
 import java.awt.Color;
@@ -53,6 +55,11 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 		btnBuy.setBackground(Color.GREEN);
 		btnBuy.addActionListener(this);
 		pBottom.add(btnBuy);
+		
+		btnLogout = new JButton("로그아웃");
+		btnLogout.addActionListener(this);
+		btnLogout.setBackground(Color.GREEN);
+		pBottom.add(btnLogout);
 		
 		JPopupMenu popupMenu = createPopupMenu();
 		pMid.setPopupMenu(popupMenu);
@@ -95,10 +102,20 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 	
 	private procutBuyTablePanel pMid;	
 	private JButton btnBuy;
-	private productInfoDetailPanel pTop;public void actionPerformed(ActionEvent e) {
-	if (e.getSource() == btnBuy) {
-		actionPerformedBtnBuy(e);
+	private productInfoDetailPanel pTop;
+	private JButton btnLogout;
+	public void actionPerformed(ActionEvent e) {
+	if (e.getSource() == btnLogout) {
+		actionPerformedBtnLogout(e);
 	}
+	try {
+		if (e.getSource() == btnBuy) {
+			actionPerformedBtnBuy(e);
+		}
+	}catch(InvaildCheckException e1){
+		JOptionPane.showMessageDialog(null, "공란 존재", "오류", JOptionPane.WARNING_MESSAGE);
+	}
+	
 	}
 	protected void actionPerformedBtnBuy(ActionEvent e) {
 		// 제품 선택하고 구입하기 버튼 누르면 자동으로 제품코드와 이름 설정
@@ -127,7 +144,20 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 	protected void mouseClickedPMidTable(MouseEvent e) {
 		Product prod = pMid.getItem();
 		Product prodDetail = service.selectProductByProcode(prod);
-		pTop.prohibitionBtn();
+//		pTop.prohibitionBtn();
 		pTop.setItem(prodDetail);
+	}
+	protected void actionPerformedBtnLogout(ActionEvent e) {
+		int res = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?",
+				"로그아웃",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE,
+				null);
+		if(res == JOptionPane.YES_OPTION) {
+			dispose();
+			shoppingMallMain frame = new shoppingMallMain();
+			frame.setVisible(true);
+		}
+		
 	}
 }

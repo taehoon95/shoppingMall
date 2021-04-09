@@ -24,9 +24,9 @@ import java.awt.Font;
 
 public class productInfoDetailPanel extends JPanel implements ActionListener {
 	
-	private JTextField tfProdcode;
-	private JTextField tfProdname;
-	private JTextField tfProdStock;
+	private JLabel lblProdcodeInfo;
+	private JLabel lblProdnameInfo;
+	private JLabel lblProdStockInfo;
 	private JPanel pLeft;
 	private JPanel pRight;
 	private JButton btnUpdate;
@@ -86,28 +86,28 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 		pRight.add(lblProdcode);
 		lblProdcode.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tfProdcode = new JTextField();
-		tfProdcode.setFont(new Font("굴림", Font.BOLD, 15));
-		pRight.add(tfProdcode);
-		tfProdcode.setColumns(10);
+		lblProdcodeInfo = new JLabel();
+		lblProdcodeInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProdcodeInfo.setFont(new Font("굴림", Font.BOLD, 15));
+		pRight.add(lblProdcodeInfo);
 		
 		JLabel lblProdname = new JLabel("상품이름");
 		pRight.add(lblProdname);
 		lblProdname.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tfProdname = new JTextField();
-		tfProdname.setFont(new Font("굴림", Font.BOLD, 15));
-		pRight.add(tfProdname);
-		tfProdname.setColumns(10);
+		lblProdnameInfo = new JLabel();
+		lblProdnameInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProdnameInfo.setFont(new Font("굴림", Font.BOLD, 15));
+		pRight.add(lblProdnameInfo);
 		
 		JLabel lblProdStock = new JLabel("남은 수량");
 		pRight.add(lblProdStock);
 		lblProdStock.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		tfProdStock = new JTextField();
-		tfProdStock.setFont(new Font("굴림", Font.BOLD, 15));
-		pRight.add(tfProdStock);
-		tfProdStock.setColumns(10);
+		lblProdStockInfo = new JLabel();
+		lblProdStockInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProdStockInfo.setFont(new Font("굴림", Font.BOLD, 15));
+		pRight.add(lblProdStockInfo);
 	}
 
 
@@ -132,23 +132,23 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 	}
 	
 	public void setItem(Product prod) {
-		tfProdcode.setText(prod.getProcode());
-		tfProdname.setText(prod.getProname());
-		tfProdStock.setText(prod.getStock()+"");
+		lblProdcodeInfo.setText(prod.getProcode());
+		lblProdnameInfo.setText(prod.getProname());
+		lblProdStockInfo.setText(prod.getStock()+"");
 		lblPic.setIcon(new ImageIcon(imgPath + prod.getProdpic()));
 	}
 	
 	public Product getProd() {
-		String procode = tfProdcode.getText();
-		String proname = tfProdname.getText();
-		int stock = Integer.parseInt(tfProdStock.getText());
+		String procode = lblProdcodeInfo.getText();
+		String proname = lblProdnameInfo.getText();
+		int stock = Integer.parseInt(lblProdStockInfo.getText());
 		String prodpic = lblPic.getName();
 		return new Product(procode, proname, stock, prodpic);
 	}
 	
-	public void prohibitionBtn() {
-		tfProdcode.setEnabled(false);
-		tfProdname.setEnabled(false);
-		tfProdStock.setEnabled(false);
-	}
+//	public void prohibitionBtn() {
+//		lblProdcodeInfo.setEnabled(false);
+//		lblProdnameInfo.setEnabled(false);
+//		lblProdStockInfo.setEnabled(false);
+//	}
 }

@@ -16,8 +16,10 @@ import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
 import shoppingMall.dto.Customer;
+import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 import shoppingMall.ui.cusframe.ProductManager;
+import shoppingMall.ui.frame.JTabbedShoppingmall;
 import shoppingMall.ui.frame.JoinMembershipManager;
 import shoppingMall.ui.frame.MainManager;
 import shoppingMall.ui.panel.loginPanel;
@@ -31,6 +33,7 @@ public class shoppingMallMain extends JFrame implements ActionListener {
 	private customerService service;
 	private loginPanel pMid;
 	private JMenuItem managerLogin;
+	private Customer login;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -103,8 +106,8 @@ public class shoppingMallMain extends JFrame implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getActionCommand().equals("비밀")) {
-				MainManager frame = new MainManager();
-				frame.setVisible(true); dispose();
+				JTabbedShoppingmall frame = new JTabbedShoppingmall();
+				frame.setVisible(true);
 			}
 		}
 	};
@@ -113,13 +116,18 @@ public class shoppingMallMain extends JFrame implements ActionListener {
 		if (e.getSource() == btnNewCus) {
 			actionPerformedBtnJoinMem(e);
 		}
-		if (e.getSource() == btnLogin) {
-			actionPerformedBtnAdd(e);
+		try{
+			if (e.getSource() == btnLogin) {
+				actionPerformedBtnAdd(e);
+			}	
+		}catch(InvaildCheckException e1) {
+			JOptionPane.showMessageDialog(null, "아이디 나 비밀번호를 입력해주세요","로그인 오류", JOptionPane.CANCEL_OPTION);
 		}
 	}
+	
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		service = new customerService();
-		Customer login = pMid.loginItem();
+		login = pMid.loginItem();
 		Customer loginCus = service.loginCustomer(login);
 		if(loginCus != null){
 			JOptionPane.showMessageDialog(null, "환영합니다.");
@@ -130,6 +138,12 @@ public class shoppingMallMain extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "아이디,비밀번호를 다시 확인해주세요", "로그인 오류", JOptionPane.WARNING_MESSAGE);
 		}
 	}
+
+	public void loginCus(Customer login) {
+		this.login = login;
+		System.out.println(login);
+	}
+	
 	protected void actionPerformedBtnJoinMem(ActionEvent e) {
 		JoinMembershipManager frame = new JoinMembershipManager();
 		frame.setVisible(true);

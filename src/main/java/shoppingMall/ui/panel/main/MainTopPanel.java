@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import shoppingMall.exception.InvaildCheckException;
+import javax.swing.border.TitledBorder;
 
 public class MainTopPanel extends JPanel implements ActionListener  {
 	private JButton btnSearch;
@@ -27,8 +28,6 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 	private JButton btnCancel;
 	private JPanel pTopRight;
 	private JPanel pTopLeft;
-	private JButton btnProduct;
-	private JButton btnDetail;
 
 	public MainTopPanel() {
 
@@ -36,6 +35,8 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 	}
 
 	private void initialize() {
+		setBackground(Color.WHITE);
+		setBorder(new TitledBorder(null, "\uBA54\uC778\uD654\uBA74", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 1, 0, 0));
 
 		pTop = new JPanel();
@@ -47,16 +48,6 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 		pTopLeft.setBorder(new EmptyBorder(15, 0, 0, 0));
 		pTop.add(pTopLeft);
 
-		btnProduct = new JButton("제품별 조회");
-		btnProduct.setBackground(Color.GREEN);
-		btnProduct.setFont(new Font("굴림", Font.BOLD, 15));
-		pTopLeft.add(btnProduct);
-
-		btnDetail = new JButton("상세 조회");
-		btnDetail.setBackground(Color.GREEN);
-		btnDetail.setFont(new Font("굴림", Font.BOLD, 15));
-		pTopLeft.add(btnDetail);
-
 		pTopRight = new JPanel();
 		pTopRight.setBackground(Color.WHITE);
 		pTop.add(pTopRight);
@@ -64,14 +55,14 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 		
 		btnAllsearch = new JButton("\uC804\uCCB4\uC870\uD68C");
 		btnAllsearch.setBackground(Color.GREEN);
-		btnAllsearch.setFont(new Font("굴림", Font.BOLD, 12));
+		btnAllsearch.setFont(new Font("굴림", Font.PLAIN, 12));
 		btnAllsearch.setBounds(12, 30, 105, 23);
 		pTopRight.add(btnAllsearch);
 		
 		btnCancel = new JButton("\uCDE8\uC18C");
 		btnCancel.addActionListener(this);
 		btnCancel.setBackground(Color.GREEN);
-		btnCancel.setFont(new Font("굴림", Font.BOLD, 12));
+		btnCancel.setFont(new Font("굴림", Font.PLAIN, 12));
 		btnCancel.setBounds(129, 30, 70, 23);
 		pTopRight.add(btnCancel);
 
@@ -101,25 +92,11 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 
 		btnSearch = new JButton("검색");
 		btnSearch.setBackground(Color.GREEN);
-		btnSearch.setFont(new Font("굴림", Font.BOLD, 12));
+		btnSearch.setFont(new Font("굴림", Font.PLAIN, 12));
 		pBottomRight.add(btnSearch);
 	}
 
-	public JButton getBtnProduct() {
-		return btnProduct;
-	}
 
-	public void setBtnProduct(JButton btnProduct) {
-		this.btnProduct = btnProduct;
-	}
-
-	public JButton getBtnDetail() {
-		return btnDetail;
-	}
-
-	public void setBtnDetail(JButton btnDetail) {
-		this.btnDetail = btnDetail;
-	}
 
 	public JButton getBtnAllsearch() {
 		return btnAllsearch;

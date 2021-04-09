@@ -49,8 +49,6 @@ public class MainManager extends JFrame implements ActionListener {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		pTop = new MainTopPanel();
-		pTop.getBtnDetail().addActionListener(this);
-		pTop.getBtnProduct().addActionListener(this);
 		pTop.getBtnAllsearch().addActionListener(this);
 		pTop.getBtnSearch().addActionListener(this);
 		contentPane.add(pTop, BorderLayout.NORTH);
@@ -64,12 +62,6 @@ public class MainManager extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == pTop.getBtnDetail()) {
-			actionPerformedPTopBtnDetail(e);
-		}
-		if (e.getSource() == pTop.getBtnProduct()) {
-			actionPerformedPTopBtnProduct(e);
-		}
 		if (e.getSource() == pTop.getBtnAllsearch()) {
 			actionPerformedPTopBtnAllsearch(e);
 		}

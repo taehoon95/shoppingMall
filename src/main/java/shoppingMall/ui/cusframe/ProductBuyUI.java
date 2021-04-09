@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import shoppingMall.shoppingMallMain;
+import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 import shoppingMall.service.productService;
@@ -25,13 +26,13 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 	private productBuyCusInfoPanel pTop;
 	private JButton btnBuy;
 	private JButton btnCancel;
-	private saleService sService;
 	private productService pService;
 	
 	public ProductBuyUI() {
 		initialize();
 	}
 	private void initialize() {
+		setTitle("구매하기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 412);
 		contentPane = new JPanel();
@@ -82,13 +83,13 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 	public void setProd(Product selectProd) {
 		pTop.setBuyProd(selectProd);
 	}
+	
 	protected void actionPerformedBtnBuy(ActionEvent e) {
 		pService = new productService();
 		Sale sale = pTop.getBuyProd();
 		Product product = pService.selectProductByProcode(sale.getProcode());
 		
 		pService.buyProductTransaction(sale, product);
-///////// 수정된 테이블정보를 다시 프레임을 나오게 함
 		dispose();		
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {

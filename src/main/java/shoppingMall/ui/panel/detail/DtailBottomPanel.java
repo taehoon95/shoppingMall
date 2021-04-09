@@ -15,6 +15,7 @@ import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class DtailBottomPanel extends JPanel {
 	private JTextField tflCntOrder;
 	private JTextField tfTotalOrder;
@@ -128,5 +129,11 @@ public class DtailBottomPanel extends JPanel {
 		this.tfTotalProfit = tfTotalProfit;
 	}
 
+	public void tfClear() {
+		tflCntOrder.setText(null);
+		tfTotalOrder.setText(null);
+		tfTotalProfit.setText(null);
+		tfTotalSales.setText(null);
+	}
 	
 }

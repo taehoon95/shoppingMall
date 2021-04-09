@@ -1,16 +1,21 @@
 package shoppingMall.ui.list;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.util.List;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -110,6 +115,34 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	 *setTableCellWidth(100, 250, 100);
 	 */
 
+	////////색
+	public void setTableCellCondition(int... idx) { // 색
+		ConditionTableCellRenderer ctcr = new ConditionTableCellRenderer();
+		TableColumnModel tcm = table.getColumnModel();
+		for (int i = 0; i < idx.length; i++) {
+			tcm.getColumn(idx[i]).setCellRenderer(ctcr);
+		}
+	}
+	
+	private class ConditionTableCellRenderer extends JLabel implements TableCellRenderer { // 색
+		
+				@Override
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+						int row, int column) {
+					setText(value == null ? "" : value.toString());
+					setOpaque(true);
+					int total = (int) table.getValueAt(row, column); //
+					if (total == 0) {
+						setBackground(Color.pink);
+					}else {
+						setBackground(Color.white);
+					}
+					setHorizontalAlignment(SwingConstants.RIGHT);
+					return this;
+				}
+		
+			}
+	///////////////
 	protected abstract void setAlignAndWidth(); // 구현해줘야할 메서드
 
 	protected void setTableCellWidth(int... width) {

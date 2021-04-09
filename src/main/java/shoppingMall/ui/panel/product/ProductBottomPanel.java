@@ -84,4 +84,9 @@ public class ProductBottomPanel extends JPanel {
 		add(tfTotalProfit);
 	}
 
+	public void tfClear() {
+		tfTotalOrder.setText(null);
+		tfTotalProfit.setText(null);
+	}
+
 }

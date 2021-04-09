@@ -23,6 +23,7 @@ import shoppingMall.ui.panel.detail.DetailMidPanel;
 import shoppingMall.ui.panel.detail.DtailBottomPanel;
 import shoppingMall.ui.panel.detail.DtailTopPanel;
 
+@SuppressWarnings("serial")
 public class DetailManager extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -78,7 +79,6 @@ public class DetailManager extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			if (e.getSource() == pTop.getBtnlblCusSearch()) {
-				System.out.println(pTop.getCmbProductSearch().getSelectedIndex());
 				if(pTop.getCmbProductSearch().getSelectedIndex() == -1){
 					actionPerformedPTopBtnlblCusSearch(e);		
 				}	

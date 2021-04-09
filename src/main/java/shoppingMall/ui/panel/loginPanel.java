@@ -1,30 +1,24 @@
 package shoppingMall.ui.panel;
 
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import shoppingMall.shoppingMallMain;
 import shoppingMall.dto.Customer;
+import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
-import shoppingMall.ui.frame.JoinMembershipManager;
-import shoppingMall.ui.frame.MainManager;
-
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.GridLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JPasswordField;
 
 public class loginPanel extends JPanel implements ActionListener {
 	private JTextField tfCusno;
 	private JPasswordField tfPass;
-	private customerService service;
 	
 	public loginPanel() {
 
@@ -54,8 +48,17 @@ public class loginPanel extends JPanel implements ActionListener {
 	}
 	
 	public Customer loginItem() {
+		validCheck();
 		int cusno = Integer.parseInt(tfCusno.getText());
 		String passno = String.valueOf(tfPass.getPassword());
 		return new Customer(cusno, passno);
 	}
+	
+	private void validCheck() {
+		if(tfCusno.getText().equals("") || tfPass.getPassword().equals("")) {
+			throw new InvaildCheckException();
+		}
+	}
+	
+	
 }

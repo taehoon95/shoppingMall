@@ -84,4 +84,9 @@ public class MainBottomPanel extends JPanel {
 		add(tfTotalSales);
 	}
 
+	public void tfClear() {
+		tfTotalOrder.setText(null);
+		tfTotalSales.setText(null);
+	}
+
 }

@@ -20,8 +20,6 @@ import javax.swing.border.TitledBorder;
 import shoppingMall.dto.Product;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
-import shoppingMall.ui.frame.DetailManager;
-import shoppingMall.ui.frame.MainManager;
 
 public class ProductTopPanel extends JPanel implements ActionListener {
 	private JButton btnSearch;
@@ -29,14 +27,9 @@ public class ProductTopPanel extends JPanel implements ActionListener {
 	private JPanel pBottom;
 	private JComboBox<Product> cmbProduct;
 	private JPanel pBottomLeft;
-	private JPanel pTop;
-	private JButton btnAllsearch;
-	private JButton btnCancel;
-	private JPanel pTopRight;
-	private JPanel pTopLeft;
-	private JButton btnProduct;
-	private JButton btnDetail;
 	private productService service;
+	private JButton btnAll;
+	private JButton button_1;
 	
 	
 	public ProductTopPanel() {
@@ -48,45 +41,6 @@ public class ProductTopPanel extends JPanel implements ActionListener {
 		setBackground(Color.WHITE);
 		setBorder(new TitledBorder(null, "제품별 조회", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setLayout(new GridLayout(0, 1, 0, 0));
-
-		pTop = new JPanel();
-		add(pTop);
-		pTop.setLayout(new GridLayout(1, 0, 0, 0));
-
-		pTopLeft = new JPanel();
-		pTopLeft.setBackground(Color.WHITE);
-		pTopLeft.setBorder(new EmptyBorder(15, 0, 0, 0));
-		pTop.add(pTopLeft);
-
-		btnProduct = new JButton("메인화면");
-		btnProduct.addActionListener(this);
-		btnProduct.setBackground(Color.GREEN);
-		btnProduct.setFont(new Font("굴림", Font.BOLD, 15));
-		pTopLeft.add(btnProduct);
-
-		btnDetail = new JButton("상세 조회");
-		btnDetail.addActionListener(this);
-		btnDetail.setBackground(Color.GREEN);
-		btnDetail.setFont(new Font("굴림", Font.BOLD, 15));
-		pTopLeft.add(btnDetail);
-
-		pTopRight = new JPanel();
-		pTopRight.setBackground(Color.WHITE);
-		pTop.add(pTopRight);
-		pTopRight.setLayout(null);
-		
-		btnAllsearch = new JButton("전체조회");
-		btnAllsearch.setBackground(Color.GREEN);
-		btnAllsearch.setFont(new Font("굴림", Font.BOLD, 12));
-		btnAllsearch.setBounds(12, 30, 105, 23);
-		pTopRight.add(btnAllsearch);
-		
-		btnCancel = new JButton("취소");
-		btnCancel.addActionListener(this);
-		btnCancel.setBackground(Color.GREEN);
-		btnCancel.setFont(new Font("굴림", Font.BOLD, 12));
-		btnCancel.setBounds(129, 30, 70, 23);
-		pTopRight.add(btnCancel);
 
 		pBottom = new JPanel();
 		add(pBottom);
@@ -111,13 +65,33 @@ public class ProductTopPanel extends JPanel implements ActionListener {
 		pBottomRight.setBorder(new EmptyBorder(20, 40, 20, 160));
 		pBottomRight.setBackground(Color.WHITE);
 		pBottom.add(pBottomRight);
-		pBottomRight.setLayout(new GridLayout(0, 2, 10, 0));
+		pBottomRight.setLayout(null);
 		
 		btnSearch = new JButton("검색");
+		btnSearch.setBounds(23, 10, 63, 28);
 		pBottomRight.add(btnSearch);
 		btnSearch.setBackground(Color.GREEN);
-		btnSearch.setFont(new Font("굴림", Font.BOLD, 12));
+		btnSearch.setFont(new Font("굴림", Font.PLAIN, 12));
+		
+		btnAll = new JButton("전체조회");
+		btnAll.addActionListener(this);
+		btnAll.setFont(new Font("굴림", Font.PLAIN, 12));
+		btnAll.setBackground(Color.GREEN);
+		btnAll.setBounds(98, 12, 94, 25);
+		pBottomRight.add(btnAll);
+		
+		button_1 = new JButton("취소");
+		button_1.addActionListener(this);
+		button_1.setFont(new Font("굴림", Font.PLAIN, 12));
+		button_1.setBackground(Color.GREEN);
+		button_1.setBounds(206, 13, 70, 23);
+		pBottomRight.add(button_1);
 	}
+
+	public JButton getBtnAll() {
+		return btnAll;
+	}
+
 
 	public JComboBox<Product> getCmbProduct() {
 		vaildCheck();
@@ -139,29 +113,7 @@ public class ProductTopPanel extends JPanel implements ActionListener {
 		cmbProduct.setSelectedIndex(-1);
 	}
 	
-	public JButton getBtnProduct() {
-		return btnProduct;
-	}
 
-	public void setBtnProduct(JButton btnProduct) {
-		this.btnProduct = btnProduct;
-	}
-
-	public JButton getBtnDetail() {
-		return btnDetail;
-	}
-
-	public void setBtnDetail(JButton btnDetail) {
-		this.btnDetail = btnDetail;
-	}
-
-	public JButton getBtnAllsearch() {
-		return btnAllsearch;
-	}
-
-	public void setBtnAllsearch(JButton btnAllsearch) {
-		this.btnAllsearch = btnAllsearch;
-	}
 
 	public JButton getBtnSearch() {
 		return btnSearch;
@@ -178,25 +130,13 @@ public class ProductTopPanel extends JPanel implements ActionListener {
 	
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnCancel) {
-			actionPerformedBtnCancel(e);
+		if (e.getSource() == button_1) {
+			actionPerformedButton_1(e);
 		}
-		if (e.getSource() == btnDetail) {
-			actionPerformedBtnDetail(e);
-		}
-		if (e.getSource() == btnProduct) {
-			actionPerformedBtnProduct(e);
-		}
+
 	}
-	protected void actionPerformedBtnProduct(ActionEvent e) {
-		MainManager frame = new MainManager();
-		frame.setVisible(true);
-	}
-	protected void actionPerformedBtnDetail(ActionEvent e) {
-		DetailManager frame = new DetailManager();
-		frame.setVisible(true);
-	}
-	protected void actionPerformedBtnCancel(ActionEvent e) {
+
+	protected void actionPerformedButton_1(ActionEvent e) {
 		tfClear();
 	}
 }

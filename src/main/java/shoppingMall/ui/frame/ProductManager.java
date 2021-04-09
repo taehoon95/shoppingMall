@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class ProductManager extends JFrame implements ActionListener {
 
@@ -42,6 +43,7 @@ public class ProductManager extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 777, 466);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
@@ -50,7 +52,6 @@ public class ProductManager extends JFrame implements ActionListener {
 		
 		pTop = new ProductTopPanel();
 		pTop.getBtnSearch().addActionListener(this);
-		pTop.getBtnAllsearch().addActionListener(this);
 		pTop.setService(service);
 		contentPane.add(pTop, BorderLayout.NORTH);
 		
@@ -63,9 +64,6 @@ public class ProductManager extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == pTop.getBtnAllsearch()) {
-			actionPerformedPTopBtnAllsearch(e);
-		}
 		try {
 			if (e.getSource() == pTop.getBtnSearch()) {
 				actionPerformedPTopBtnSearch(e);

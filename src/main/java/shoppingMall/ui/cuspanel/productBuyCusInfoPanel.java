@@ -141,7 +141,6 @@ public class productBuyCusInfoPanel extends JPanel implements ChangeListener{
 		this.prod = prod;
 		lblProcode.setText(prod.getProcode());
 		lblProname.setText(prod.getProname());	
-		
 	}
 	
 	public JSpinner getSpinsaleamount() {
