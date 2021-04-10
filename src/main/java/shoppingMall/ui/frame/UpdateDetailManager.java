@@ -8,11 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import shoppingMall.ui.panel.UpdateDetailManagerPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class UpdateDetailManager extends JFrame {
+public class UpdateDetailManager extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
+	private UpdateDetailManagerPanel pUpdateDetailItem;
+	private JButton btnCancel;
 
 	public UpdateDetailManager() {
 		initialize();
@@ -25,19 +29,34 @@ public class UpdateDetailManager extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		UpdateDetailManagerPanel panel = new UpdateDetailManagerPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
+		pUpdateDetailItem = new UpdateDetailManagerPanel();
+		contentPane.add(pUpdateDetailItem, BorderLayout.CENTER);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.SOUTH);
+		JPanel pBtns = new JPanel();
+		contentPane.add(pBtns, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("수정");
-		panel_1.add(btnNewButton);
+		JButton btnUpdate = new JButton("수정");
+		pBtns.add(btnUpdate);
 		
-		JButton btnNewButton_1 = new JButton("취소");
-		panel_1.add(btnNewButton_1);
+		btnCancel = new JButton("취소");
+		btnCancel.addActionListener(this);
+		pBtns.add(btnCancel);
+	}
+	public UpdateDetailManagerPanel getpUpdateDetailItem() {
+		return pUpdateDetailItem;
+	}
+	public void setpUpdateDetailItem(UpdateDetailManagerPanel pUpdateDetailItem) {
+		this.pUpdateDetailItem = pUpdateDetailItem;
 	}
 	
 
 
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnCancel) {
+			actionPerformedBtnCancel(e);
+		}
+	}
+	protected void actionPerformedBtnCancel(ActionEvent e) {
+		pUpdateDetailItem.tfClear();
+	}
 }

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -144,7 +145,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pDetailTable.loadData();
 		pDetail.add(pDetailTable, BorderLayout.CENTER);
 
-////////// 팝업메뉴생성
+////////////////// 팝업메뉴생성
 		JPopupMenu popupMenu = createPopupMenu();
 		pDetailTable.setPopupMenu(popupMenu);
 	}
@@ -154,15 +155,13 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 
 		JMenuItem delSale = new JMenuItem("삭제");
 		JMenuItem upSale = new JMenuItem("수정");
-		JMenuItem addSale = new JMenuItem("추가");
+
 		
 		delSale.addActionListener(popupMenuListner);
 		upSale.addActionListener(popupMenuListner);
-		addSale.addActionListener(popupMenuListner);		
 		
 		popMenu.add(delSale);
 		popMenu.add(upSale);
-		popMenu.add(addSale);
 		return popMenu;
 	}
 
@@ -174,21 +173,25 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 			
 			if (e.getActionCommand() == "삭제") {
 				Sale sale = pDetailTable.getItem();
-
 				saleService.delSale(sale);
 				pDetailTable.loadData();
 			}else if(e.getActionCommand() == "수정"){
+				
 				UpdateDetailManager frame = new UpdateDetailManager();
-				Sale cus = pDetailTable.getItem();
-				frame.setVisible(true);
-			}else if(e.getActionCommand() == "추가"){
-				ProductBuyUI frame = new ProductBuyUI();
+				Customer cus = pDetailTable.getCusItem();
+				Product prod = pDetailTable.getProdItem();
+				Sale sale = pDetailTable.getItem();
+				try {
+					frame.getpUpdateDetailItem().setUpdateTf(cus, prod, sale);
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
 				frame.setVisible(true);
 			}
 		}
 	};
 
-	/// 검색할 날짜 받아오기
+////////////////// 검색할 날짜 받아오기
 	private Sale searchDate() {
 		SimpleDateFormat searchDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 		Date searchDate = pMainBtns.getJDate().getDate();
@@ -197,7 +200,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		return searchByDate;
 	}
 
-/////// 액션 이벤트
+///////////////// 액션 이벤트
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == pDetailBtns.getBtnAllSerach()) {
 			actionPerformedPDetailBtnsBtnAllSerach(e);
@@ -233,7 +236,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		} catch (InvaildCheckException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "오류", JOptionPane.WARNING_MESSAGE);
 		} catch (NullPointerException e1) {
-			/////// 아무값도 검색 되지 않을때
+///////////////// 아무값도 검색 되지 않을때
 			pMainTable.selectList(nullList);
 			pProdTable.selectList(nullList);
 			pDetailTable.selectList(nullList);

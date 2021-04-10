@@ -1,8 +1,15 @@
 package shoppingMall.ui.panel.detail;
 
+import java.util.List;
+
 import javax.swing.SwingConstants;
 
+import shoppingMall.dto.Customer;
+import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
+import shoppingMall.exception.NotSelectedExeption;
+import shoppingMall.service.customerService;
+import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
@@ -10,13 +17,23 @@ import shoppingMall.ui.list.AbstractCustomTablePanel;
 public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 	public DetailMidPanel() {
 	}
-	int i = 1;
-	private saleService service;
+	private saleService saleService;
+	private productService prodService;
+	private customerService cusService;
+	
+	private List<Product> prodList;
+	private List<Customer> cusList;
 	
 	@Override
 	public void initList() {
-		service = new saleService();
-		list = service.showDetail();
+		saleService = new saleService();
+		list = saleService.showDetail();
+		
+		prodService = new productService();
+		prodList = prodService.showProInfo();
+		
+		cusService = new customerService();
+		cusList = cusService.showCustomer();
 	}
 
 	@Override
@@ -50,4 +67,25 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 		return new String[] {"번호","날짜","제품코드","제품명","회원명","주문수량","단가","판매액","이익금액"};
 	}
 
+	public Customer getCusItem() {
+		int row = table.getSelectedRow();
+		String serCus = (String) table.getValueAt(row, 4);
+		
+		int cusCode = Integer.parseInt(serCus.substring(4, 9));
+		if (row == -1) {
+			throw new NotSelectedExeption();
+		}
+		return cusList.get(cusList.indexOf(new Customer(cusCode)));
+	}
+
+	public Product getProdItem() {
+		int row = table.getSelectedRow();
+		String proCode = (String) table.getValueAt(row, 2);
+		
+		if (row == -1) {
+			throw new NotSelectedExeption();
+		}
+		
+		return prodList.get(prodList.indexOf(new Product(proCode)));
+	}
 }

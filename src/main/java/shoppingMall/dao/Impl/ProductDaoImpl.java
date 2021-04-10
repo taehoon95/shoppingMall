@@ -46,7 +46,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public List<Product> selectProduct() {
-		String sql = "select procode,proname,proprice*1.1 as salePrice,stock from product";
+		String sql = "select procode,proname,proprice,proprice*1.1 as salePrice,stock from product";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
 				ResultSet rs = pstmt.executeQuery()){
