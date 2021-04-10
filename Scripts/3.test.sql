@@ -165,11 +165,13 @@ select * from product p ;
 
 update product set stock = 10 where procode ='PF';
 
+select cusno,cusname,birth,callno,sex from customer where cusno = 12001;
 
+-- 판매내역 삭제
 
+select * from sale;
 
-
-
+delete from sale where orderno = ?;
 
 
 

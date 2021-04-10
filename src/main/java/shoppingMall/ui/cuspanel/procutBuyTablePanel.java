@@ -35,7 +35,6 @@ public class procutBuyTablePanel extends AbstractCustomTablePanel<Product> {
 		// 컬럼별 너비 조정
 		setTableCellWidth(80, 80, 100, 80);
 		
-		setTableCellCondition(3);
 	}
 
 	

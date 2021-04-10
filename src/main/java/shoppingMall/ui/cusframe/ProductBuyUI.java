@@ -34,7 +34,7 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 	private void initialize() {
 		setTitle("구매하기");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 412);
+		setBounds(100, 100, 450, 228);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

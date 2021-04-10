@@ -24,6 +24,7 @@ import shoppingMall.ui.frame.JoinMembershipManager;
 import shoppingMall.ui.frame.MainManager;
 import shoppingMall.ui.panel.loginPanel;
 
+@SuppressWarnings("serial")
 public class shoppingMallMain extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -141,7 +142,6 @@ public class shoppingMallMain extends JFrame implements ActionListener {
 
 	public void loginCus(Customer login) {
 		this.login = login;
-		System.out.println(login);
 	}
 	
 	protected void actionPerformedBtnJoinMem(ActionEvent e) {

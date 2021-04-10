@@ -115,34 +115,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	 *setTableCellWidth(100, 250, 100);
 	 */
 
-	////////색
-	public void setTableCellCondition(int... idx) { // 색
-		ConditionTableCellRenderer ctcr = new ConditionTableCellRenderer();
-		TableColumnModel tcm = table.getColumnModel();
-		for (int i = 0; i < idx.length; i++) {
-			tcm.getColumn(idx[i]).setCellRenderer(ctcr);
-		}
-	}
 	
-	private class ConditionTableCellRenderer extends JLabel implements TableCellRenderer { // 색
-		
-				@Override
-				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-						int row, int column) {
-					setText(value == null ? "" : value.toString());
-					setOpaque(true);
-					int total = (int) table.getValueAt(row, column); //
-					if (total == 0) {
-						setBackground(Color.pink);
-					}else {
-						setBackground(Color.white);
-					}
-					setHorizontalAlignment(SwingConstants.RIGHT);
-					return this;
-				}
-		
-			}
-	///////////////
 	protected abstract void setAlignAndWidth(); // 구현해줘야할 메서드
 
 	protected void setTableCellWidth(int... width) {

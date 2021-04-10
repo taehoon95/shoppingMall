@@ -174,12 +174,10 @@ public class SaleDaoImpl implements SaleDao {
 
 	@Override
 	public int deleteSale(Sale sale) {
-		String sql = "delete from sale where date = ? and cusno = ? and procode = ?";
+		String sql = "delete from sale where orderno = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setString(1, sale.getDate());
-			pstmt.setInt(2, sale.getCusno().getCusno());
-			pstmt.setString(3, sale.getProcode().getProcode());
+			pstmt.setInt(1, sale.getOrderno());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

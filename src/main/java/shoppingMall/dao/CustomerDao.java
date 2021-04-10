@@ -17,4 +17,7 @@ public interface CustomerDao {
 	
 	int updateCustomer(Customer customer);
 	int deleteCustomer(String customer);
+
+//////////고객코드로 검색
+	Customer selectCusByCo(Customer customer);
 }

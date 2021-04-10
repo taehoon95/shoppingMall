@@ -123,4 +123,19 @@ public class CustomerDaoImpl implements CustomerDao {
 		return null;
 	}
 
+	@Override
+	public Customer selectCusByCo(Customer customer) {
+		String sql = "select cusno,cusname,birth,callno,sex from customer where cusno = ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setInt(1, customer.getCusno());
+			try(ResultSet rs = pstmt.executeQuery()){
+				return getCustomer(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

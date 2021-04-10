@@ -2,6 +2,7 @@ package shoppingMall.ui.cuspanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -14,14 +15,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import shoppingMall.dto.Product;
-import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class productInfoDetailPanel extends JPanel implements ActionListener {
 	
 	private JLabel lblProdcodeInfo;
@@ -146,9 +146,4 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 		return new Product(procode, proname, stock, prodpic);
 	}
 	
-//	public void prohibitionBtn() {
-//		lblProdcodeInfo.setEnabled(false);
-//		lblProdnameInfo.setEnabled(false);
-//		lblProdStockInfo.setEnabled(false);
-//	}
 }

@@ -21,4 +21,8 @@ public class customerService {
 	public Customer loginCustomer(Customer customer) {
 		return dao.LoginCustomer(customer);
 	}
+
+	public Customer showCustomerByNo(Customer customer) {
+		return dao.selectCusByCo(customer);
+	}
 }

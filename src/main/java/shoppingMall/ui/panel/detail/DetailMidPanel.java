@@ -6,7 +6,10 @@ import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
+@SuppressWarnings("serial")
 public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
+	public DetailMidPanel() {
+	}
 	int i = 1;
 	private saleService service;
 	
@@ -23,7 +26,7 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 		setTableCellAlign(SwingConstants.RIGHT, 5, 6, 7, 8);
 
 		// 컬럼별 너비 조정
-		setTableCellWidth(60, 100, 100, 100, 100, 90, 100, 100, 100);
+		setTableCellWidth(60, 100, 100, 100, 140, 90, 100, 100, 100);
 	}
 
 	@Override
@@ -33,7 +36,7 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 				t.getDate(),
 				t.getProcode().getProcode(),
 				t.getProcode().getProname(),
-				t.getCusno().getCusname(),
+				String.format("%s(%s)", t.getCusno().getCusname(),t.getCusno().getCusno()),
 				t.getSaleamount(),
 				t.getProcode().getProprice(),
 				t.getSales(),

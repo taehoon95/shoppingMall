@@ -44,6 +44,10 @@ public class saleService {
 	public List<Sale> selectDetailByProdAndCus(Customer cus,Product prod){
 		return dao.selectDetailByProdAndCus(cus, prod);
 	}
+	////////////////////////////////////// 판매내역삭제
 	
+	public void delSale(Sale sale) {
+		dao.deleteSale(sale);
+	}
 	
 }

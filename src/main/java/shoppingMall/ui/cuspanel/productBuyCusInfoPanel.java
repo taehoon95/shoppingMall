@@ -16,19 +16,17 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 import shoppingMall.service.productService;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 
 @SuppressWarnings("serial")
 public class productBuyCusInfoPanel extends JPanel implements ChangeListener{
 	private JTextField tfCusno;
-	private JTextField tfCusname;
-	private JTextField tfTel;
 
 	private SimpleDateFormat searchDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 	private JLabel lblProcode;
@@ -108,24 +106,6 @@ public class productBuyCusInfoPanel extends JPanel implements ChangeListener{
 		tfCusno.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_3.add(tfCusno);
 		tfCusno.setColumns(10);
-		
-		JLabel lblCusname = new JLabel("회원 명");
-		lblCusname.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(lblCusname);
-		
-		tfCusname = new JTextField();
-		tfCusname.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel_3.add(tfCusname);
-		tfCusname.setColumns(10);
-		
-		JLabel lblTel = new JLabel("전화번호");
-		lblTel.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_3.add(lblTel);
-		
-		tfTel = new JTextField();
-		tfTel.setHorizontalAlignment(SwingConstants.RIGHT);
-		tfTel.setColumns(10);
-		panel_3.add(tfTel);
 	}
 
 	public Sale getBuyProd() {
@@ -172,8 +152,6 @@ public class productBuyCusInfoPanel extends JPanel implements ChangeListener{
 	public void clearTf() {
 		lblPrice.setText(null);
 		tfCusno.setText("");
-		tfCusname.setText("");
-		tfTel.setText("");
 		spinsaleamount.setValue(0);
 	}
 }	

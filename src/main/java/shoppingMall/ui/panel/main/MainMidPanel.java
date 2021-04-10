@@ -4,7 +4,10 @@ import java.awt.Color;
 
 import javax.swing.SwingConstants;
 
+import shoppingMall.dto.Customer;
+import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
+import shoppingMall.exception.NotSelectedExeption;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
@@ -52,7 +55,6 @@ public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
 	public String[] getColumnNames() {
 		return new String[] { "날짜", "회원번호", "회원명", "휴대전화", "제품코드", "주문수량", "판매액" };
 	}
-
 
 
 }

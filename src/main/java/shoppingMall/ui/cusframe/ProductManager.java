@@ -1,28 +1,28 @@
 package shoppingMall.ui.cusframe;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
 
 import shoppingMall.shoppingMallMain;
 import shoppingMall.dto.Product;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
 import shoppingMall.ui.cuspanel.procutBuyTablePanel;
-import java.awt.Color;
 import shoppingMall.ui.cuspanel.productInfoDetailPanel;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
 
+@SuppressWarnings("serial")
 public class ProductManager extends JFrame implements ActionListener, MouseListener {
 
 	private JPanel contentPane;
@@ -68,6 +68,9 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 		pTop.setBackground(Color.WHITE);
 		contentPane.add(pTop, BorderLayout.NORTH);
 	}
+	
+	
+
 	public void tableLoadData() {
 		pMid.loadData();
 	}

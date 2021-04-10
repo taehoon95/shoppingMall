@@ -2,7 +2,6 @@ package shoppingMall.ui.frame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -12,8 +11,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
@@ -24,6 +25,7 @@ import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
+import shoppingMall.ui.cusframe.ProductBuyUI;
 import shoppingMall.ui.panel.detail.DetailMidPanel;
 import shoppingMall.ui.panel.detail.DtailBottomPanel;
 import shoppingMall.ui.panel.detail.DtailTopPanel;
@@ -43,7 +45,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 
 ///////// 빈 리스트
 	List<Sale> nullList = new ArrayList<>();
-	
+
 ///////// 메인화면
 	private MainTopPanel pMainBtns;
 	private MainMidPanel pMainTable;
@@ -68,18 +70,6 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 	private List<Sale> searchListByProd;
 	private List<Sale> searchListByCusAndProd;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public JTabbedShoppingmall() {
 		saleService = new saleService();
 		productService = new productService();
@@ -88,7 +78,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 	}
 
 	private void initialize() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 681, 555);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
@@ -153,9 +143,52 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pDetailTable = new DetailMidPanel();
 		pDetailTable.loadData();
 		pDetail.add(pDetailTable, BorderLayout.CENTER);
+
+////////// 팝업메뉴생성
+		JPopupMenu popupMenu = createPopupMenu();
+		pDetailTable.setPopupMenu(popupMenu);
 	}
 
-/// 검색할 날짜 받아오기
+	private JPopupMenu createPopupMenu() {
+		JPopupMenu popMenu = new JPopupMenu();
+
+		JMenuItem delSale = new JMenuItem("삭제");
+		JMenuItem upSale = new JMenuItem("수정");
+		JMenuItem addSale = new JMenuItem("추가");
+		
+		delSale.addActionListener(popupMenuListner);
+		upSale.addActionListener(popupMenuListner);
+		addSale.addActionListener(popupMenuListner);		
+		
+		popMenu.add(delSale);
+		popMenu.add(upSale);
+		popMenu.add(addSale);
+		return popMenu;
+	}
+
+/////////////////// 팝업메뉴 추가,삭제,수정
+	ActionListener popupMenuListner = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if (e.getActionCommand() == "삭제") {
+				Sale sale = pDetailTable.getItem();
+
+				saleService.delSale(sale);
+				pDetailTable.loadData();
+			}else if(e.getActionCommand() == "수정"){
+				UpdateDetailManager frame = new UpdateDetailManager();
+				Sale cus = pDetailTable.getItem();
+				frame.setVisible(true);
+			}else if(e.getActionCommand() == "추가"){
+				ProductBuyUI frame = new ProductBuyUI();
+				frame.setVisible(true);
+			}
+		}
+	};
+
+	/// 검색할 날짜 받아오기
 	private Sale searchDate() {
 		SimpleDateFormat searchDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 		Date searchDate = pMainBtns.getJDate().getDate();
@@ -163,8 +196,8 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		Sale searchByDate = new Sale(date);
 		return searchByDate;
 	}
-///////
 
+/////// 액션 이벤트
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == pDetailBtns.getBtnAllSerach()) {
 			actionPerformedPDetailBtnsBtnAllSerach(e);
@@ -210,14 +243,14 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		}
 	}
 
+//// 두개 검색
 	private void actionPerformedPTopBtnlblCusAndProdSearch(ActionEvent e) {
 		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
 		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
-		selectListByCusAndProd(); 
+		selectListByCusAndProd();
 	}
 
-
-	
+////////메인	
 	protected void actionPerformedPMainBtnsBtnSearch(ActionEvent e) {
 		Sale searchByDate = searchDate();
 		saleList = saleService.selectMainByDate(searchByDate);
@@ -226,6 +259,15 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		setDataTotalOrderByDate();
 	}
 
+////////메인 전체검색
+	protected void actionPerformedPMainBtnsBtnAllsearch(ActionEvent e) {
+		pMainTable.loadData();
+		pMainBtns.tfClear();
+		pMainTotal.setDataTotalOrder();
+		pMainTotal.setDataTotalSales();
+	}
+
+/////// 메인 날짜 검색(토탈)
 	public void setDataTotalSalesByDate() {
 		int totalSales = saleList.parallelStream().mapToInt(Sale::getSales).sum();
 		pMainTotal.getTfTotalSales().setText(df.format(totalSales));
@@ -236,13 +278,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pMainTotal.getTfTotalOrder().setText(totalOrder + "");
 	}
 
-	protected void actionPerformedPMainBtnsBtnAllsearch(ActionEvent e) {
-		pMainTable.loadData();
-		pMainBtns.tfClear();
-		pMainTotal.setDataTotalOrder();
-		pMainTotal.setDataTotalSales();
-	}
-
+////////제품 검색
 	protected void actionPerformedPProdBtnsBtnSearch(ActionEvent e) {
 		Product prodInfo = (Product) pProdBtns.getCmbProduct().getSelectedItem();
 		List<Sale> productByproInfoList = productService.selectProductByProInfo(prodInfo);
@@ -255,6 +291,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pProdTotal.getTfTotalOrder().setText(totalOrder + "");
 	}
 
+////////제품 전체 검색
 	protected void actionPerformedPProdBtnsBtnAll(ActionEvent e) {
 		pProdTable.loadData();
 		pProdBtns.tfClear();
@@ -262,6 +299,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pProdTotal.setDataTotalProfit();
 	}
 
+/////////상세 검색
 	protected void actionPerformedPDetailBtnsBtnProductSearch(ActionEvent e) {
 		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
 		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
@@ -337,6 +375,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pDetailTotal.getTflCntOrder().setText(searchListByCus.size() + "");
 	}
 
+/////////// 디테일 고객명으로 검색
 	protected void actionPerformedPDetailBtnsBtnlblCusSearch(ActionEvent e) {
 		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
 		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
@@ -348,40 +387,43 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		setDataTotalProfitByCus();
 
 	}
-	
-	////디테일 두개 같이 검색
+
+/////////  디테일 두개 같이 검색
 	private void selectListByCusAndProd() {
 		searchListByCusAndProd = saleService.selectDetailByProdAndCus(customerSearch, prodSearch);
 		pDetailTable.selectList(searchListByCusAndProd);
-		
+
 		setDataCntOrderByCusAndProd();
 		setDataTotalOrderByCusAndProd();
 		setDataTotalProfitByCusAndProd();
-		setDataTotalSalesByCusAndProd();		
+		setDataTotalSalesByCusAndProd();
 	}
 
+///////   디테일 두개 같이 검색 될때 총판매량 ,총이익량,총주문량,총 주문건수
 	private void setDataTotalSalesByCusAndProd() {
 		int totalSalesByCusAndProd = searchListByCusAndProd.parallelStream().mapToInt(Sale::getSales).sum();
 		pDetailTotal.getTfTotalSales().setText(totalSalesByCusAndProd + "");
-		
+
 	}
 
 	private void setDataTotalProfitByCusAndProd() {
 		int TotalProfitByCusAndProd = searchListByCusAndProd.parallelStream().mapToInt(Sale::getProfit).sum();
 		pDetailTotal.getTfTotalProfit().setText(TotalProfitByCusAndProd + "");
-		
+
 	}
 
 	private void setDataTotalOrderByCusAndProd() {
 		int TotalOrderByCusAndProd = searchListByCusAndProd.parallelStream().mapToInt(Sale::getSaleamount).sum();
 		pDetailTotal.getTfTotalOrder().setText(TotalOrderByCusAndProd + "");
-		
+
 	}
 
 	private void setDataCntOrderByCusAndProd() {
-		pDetailTotal.getTflCntOrder().setText(searchListByCusAndProd.size()+"");
-		
+		pDetailTotal.getTflCntOrder().setText(searchListByCusAndProd.size() + "");
+
 	}
+
+////////////////// 디테일 전체 검색
 	protected void actionPerformedPDetailBtnsBtnAllSerach(ActionEvent e) {
 		pDetailTable.loadData();
 		pDetailTotal.setDataCntOrder();
@@ -389,6 +431,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pDetailTotal.setDataTotalProfit();
 		pDetailTotal.setDataTotalSales();
 		pDetailBtns.tfClear();
-		
+
 	}
+////////////////// 
 }
