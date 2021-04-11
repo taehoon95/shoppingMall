@@ -79,6 +79,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 	}
 
 	private void initialize() {
+		setTitle("관리자 화면");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 681, 555);
 		contentPane = new JPanel();
@@ -148,6 +149,9 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 ////////////////// 팝업메뉴생성
 		JPopupMenu popupMenu = createPopupMenu();
 		pDetailTable.setPopupMenu(popupMenu);
+		
+		pCus = new JPanel();
+		tabbedPane.addTab("회원 관리", null, pCus, null);
 	}
 
 	public void tabSelected() {
@@ -195,11 +199,14 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 					e1.printStackTrace();
 				}
 				frame.setVisible(true);
+				frame.setTable(pDetailTable);
+				frame.dispose();
 			}
 		}
 	};
 	private JPanel pDetail;
 	private JTabbedPane tabbedPane;
+	private JPanel pCus;
 //////////////////
 ////////////////// 검색할 날짜 받아오기
 	private Sale searchDate() {

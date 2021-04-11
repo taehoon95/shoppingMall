@@ -87,4 +87,6 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 		
 		return prodList.get(prodList.indexOf(new Product(proCode)));
 	}
+	
+	
 }

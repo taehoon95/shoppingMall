@@ -127,6 +127,7 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 		ProductBuyUI frame = new ProductBuyUI();
 		frame.setProd(select);
 		frame.setVisible(true);
+		frame.setTable(pMid);
 		if(select.getStock() < 0) {
 			JOptionPane.showMessageDialog(null, "죄송합니다. " + select.getStock() +" 만큼 남았습니다.","재고 오류",JOptionPane.CANCEL_OPTION);
 		}

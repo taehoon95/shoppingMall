@@ -74,7 +74,6 @@ public class productService {
 				JOptionPane.showMessageDialog(null, product.getProname() + "을(를) " +sale.getSaleamount()+"개 주문하셨습니다.");
 				ProductManager frame = new ProductManager();
 				frame.tableLoadData();
-				frame.setVisible(true);
 			}
 			res = res + pPstmt.executeUpdate();
 			if(res == 2) {

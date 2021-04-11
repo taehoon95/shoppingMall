@@ -5,10 +5,12 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import shoppingMall.dto.Sale;
@@ -17,6 +19,7 @@ import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.panel.UpdateDetailManagerPanel;
+import shoppingMall.ui.panel.detail.DetailMidPanel;
 
 @SuppressWarnings("serial")
 public class UpdateDetailManager extends JFrame implements ActionListener {
@@ -30,10 +33,13 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 	private customerService cusService = new customerService();
 	private saleService saleService = new saleService();
 	
+	private DetailMidPanel table;
+	
 	public UpdateDetailManager() {
 		initialize();
 	}
 	private void initialize() {
+		setTitle("주문 정보 수정");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 419, 390);
 		contentPane = new JPanel();
@@ -95,6 +101,12 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		JTabbedShoppingmall frame = new JTabbedShoppingmall();
 		frame.detailLodeData();
 		frame.tabSelected();
-		frame.setVisible(true);
+		table.loadData();
 	}
+	
+	public void setTable(DetailMidPanel table) {
+		this.table = table;
+	}
+	
+	
 }
