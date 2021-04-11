@@ -1,15 +1,20 @@
 package shoppingMall.ui.frame;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import shoppingMall.dto.Sale;
+import shoppingMall.service.customerService;
+import shoppingMall.service.productService;
+import shoppingMall.service.saleService;
 import shoppingMall.ui.panel.UpdateDetailManagerPanel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class UpdateDetailManager extends JFrame implements ActionListener {
@@ -17,7 +22,12 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private UpdateDetailManagerPanel pUpdateDetailItem;
 	private JButton btnCancel;
-
+	private JButton btnUpdate;
+	
+	private productService prodService = new productService();
+	private customerService cusService = new customerService();
+	private saleService saleService = new saleService();
+	
 	public UpdateDetailManager() {
 		initialize();
 	}
@@ -25,20 +35,26 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 419, 390);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		pUpdateDetailItem = new UpdateDetailManagerPanel();
+		pUpdateDetailItem.setService(prodService, cusService);
 		contentPane.add(pUpdateDetailItem, BorderLayout.CENTER);
 		
 		JPanel pBtns = new JPanel();
+		pBtns.setBackground(Color.WHITE);
 		contentPane.add(pBtns, BorderLayout.SOUTH);
 		
-		JButton btnUpdate = new JButton("수정");
+		btnUpdate = new JButton("수정");
+		btnUpdate.setBackground(Color.GREEN);
+		btnUpdate.addActionListener(this);
 		pBtns.add(btnUpdate);
 		
 		btnCancel = new JButton("취소");
+		btnCancel.setBackground(Color.GREEN);
 		btnCancel.addActionListener(this);
 		pBtns.add(btnCancel);
 	}
@@ -52,11 +68,24 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnUpdate) {
+			actionPerformedBtnUpdate(e);
+		}
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
 		pUpdateDetailItem.tfClear();
+	}
+
+////////////// 수정
+	protected void actionPerformedBtnUpdate(ActionEvent e) {
+		Sale sale = pUpdateDetailItem.getUpdateTf();
+		saleService.modiDetailInfo(sale);
+		
+		JTabbedShoppingmall frame = new JTabbedShoppingmall();
+		frame.detailLodeData();
+		frame.setVisible(true);
 	}
 }

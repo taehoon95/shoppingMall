@@ -174,7 +174,11 @@ select * from sale;
 delete from sale where orderno = ?;
 
 
+-- detail정보 수정
 
+select * from customer;
+select * from product;
+select * from sale;
 
 
 

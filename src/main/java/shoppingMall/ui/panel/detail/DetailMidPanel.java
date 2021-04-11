@@ -81,7 +81,6 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 	public Product getProdItem() {
 		int row = table.getSelectedRow();
 		String proCode = (String) table.getValueAt(row, 2);
-		
 		if (row == -1) {
 			throw new NotSelectedExeption();
 		}

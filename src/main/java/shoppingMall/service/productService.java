@@ -7,11 +7,14 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import shoppingMall.dao.CustomerDao;
 import shoppingMall.dao.ProductDao;
 import shoppingMall.dao.SaleDao;
+import shoppingMall.dao.Impl.CustomerDaoImpl;
 import shoppingMall.dao.Impl.ProductDaoImpl;
 import shoppingMall.dao.Impl.SaleDaoImpl;
 import shoppingMall.database.JdbcConn;
+import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 import shoppingMall.ui.cusframe.ProductManager;
@@ -20,10 +23,15 @@ public class productService {
 	private ProductDao dao = ProductDaoImpl.getInstance();
 	private SaleDao sDao = SaleDaoImpl.getInstance();
 	
-	/////////////////////////////////////// 제품별 조회
+	/////////////////////////////////////// 제품정보별 조회
 	public List<Product> showProInfo(){
+		return dao.selectProductInfo();
+	}
+	////////////////////////////////////// 제품코드,명만 조회
+	public List<Product> showProd(){
 		return dao.selectProduct();
 	}
+
 	
 	public List<Sale> selectProductByProInfo(Product prod){
 		return sDao.selectProductByProInfo(prod);
@@ -100,4 +108,6 @@ public class productService {
 			e1.printStackTrace();
 		}
 	}
+	
+
 }

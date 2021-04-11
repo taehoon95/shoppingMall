@@ -50,4 +50,8 @@ public class saleService {
 		dao.deleteSale(sale);
 	}
 	
+	///////////////////////////////////// Detail정보 수정
+	public void modiDetailInfo(Sale sale) {
+		dao.updateSale(sale);
+	}
 }

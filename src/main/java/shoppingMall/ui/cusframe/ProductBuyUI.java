@@ -90,6 +90,9 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 		Product product = pService.selectProductByProcode(sale.getProcode());
 		
 		pService.buyProductTransaction(sale, product);
+		ProductManager frame = new ProductManager();
+		frame.tableLoadData();
+		frame.setVisible(true);
 		dispose();		
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {

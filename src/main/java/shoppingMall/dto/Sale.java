@@ -21,6 +21,11 @@ public class Sale {
 		this.profit = profit;
 	}
 
+	public Sale(String date, int saleamount) {
+		this.date = date;
+		this.saleamount = saleamount;
+	}
+
 	public Sale(String date, Customer cusno, Product procode, int saleamount, int sales, int profit) {
 		this.date = date;
 		this.cusno = cusno;

@@ -23,9 +23,12 @@ public interface SaleDao {
 	// 제품 구입용
 	int insertSale(Sale sale);
 	
-	
+	// detail 정보 수정
 	int updateSale(Sale sale);
 	
 	
 	int deleteSale(Sale sale);
+	
+	
+	
 }

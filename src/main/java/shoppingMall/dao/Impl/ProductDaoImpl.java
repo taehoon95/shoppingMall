@@ -45,7 +45,7 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public List<Product> selectProduct() {
+	public List<Product> selectProductInfo() {
 		String sql = "select procode,proname,proprice,proprice*1.1 as salePrice,stock from product";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql);
@@ -108,5 +108,25 @@ public class ProductDaoImpl implements ProductDao {
 		}
 		return null;
 	}
+
+	@Override
+	public List<Product> selectProduct() {
+		String sql = "select procode,proname from product";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			if(rs.next()) {
+				ArrayList<Product> list = new ArrayList<>();
+				do {
+					list.add(getProduct(rs));
+				}while(rs.next());
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 }

@@ -20,4 +20,5 @@ public interface CustomerDao {
 
 //////////고객코드로 검색
 	Customer selectCusByCo(Customer customer);
+	
 }

@@ -142,12 +142,16 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pDetail.add(pDetailTotal, BorderLayout.SOUTH);
 
 		pDetailTable = new DetailMidPanel();
-		pDetailTable.loadData();
+		detailLodeData();
 		pDetail.add(pDetailTable, BorderLayout.CENTER);
 
 ////////////////// 팝업메뉴생성
 		JPopupMenu popupMenu = createPopupMenu();
 		pDetailTable.setPopupMenu(popupMenu);
+	}
+
+	public void detailLodeData() {
+		pDetailTable.loadData();
 	}
 
 	private JPopupMenu createPopupMenu() {
@@ -174,7 +178,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 			if (e.getActionCommand() == "삭제") {
 				Sale sale = pDetailTable.getItem();
 				saleService.delSale(sale);
-				pDetailTable.loadData();
+				detailLodeData();
 			}else if(e.getActionCommand() == "수정"){
 				
 				UpdateDetailManager frame = new UpdateDetailManager();
@@ -190,7 +194,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 			}
 		}
 	};
-
+//////////////////
 ////////////////// 검색할 날짜 받아오기
 	private Sale searchDate() {
 		SimpleDateFormat searchDateFormat = new SimpleDateFormat("yyyy.MM.dd");
@@ -428,7 +432,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 
 ////////////////// 디테일 전체 검색
 	protected void actionPerformedPDetailBtnsBtnAllSerach(ActionEvent e) {
-		pDetailTable.loadData();
+		detailLodeData();
 		pDetailTotal.setDataCntOrder();
 		pDetailTotal.setDataTotalOrder();
 		pDetailTotal.setDataTotalProfit();
@@ -436,5 +440,5 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pDetailBtns.tfClear();
 
 	}
-////////////////// 
+
 }

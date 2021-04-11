@@ -107,7 +107,7 @@ public class ProductTopPanel extends JPanel implements ActionListener {
 	public void setService(productService service) {
 		this.service = service;
 	
-		List<Product> prodList = service.showProInfo();
+		List<Product> prodList = service.showProd();
 		DefaultComboBoxModel prodModel = new DefaultComboBoxModel<Product>(new Vector<>(prodList));
 		cmbProduct.setModel(prodModel);
 		cmbProduct.setSelectedIndex(-1);

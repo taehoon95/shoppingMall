@@ -115,7 +115,7 @@ public class DtailTopPanel extends JPanel implements ActionListener, ItemListene
 
 		service = new productService();
 
-		List<Product> prodList = service.showProInfo();
+		List<Product> prodList = service.showProd();
 		DefaultComboBoxModel prodModel = new DefaultComboBoxModel<Product>(new Vector<>(prodList));
 		cmbProductSearch.setModel(prodModel);
 		cmbProductSearch.setSelectedIndex(-1);

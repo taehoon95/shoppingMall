@@ -158,13 +158,14 @@ public class SaleDaoImpl implements SaleDao {
 
 	@Override
 	public int updateSale(Sale sale) {
-		String sql = "update sale set date = ? ,procode = ?,saleamount = ? where cusno = ?";
+		String sql = "update sale set date = ?, procode = ?, saleamount = ?, cusno = ? where orderno = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, sale.getDate());
 			pstmt.setString(2, sale.getProcode().getProcode());
 			pstmt.setInt(3, sale.getSaleamount());
 			pstmt.setInt(4, sale.getCusno().getCusno());
+			pstmt.setInt(5, sale.getOrderno());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
