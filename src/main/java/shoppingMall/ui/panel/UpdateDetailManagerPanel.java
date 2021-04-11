@@ -21,6 +21,7 @@ import com.toedter.calendar.JDateChooser;
 import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
+import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 
@@ -134,6 +135,7 @@ public class UpdateDetailManagerPanel extends JPanel {
 	}
 	
 	public Sale getUpdateTf() {
+		vaildCheck();
 		int orderno = Integer.parseInt(lblOrderNoText.getText());
 		String date = tdf.format(dCOrderdate.getDate());
 		int saleamount = Integer.parseInt(tftfSaleAmount.getText());
@@ -143,5 +145,13 @@ public class UpdateDetailManagerPanel extends JPanel {
 		String seachCusno = cmbCus.getSelectedItem()+"";
 		int cusno = Integer.parseInt(seachCusno.substring(0, 5));
 		return new Sale(date, orderno,new Customer(cusno),new Product(procode.substring(0, 2)), saleamount);
+	}
+	private void vaildCheck() {
+		if(dCOrderdate.getDate().equals(null) ||
+				tftfSaleAmount.getText().equals(null) ||
+				cmbProd.getSelectedItem().equals(null) ||
+				cmbCus.getSelectedItem().equals(null)){
+					throw new InvaildCheckException();
+				}
 	}
 }

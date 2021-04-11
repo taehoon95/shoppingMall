@@ -87,7 +87,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 
 		JPanel pMain = new JPanel();
@@ -125,7 +125,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pProdTable.setBackground(Color.WHITE);
 		pProduct.add(pProdTable);
 
-		JPanel pDetail = new JPanel();
+		pDetail = new JPanel();
 		pDetail.setForeground(Color.WHITE);
 		tabbedPane.addTab("상세 조회", null, pDetail, null);
 		pDetail.setLayout(new BorderLayout(0, 0));
@@ -150,6 +150,10 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		pDetailTable.setPopupMenu(popupMenu);
 	}
 
+	public void tabSelected() {
+		tabbedPane.setSelectedComponent(pDetail);
+	}
+	
 	public void detailLodeData() {
 		pDetailTable.loadData();
 	}
@@ -194,6 +198,8 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 			}
 		}
 	};
+	private JPanel pDetail;
+	private JTabbedPane tabbedPane;
 //////////////////
 ////////////////// 검색할 날짜 받아오기
 	private Sale searchDate() {

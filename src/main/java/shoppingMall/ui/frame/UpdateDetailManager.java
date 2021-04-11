@@ -7,10 +7,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import shoppingMall.dto.Sale;
+import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
@@ -68,11 +70,17 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnUpdate) {
-			actionPerformedBtnUpdate(e);
-		}
+		
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
+		}
+		
+		try{
+			if (e.getSource() == btnUpdate) {
+				actionPerformedBtnUpdate(e);
+			}	
+		}catch (NullPointerException | InvaildCheckException | NumberFormatException e1) {
+			JOptionPane.showMessageDialog(null, "공란이나 형식을 맞춰 입력해주세요","수정 오류",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {
@@ -86,6 +94,7 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		
 		JTabbedShoppingmall frame = new JTabbedShoppingmall();
 		frame.detailLodeData();
+		frame.tabSelected();
 		frame.setVisible(true);
 	}
 }
