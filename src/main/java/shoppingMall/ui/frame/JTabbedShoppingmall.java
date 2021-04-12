@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -26,7 +27,8 @@ import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
-import shoppingMall.ui.cusframe.ProductBuyUI;
+import shoppingMall.ui.cusframe.CustomerManagerUI;
+import shoppingMall.ui.cuspanel.CustomerInfoTablePanel;
 import shoppingMall.ui.panel.detail.DetailMidPanel;
 import shoppingMall.ui.panel.detail.DtailBottomPanel;
 import shoppingMall.ui.panel.detail.DtailTopPanel;
@@ -152,8 +154,51 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		
 		pCus = new JPanel();
 		tabbedPane.addTab("회원 관리", null, pCus, null);
+		pCus.setLayout(new BoxLayout(pCus, BoxLayout.Y_AXIS));
+		
+		pCusTable = new CustomerInfoTablePanel();
+		pCusTable.setBackground(Color.WHITE);
+		pCusTable.loadData();
+		JPopupMenu CusPopupMenu = createCusPopupMenu();
+		pCusTable.setPopupMenu(CusPopupMenu);
+		pCus.add(pCusTable);
 	}
 
+/////////// 고객 수정, 삭제 팝업메뉴
+	private JPopupMenu createCusPopupMenu() {
+		JPopupMenu popMenu = new JPopupMenu();
+
+		JMenuItem delSale = new JMenuItem("삭제");
+		JMenuItem upSale = new JMenuItem("수정");
+
+		
+		delSale.addActionListener(popupCusMenuListner);
+		upSale.addActionListener(popupCusMenuListner);
+		
+		popMenu.add(delSale);
+		popMenu.add(upSale);
+		return popMenu;
+	}
+//////////////////////////////////////고객 수정,삭제
+	ActionListener popupCusMenuListner = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getActionCommand() == "삭제") {
+				Customer customer = pCusTable.getItem();
+				customerService.delCustomer(customer.getCusno());
+				pCusTable.loadData();
+			}else if(e.getActionCommand() == "수정"){
+				
+				Customer customer = pCusTable.getItem();
+				
+				CustomerManagerUI frame = new CustomerManagerUI();
+				frame.getpItems().setCusItem(customer);
+				frame.setVisible(true);
+			}
+		}
+	}; 
+////////////////////////////////////////////////////////
 	public void tabSelected() {
 		tabbedPane.setSelectedComponent(pDetail);
 	}
@@ -207,6 +252,7 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 	private JPanel pDetail;
 	private JTabbedPane tabbedPane;
 	private JPanel pCus;
+	private CustomerInfoTablePanel pCusTable;
 //////////////////
 ////////////////// 검색할 날짜 받아오기
 	private Sale searchDate() {

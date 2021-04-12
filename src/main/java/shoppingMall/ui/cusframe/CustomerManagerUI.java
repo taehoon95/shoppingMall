@@ -8,48 +8,42 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JButton;
+import shoppingMall.ui.cuspanel.updateCusItemPanel;
 
 @SuppressWarnings("serial")
 public class CustomerManagerUI extends JFrame {
 
 	private JPanel contentPane;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CustomerManagerUI frame = new CustomerManagerUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private updateCusItemPanel pItems;
 
 	public CustomerManagerUI() {
 		initialize();
 	}
 	private void initialize() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 461);
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 441, 404);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
+		pItems = new updateCusItemPanel();
+		contentPane.add(pItems, BorderLayout.CENTER);
 		
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.SOUTH);
+		JPanel pBtns = new JPanel();
+		pBtns.setBackground(Color.WHITE);
+		contentPane.add(pBtns, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("\uC218\uC815");
-		panel_1.add(btnNewButton);
+		JButton btnUpdate = new JButton("수정");
+		pBtns.add(btnUpdate);
 		
-		JButton btnNewButton_1 = new JButton("\uCDE8\uC18C");
-		panel_1.add(btnNewButton_1);
+		JButton btnCancel = new JButton("취소");
+		pBtns.add(btnCancel);
+	}
+	public updateCusItemPanel getpItems() {
+		return pItems;
 	}
 
 }

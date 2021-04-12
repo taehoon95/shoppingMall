@@ -31,6 +31,7 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 		initialize();
 	}
 	private void initialize() {
+		setTitle("회원 가입");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 514);
 		contentPane = new JPanel();

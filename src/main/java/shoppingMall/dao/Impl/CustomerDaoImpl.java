@@ -55,11 +55,12 @@ public class CustomerDaoImpl implements CustomerDao {
 	}
 
 	@Override
-	public int deleteCustomer(String customer) {
+	public int deleteCustomer(int customer) {
 		String sql = "delete from customer where cusno = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
-			pstmt.setString(1, customer);
+			pstmt.setInt(1, customer);
+			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -135,6 +136,26 @@ public class CustomerDaoImpl implements CustomerDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	public List<Customer> selectCustomers() {
+		String sql = "select cusno, cusname, birth, callno, sex from customer";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql);
+				ResultSet rs = pstmt.executeQuery()){
+			if(rs.next()) {
+				ArrayList<Customer> list = new ArrayList<>();
+				do {
+					list.add(getCustomer(rs));
+				}while(rs.next());
+				return list;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 

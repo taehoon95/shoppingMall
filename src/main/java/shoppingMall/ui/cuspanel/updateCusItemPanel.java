@@ -1,8 +1,8 @@
 package shoppingMall.ui.cuspanel;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridLayout;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.OptionalInt;
@@ -10,14 +10,11 @@ import java.util.OptionalInt;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -26,21 +23,17 @@ import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 
 @SuppressWarnings("serial")
-public class CusItemPanel extends JPanel {
+public class updateCusItemPanel extends JPanel {
 	private JLabel lblCusId;
 	private JTextField tfCusname;
-	private JPasswordField pfPass1;
 	private JTextField tfCall;
-	private JPasswordField pfPass2;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JDateChooser dcBirth;
 	private JRadioButton rdbtnmale;
 	private JRadioButton rdbtnFemale;
-	private JLabel lblConfirm;
 	private customerService service = new customerService();
 	
-	public CusItemPanel() {
-
+	public updateCusItemPanel() {
 		initialize();
 	}
 	
@@ -71,31 +64,6 @@ public class CusItemPanel extends JPanel {
 		tfCusname = new JTextField();
 		tfCusname.setColumns(10);
 		add(tfCusname);
-		
-		JLabel lblPass1 = new JLabel("비밀번호");
-		lblPass1.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblPass1);
-		
-		pfPass1 = new JPasswordField();
-		pfPass1.getDocument().addDocumentListener(listener);
-		add(pfPass1);
-		
-		JLabel lblPass2 = new JLabel("비밀번호 확인");
-		lblPass2.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblPass2);
-		
-		pfPass2 = new JPasswordField();
-		pfPass2.getDocument().addDocumentListener(listener);
-		add(pfPass2);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.WHITE);
-		add(panel);
-		
-		lblConfirm = new JLabel();
-		lblConfirm.setFont(new Font("굴림", Font.BOLD, 12));
-		lblConfirm.setHorizontalAlignment(SwingConstants.CENTER);
-		add(lblConfirm);
 		
 		JLabel lblSex = new JLabel("성별");
 		lblSex.setHorizontalAlignment(SwingConstants.CENTER);
@@ -134,69 +102,48 @@ public class CusItemPanel extends JPanel {
 	
 	public void tfClear() {
 		tfCusname.setText("");
-		pfPass1.setText("");
-		pfPass2.setText("");
-		lblConfirm.setText("");
 		rdbtnFemale.setSelected(false);
 		rdbtnmale.setSelected(false);
 		tfCall.setText("");
 		dcBirth.setDate(new Date());
 	}
-	
 
-	
 	public Customer getJoinItem() {
 		validCheck();
 		int cusno = Integer.parseInt(lblCusId.getText().trim());
 		String cusname = tfCusname.getText().trim();
-		
-		String passno = String.valueOf(pfPass1.getPassword());
 		
 		SimpleDateFormat birthDate = new SimpleDateFormat("yyyy.MM.dd");
 		String birth = birthDate.format(dcBirth.getDate());
 		
 		String callno = tfCall.getText().trim();
 		int sex = rdbtnFemale.isSelected()?2:1;
-		return new Customer(cusno, passno,cusname, birth, callno, sex);
+		return new Customer(cusno, cusname, birth, callno, sex);
 	}
+	
 	private void validCheck() {
 		if(lblCusId.getText().equals("") || tfCusname.getText().equals("")||
-				dcBirth.getDate() == null || tfCall.getText().equals("") || tfCall.getText().length() != 11 ||
-				lblConfirm.getText().equals("불일치")) {
+				dcBirth.getDate() == null || tfCall.getText().equals("") || tfCall.getText().length() != 11) {
 			throw new InvaildCheckException();
 		}
 	}
-	
-	DocumentListener listener = new DocumentListener() {
+
+	public void setCusItem(Customer customer) {
+		SimpleDateFormat sdf = new SimpleDateFormat();
 		
-		@Override
-		public void removeUpdate(DocumentEvent e) {
-			getMessage();
-			
+		lblCusId.setText(customer.getCusno()+"");
+		tfCusname.setText(customer.getCusname());
+		tfCall.setText(customer.getCallno());
+		if(customer.getSex() == 1) {
+			rdbtnmale.setSelected(true);
+		}else {
+			rdbtnFemale.setSelected(true);
 		}
 		
-		@Override
-		public void insertUpdate(DocumentEvent e) {
-			getMessage();
-			
+		try {
+			dcBirth.setDate(sdf.parse(customer.getBirth()));
+		} catch (ParseException e) {
+			e.printStackTrace();
 		}
-		
-		@Override
-		public void changedUpdate(DocumentEvent e) {
-			getMessage();
-			
-		}
-		
-		private void getMessage() {
-			String pw1 = new String(pfPass1.getPassword());
-			String pw2 = new String(pfPass2.getPassword());
-			if(pw1.equals(pw2)) {
-				lblConfirm.setText("일치");
-				lblConfirm.setForeground(Color.GREEN);
-			}else {
-				lblConfirm.setForeground(Color.RED);
-				lblConfirm.setText("불일치");
-			}
-		}
-	};
+	}
 }

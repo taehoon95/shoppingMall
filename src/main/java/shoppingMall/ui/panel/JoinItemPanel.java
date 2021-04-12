@@ -25,6 +25,7 @@ import shoppingMall.dto.Customer;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 
+@SuppressWarnings("serial")
 public class JoinItemPanel extends JPanel {
 	private JLabel lblCusId;
 	private JTextField tfCusname;

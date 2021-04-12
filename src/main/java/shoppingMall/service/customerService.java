@@ -25,4 +25,12 @@ public class customerService {
 	public Customer showCustomerByNo(Customer customer) {
 		return dao.selectCusByCo(customer);
 	}
+	
+	public List<Customer> showCustomers(){
+		return dao.selectCustomers();
+	}
+	
+	public void delCustomer(int customer) {
+		dao.deleteCustomer(customer);
+	}
 }
