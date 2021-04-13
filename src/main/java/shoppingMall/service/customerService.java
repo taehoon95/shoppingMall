@@ -33,4 +33,8 @@ public class customerService {
 	public void delCustomer(int customer) {
 		dao.deleteCustomer(customer);
 	}
+	
+	public void modiCustomer(Customer customer) {
+		dao.updateCustomer(customer);
+	}
 }

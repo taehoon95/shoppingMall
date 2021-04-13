@@ -41,12 +41,14 @@ public class CustomerDaoImpl implements CustomerDao {
 
 	@Override
 	public int updateCustomer(Customer customer) {
-		String sql = "update customer set cusname =?, callno = ? where cusno = ?";
+		String sql = "update customer set cusname = ?, birth = ?, callno = ?,sex = ? where cusno = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, customer.getCusname());
-			pstmt.setString(2, customer.getCallno());
-			pstmt.setInt(3, customer.getCusno());
+			pstmt.setString(2, customer.getBirth());
+			pstmt.setString(3, customer.getCallno());
+			pstmt.setInt(4, customer.getSex());
+			pstmt.setInt(5, customer.getCusno());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

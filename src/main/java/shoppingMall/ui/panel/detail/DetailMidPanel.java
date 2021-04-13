@@ -71,7 +71,11 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 		int row = table.getSelectedRow();
 		String serCus = (String) table.getValueAt(row, 4);
 		
-		int cusCode = Integer.parseInt(serCus.substring(4, 9));
+		int startCus = serCus.indexOf("(");
+		int lastCus = serCus.indexOf(")");
+		
+		int cusCode = Integer.parseInt(serCus.substring(startCus+1, lastCus));
+		
 		if (row == -1) {
 			throw new NotSelectedExeption();
 		}

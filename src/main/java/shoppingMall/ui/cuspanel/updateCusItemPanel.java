@@ -129,8 +129,12 @@ public class updateCusItemPanel extends JPanel {
 	}
 
 	public void setCusItem(Customer customer) {
-		SimpleDateFormat sdf = new SimpleDateFormat();
-		
+		Date d = null;
+		try {
+			d = new SimpleDateFormat("yyyy-MM-dd").parse(customer.getBirth());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		lblCusId.setText(customer.getCusno()+"");
 		tfCusname.setText(customer.getCusname());
 		tfCall.setText(customer.getCallno());
@@ -140,10 +144,7 @@ public class updateCusItemPanel extends JPanel {
 			rdbtnFemale.setSelected(true);
 		}
 		
-		try {
-			dcBirth.setDate(sdf.parse(customer.getBirth()));
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		dcBirth.setDate(d);
+		
 	}
 }

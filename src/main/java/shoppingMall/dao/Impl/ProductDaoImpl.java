@@ -40,7 +40,15 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public int deleteProduct(int product) {
+	public int deleteProduct(String product) {
+		String sql = "delete from product where procode = ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, product);
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 

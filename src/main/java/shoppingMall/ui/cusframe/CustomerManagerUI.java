@@ -1,22 +1,33 @@
 package shoppingMall.ui.cusframe;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JButton;
+
+import shoppingMall.dto.Customer;
+import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.service.customerService;
+import shoppingMall.ui.cuspanel.CustomerInfoTablePanel;
 import shoppingMall.ui.cuspanel.updateCusItemPanel;
 
 @SuppressWarnings("serial")
-public class CustomerManagerUI extends JFrame {
+public class CustomerManagerUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private updateCusItemPanel pItems;
-
+	private JButton btnUpdate;
+	private customerService service;
+	private CustomerInfoTablePanel table;
+	
 	public CustomerManagerUI() {
+		service = new customerService();
 		initialize();
 	}
 	private void initialize() {
@@ -36,7 +47,8 @@ public class CustomerManagerUI extends JFrame {
 		pBtns.setBackground(Color.WHITE);
 		contentPane.add(pBtns, BorderLayout.SOUTH);
 		
-		JButton btnUpdate = new JButton("수정");
+		btnUpdate = new JButton("수정");
+		btnUpdate.addActionListener(this);
 		pBtns.add(btnUpdate);
 		
 		JButton btnCancel = new JButton("취소");
@@ -46,4 +58,25 @@ public class CustomerManagerUI extends JFrame {
 		return pItems;
 	}
 
+	public void actionPerformed(ActionEvent e) {
+		try {
+			if (e.getSource() == btnUpdate) {
+				actionPerformedBtnUpdate(e);
+			}	
+		}catch (InvaildCheckException e1) {
+			JOptionPane.showMessageDialog(null, "공란이나 형식을 확인해주세요","오류",JOptionPane.ERROR_MESSAGE);
+		}
+		
+	}
+	protected void actionPerformedBtnUpdate(ActionEvent e) {
+		
+		Customer customer = pItems.getJoinItem();
+		service.modiCustomer(customer);
+		table.loadData();
+		dispose();
+	}
+	
+	public void setTable(CustomerInfoTablePanel table) {
+		this.table = table;
+	}
 }

@@ -7,7 +7,7 @@ import shoppingMall.dto.Product;
 public interface ProductDao {
 	int insertProduct(Product product);
 	
-	int deleteProduct(int product);
+	int deleteProduct(String product);
 	
 ///////////////////////////// 제품검색(고객 구매 테이블)
 	List<Product> selectProductInfo();

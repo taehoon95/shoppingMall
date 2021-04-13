@@ -32,9 +32,13 @@ public class productService {
 		return dao.selectProduct();
 	}
 
-	
 	public List<Sale> selectProductByProInfo(Product prod){
 		return sDao.selectProductByProInfo(prod);
+	}
+
+	///////////////////////////////////////// 제품 삭제
+	public void delProd(String prod) {
+		dao.deleteProduct(prod);
 	}
 	
 	// 제품 목록

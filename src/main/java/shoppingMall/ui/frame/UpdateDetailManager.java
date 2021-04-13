@@ -102,6 +102,7 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		frame.detailLodeData();
 		frame.tabSelected();
 		table.loadData();
+		dispose();
 	}
 	
 	public void setTable(DetailMidPanel table) {

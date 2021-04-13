@@ -20,13 +20,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import shoppingMall.dto.Product;
+import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
 public class productInfoDetailPanel extends JPanel implements ActionListener {
 	
-	private JLabel lblProdcodeInfo;
-	private JLabel lblProdnameInfo;
-	private JLabel lblProdStockInfo;
+	private JLabel tfProdCode;
+	private JLabel tfProdname;
+	private JLabel tfProdStock;
 	private JPanel pLeft;
 	private JPanel pRight;
 	private JButton btnUpdate;
@@ -86,28 +87,28 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 		pRight.add(lblProdcode);
 		lblProdcode.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		lblProdcodeInfo = new JLabel();
-		lblProdcodeInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProdcodeInfo.setFont(new Font("굴림", Font.BOLD, 15));
-		pRight.add(lblProdcodeInfo);
+		tfProdCode = new JLabel();
+		tfProdCode.setHorizontalAlignment(SwingConstants.CENTER);
+		tfProdCode.setFont(new Font("굴림", Font.BOLD, 15));
+		pRight.add(tfProdCode);
 		
 		JLabel lblProdname = new JLabel("상품이름");
 		pRight.add(lblProdname);
 		lblProdname.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		lblProdnameInfo = new JLabel();
-		lblProdnameInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProdnameInfo.setFont(new Font("굴림", Font.BOLD, 15));
-		pRight.add(lblProdnameInfo);
+		tfProdname = new JLabel();
+		tfProdname.setHorizontalAlignment(SwingConstants.CENTER);
+		tfProdname.setFont(new Font("굴림", Font.BOLD, 15));
+		pRight.add(tfProdname);
 		
 		JLabel lblProdStock = new JLabel("남은 수량");
 		pRight.add(lblProdStock);
 		lblProdStock.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		lblProdStockInfo = new JLabel();
-		lblProdStockInfo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblProdStockInfo.setFont(new Font("굴림", Font.BOLD, 15));
-		pRight.add(lblProdStockInfo);
+		tfProdStock = new JLabel();
+		tfProdStock.setHorizontalAlignment(SwingConstants.CENTER);
+		tfProdStock.setFont(new Font("굴림", Font.BOLD, 15));
+		pRight.add(tfProdStock);
 	}
 
 
@@ -132,16 +133,16 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 	}
 	
 	public void setItem(Product prod) {
-		lblProdcodeInfo.setText(prod.getProcode());
-		lblProdnameInfo.setText(prod.getProname());
-		lblProdStockInfo.setText(prod.getStock()+"");
+		tfProdCode.setText(prod.getProcode());
+		tfProdname.setText(prod.getProname());
+		tfProdStock.setText(prod.getStock()+"");
 		lblPic.setIcon(new ImageIcon(imgPath + prod.getProdpic()));
 	}
 	
 	public Product getProd() {
-		String procode = lblProdcodeInfo.getText();
-		String proname = lblProdnameInfo.getText();
-		int stock = Integer.parseInt(lblProdStockInfo.getText());
+		String procode = tfProdCode.getText();
+		String proname = tfProdname.getText();
+		int stock = Integer.parseInt(tfProdStock.getText());
 		String prodpic = lblPic.getName();
 		return new Product(procode, proname, stock, prodpic);
 	}

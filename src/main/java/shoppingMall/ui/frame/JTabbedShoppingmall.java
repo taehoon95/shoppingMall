@@ -38,6 +38,7 @@ import shoppingMall.ui.panel.main.MainTopPanel;
 import shoppingMall.ui.panel.product.ProductBottomPanel;
 import shoppingMall.ui.panel.product.ProductMidPanel;
 import shoppingMall.ui.panel.product.ProductTopPanel;
+import shoppingMall.ui.cuspanel.procutBuyTablePanel;
 
 @SuppressWarnings("serial")
 public class JTabbedShoppingmall extends JFrame implements ActionListener {
@@ -151,58 +152,109 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 ////////////////// 팝업메뉴생성
 		JPopupMenu popupMenu = createPopupMenu();
 		pDetailTable.setPopupMenu(popupMenu);
-		
+
 		pCus = new JPanel();
 		tabbedPane.addTab("회원 관리", null, pCus, null);
 		pCus.setLayout(new BoxLayout(pCus, BoxLayout.Y_AXIS));
-		
+
 		pCusTable = new CustomerInfoTablePanel();
 		pCusTable.setBackground(Color.WHITE);
 		pCusTable.loadData();
 		JPopupMenu CusPopupMenu = createCusPopupMenu();
 		pCusTable.setPopupMenu(CusPopupMenu);
 		pCus.add(pCusTable);
-	}
 
-/////////// 고객 수정, 삭제 팝업메뉴
+		pProd = new JPanel();
+		tabbedPane.addTab("제품관리", null, pProd, null);
+		pProd.setLayout(new BoxLayout(pProd, BoxLayout.Y_AXIS));
+
+		pProdInfoTable = new procutBuyTablePanel();
+		pProdInfoTable.loadData();
+
+		JPopupMenu popupProdMenu = createProdPopupMenu();
+		pProdInfoTable.setPopupMenu(popupProdMenu);
+
+		pProd.add(pProdInfoTable);
+	}
+///////////////// 제품 수정, 삭제
+	private JPopupMenu createProdPopupMenu() {
+		JPopupMenu popMenu = new JPopupMenu();
+
+		JMenuItem modiItem = new JMenuItem("수정");
+		JMenuItem delItem = new JMenuItem("삭제");
+		modiItem.addActionListener(popupProdMenuListner);
+		delItem.addActionListener(popupProdMenuListner);
+		popMenu.add(modiItem);
+		popMenu.add(delItem);
+		return popMenu;
+	}
+///////////////////////////////////////////// 제품 수정, 삭제
+	ActionListener popupProdMenuListner = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getActionCommand() == "삭제") {
+				Product product = pProdInfoTable.getItem();
+				
+				productService.delProd(product.getProcode());
+				System.out.println(product.getProcode());
+				pProdInfoTable.loadData();
+			} else if (e.getActionCommand() == "수정") {
+
+				Customer customer = pCusTable.getItem();
+
+				CustomerManagerUI frame = new CustomerManagerUI();
+				frame.getpItems().setCusItem(customer);
+
+				frame.setVisible(true);
+				frame.setTable(pCusTable);
+
+			}
+		}
+	};
+	/////////// 고객 수정, 삭제 팝업메뉴
 	private JPopupMenu createCusPopupMenu() {
 		JPopupMenu popMenu = new JPopupMenu();
 
 		JMenuItem delSale = new JMenuItem("삭제");
 		JMenuItem upSale = new JMenuItem("수정");
 
-		
 		delSale.addActionListener(popupCusMenuListner);
 		upSale.addActionListener(popupCusMenuListner);
-		
+
 		popMenu.add(delSale);
 		popMenu.add(upSale);
 		return popMenu;
 	}
+
 //////////////////////////////////////고객 수정,삭제
 	ActionListener popupCusMenuListner = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand() == "삭제") {
 				Customer customer = pCusTable.getItem();
 				customerService.delCustomer(customer.getCusno());
 				pCusTable.loadData();
-			}else if(e.getActionCommand() == "수정"){
-				
+			} else if (e.getActionCommand() == "수정") {
+
 				Customer customer = pCusTable.getItem();
-				
+
 				CustomerManagerUI frame = new CustomerManagerUI();
 				frame.getpItems().setCusItem(customer);
+
 				frame.setVisible(true);
+				frame.setTable(pCusTable);
+
 			}
 		}
-	}; 
+	};
+
 ////////////////////////////////////////////////////////
 	public void tabSelected() {
 		tabbedPane.setSelectedComponent(pDetail);
 	}
-	
+
 	public void detailLodeData() {
 		pDetailTable.loadData();
 	}
@@ -213,10 +265,9 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		JMenuItem delSale = new JMenuItem("삭제");
 		JMenuItem upSale = new JMenuItem("수정");
 
-		
 		delSale.addActionListener(popupMenuListner);
 		upSale.addActionListener(popupMenuListner);
-		
+
 		popMenu.add(delSale);
 		popMenu.add(upSale);
 		return popMenu;
@@ -227,13 +278,13 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+
 			if (e.getActionCommand() == "삭제") {
 				Sale sale = pDetailTable.getItem();
 				saleService.delSale(sale);
 				detailLodeData();
-			}else if(e.getActionCommand() == "수정"){
-				
+			} else if (e.getActionCommand() == "수정") {
+
 				UpdateDetailManager frame = new UpdateDetailManager();
 				Customer cus = pDetailTable.getCusItem();
 				Product prod = pDetailTable.getProdItem();
@@ -245,7 +296,6 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 				}
 				frame.setVisible(true);
 				frame.setTable(pDetailTable);
-				frame.dispose();
 			}
 		}
 	};
@@ -253,6 +303,9 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 	private JTabbedPane tabbedPane;
 	private JPanel pCus;
 	private CustomerInfoTablePanel pCusTable;
+	private JPanel pProd;
+	private procutBuyTablePanel pProdInfoTable;
+
 //////////////////
 ////////////////// 검색할 날짜 받아오기
 	private Sale searchDate() {
