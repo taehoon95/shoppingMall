@@ -15,8 +15,8 @@ import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 
 public class ProductBottomPanel extends JPanel {
-	private JTextField tfTotalOrder;
-	private JTextField tfTotalProfit;
+	private JLabel tfTotalOrder;
+	private JLabel tfTotalProfit;
 	private saleService service;
 	
 	private DecimalFormat df = new DecimalFormat("0,000");
@@ -28,21 +28,26 @@ public class ProductBottomPanel extends JPanel {
 		setDataTotalProfit();
 	}
 
-	public JTextField getTfTotalProfit() {
-		return tfTotalProfit;
-	}
 
-	public void setTfTotalProfit(JTextField tfTotalProfit) {
-		this.tfTotalProfit = tfTotalProfit;
-	}
-
-	public JTextField getTfTotalOrder() {
+	public JLabel getTfTotalOrder() {
 		return tfTotalOrder;
 	}
 
-	public void setTfTotalOrder(JTextField tfTotalOrder) {
+
+	public void setTfTotalOrder(JLabel tfTotalOrder) {
 		this.tfTotalOrder = tfTotalOrder;
 	}
+
+
+	public JLabel getTfTotalProfit() {
+		return tfTotalProfit;
+	}
+
+
+	public void setTfTotalProfit(JLabel tfTotalProfit) {
+		this.tfTotalProfit = tfTotalProfit;
+	}
+
 
 	public void setDataTotalProfit() {
 		List<Sale> saleList = service.showProduct();
@@ -65,11 +70,12 @@ public class ProductBottomPanel extends JPanel {
 		lblTotalOrder.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTotalOrder);
 
-		tfTotalOrder = new JTextField();
+		tfTotalOrder = new JLabel();
+		tfTotalOrder.setOpaque(true);
+		tfTotalOrder.setBackground(Color.WHITE);
 		tfTotalOrder.setFont(new Font("굴림", Font.BOLD, 15));
 		tfTotalOrder.setHorizontalAlignment(SwingConstants.TRAILING);
 		add(tfTotalOrder);
-		tfTotalOrder.setColumns(10);
 
 		JLabel lblTotalProfit = new JLabel("총 이익금액");
 		lblTotalProfit.setOpaque(true);
@@ -77,10 +83,11 @@ public class ProductBottomPanel extends JPanel {
 		lblTotalProfit.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTotalProfit);
 
-		tfTotalProfit = new JTextField();
+		tfTotalProfit = new JLabel();
+		tfTotalProfit.setOpaque(true);
+		tfTotalProfit.setBackground(Color.WHITE);
 		tfTotalProfit.setFont(new Font("굴림", Font.BOLD, 15));
 		tfTotalProfit.setHorizontalAlignment(SwingConstants.TRAILING);
-		tfTotalProfit.setColumns(10);
 		add(tfTotalProfit);
 	}
 

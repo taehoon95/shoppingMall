@@ -15,12 +15,12 @@ import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 
 public class MainBottomPanel extends JPanel {
-	private JTextField tfTotalOrder;
-	private JTextField tfTotalSales;
+	private JLabel tfTotalOrder;
+	private JLabel tfTotalSales;
 	private saleService service;
-	
-	private DecimalFormat df = new DecimalFormat("0,000");
-	
+
+	private DecimalFormat df = new DecimalFormat("#,###");
+
 	public MainBottomPanel() {
 		service = new saleService();
 		initialize();
@@ -28,19 +28,19 @@ public class MainBottomPanel extends JPanel {
 		setDataTotalSales();
 	}
 
-	public JTextField getTfTotalOrder() {
+	public JLabel getTfTotalOrder() {
 		return tfTotalOrder;
 	}
 
-	public void setTfTotalOrder(JTextField tfTotalOrder) {
+	public void setTfTotalOrder(JLabel tfTotalOrder) {
 		this.tfTotalOrder = tfTotalOrder;
 	}
 
-	public JTextField getTfTotalSales() {
+	public JLabel getTfTotalSales() {
 		return tfTotalSales;
 	}
 
-	public void setTfTotalSales(JTextField tfTotalSales) {
+	public void setTfTotalSales(JLabel tfTotalSales) {
 		this.tfTotalSales = tfTotalSales;
 	}
 
@@ -53,7 +53,7 @@ public class MainBottomPanel extends JPanel {
 	public void setDataTotalOrder() {
 		List<Sale> saleList = service.showMain();
 		int totalOrder = saleList.parallelStream().mapToInt(Sale::getSaleamount).sum();
-		tfTotalOrder.setText(totalOrder + "");
+		tfTotalOrder.setText(df.format(totalOrder));
 	}
 
 	private void initialize() {
@@ -65,11 +65,12 @@ public class MainBottomPanel extends JPanel {
 		lblTotalOrder.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTotalOrder);
 
-		tfTotalOrder = new JTextField();
+		tfTotalOrder = new JLabel();
+		tfTotalOrder.setOpaque(true);
+		tfTotalOrder.setBackground(Color.WHITE);
 		tfTotalOrder.setFont(new Font("굴림", Font.BOLD, 15));
 		tfTotalOrder.setHorizontalAlignment(SwingConstants.TRAILING);
 		add(tfTotalOrder);
-		tfTotalOrder.setColumns(10);
 
 		JLabel lblTotalSales = new JLabel("총 판매액");
 		lblTotalSales.setOpaque(true);
@@ -77,10 +78,11 @@ public class MainBottomPanel extends JPanel {
 		lblTotalSales.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblTotalSales);
 
-		tfTotalSales = new JTextField();
+		tfTotalSales = new JLabel();
+		tfTotalSales.setOpaque(true);
+		tfTotalSales.setBackground(Color.WHITE);
 		tfTotalSales.setFont(new Font("굴림", Font.BOLD, 15));
 		tfTotalSales.setHorizontalAlignment(SwingConstants.TRAILING);
-		tfTotalSales.setColumns(10);
 		add(tfTotalSales);
 	}
 

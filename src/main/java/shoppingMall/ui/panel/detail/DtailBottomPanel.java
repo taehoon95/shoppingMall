@@ -17,10 +17,10 @@ import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class DtailBottomPanel extends JPanel {
-	private JTextField tflCntOrder;
-	private JTextField tfTotalOrder;
-	private JTextField tfTotalSales;
-	private JTextField tfTotalProfit;
+	private JLabel tflCntOrder;
+	private JLabel tfTotalOrder;
+	private JLabel tfTotalSales;
+	private JLabel tfTotalProfit;
 
 	private saleService service;
 	
@@ -62,11 +62,12 @@ public class DtailBottomPanel extends JPanel {
 		lblCntOrder.setBackground(Color.WHITE);
 		add(lblCntOrder);
 		
-		tflCntOrder = new JTextField();
+		tflCntOrder = new JLabel();
+		tflCntOrder.setBackground(Color.WHITE);
+		tflCntOrder.setOpaque(true);
 		tflCntOrder.setFont(new Font("굴림", Font.BOLD, 12));
 		tflCntOrder.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(tflCntOrder);
-		tflCntOrder.setColumns(10);
 		
 		JLabel lblTotalOrder = new JLabel("총 주문 수량");
 		lblTotalOrder.setHorizontalAlignment(SwingConstants.CENTER);
@@ -74,10 +75,11 @@ public class DtailBottomPanel extends JPanel {
 		lblTotalOrder.setBackground(Color.WHITE);
 		add(lblTotalOrder);
 		
-		tfTotalOrder = new JTextField();
+		tfTotalOrder = new JLabel();
+		tfTotalOrder.setBackground(Color.WHITE);
+		tfTotalOrder.setOpaque(true);
 		tfTotalOrder.setFont(new Font("굴림", Font.BOLD, 12));
 		tfTotalOrder.setHorizontalAlignment(SwingConstants.RIGHT);
-		tfTotalOrder.setColumns(10);
 		add(tfTotalOrder);
 		
 		JLabel lblTotalSales = new JLabel("총 판매액");
@@ -86,10 +88,11 @@ public class DtailBottomPanel extends JPanel {
 		lblTotalSales.setOpaque(true);
 		add(lblTotalSales);
 		
-		tfTotalSales = new JTextField();
+		tfTotalSales = new JLabel();
+		tfTotalSales.setBackground(Color.WHITE);
+		tfTotalSales.setOpaque(true);
 		tfTotalSales.setFont(new Font("굴림", Font.BOLD, 12));
 		tfTotalSales.setHorizontalAlignment(SwingConstants.RIGHT);
-		tfTotalSales.setColumns(10);
 		add(tfTotalSales);
 		
 		JLabel lblTotalProfit = new JLabel("총 이익금액");
@@ -98,37 +101,38 @@ public class DtailBottomPanel extends JPanel {
 		lblTotalProfit.setOpaque(true);
 		add(lblTotalProfit);
 		
-		tfTotalProfit = new JTextField();
+		tfTotalProfit = new JLabel();
+		tfTotalProfit.setBackground(Color.WHITE);
+		tfTotalProfit.setOpaque(true);
 		tfTotalProfit.setFont(new Font("굴림", Font.BOLD, 12));
 		tfTotalProfit.setHorizontalAlignment(SwingConstants.RIGHT);
-		tfTotalProfit.setColumns(10);
 		add(tfTotalProfit);
 	}
-	public JTextField getTflCntOrder() {
+
+	public JLabel getTflCntOrder() {
 		return tflCntOrder;
 	}
-	public void setTflCntOrder(JTextField tflCntOrder) {
+	public void setTflCntOrder(JLabel tflCntOrder) {
 		this.tflCntOrder = tflCntOrder;
 	}
-	public JTextField getTfTotalOrder() {
+	public JLabel getTfTotalOrder() {
 		return tfTotalOrder;
 	}
-	public void setTfTotalOrder(JTextField tfTotalOrder) {
+	public void setTfTotalOrder(JLabel tfTotalOrder) {
 		this.tfTotalOrder = tfTotalOrder;
 	}
-	public JTextField getTfTotalSales() {
+	public JLabel getTfTotalSales() {
 		return tfTotalSales;
 	}
-	public void setTfTotalSales(JTextField tfTotalSales) {
+	public void setTfTotalSales(JLabel tfTotalSales) {
 		this.tfTotalSales = tfTotalSales;
 	}
-	public JTextField getTfTotalProfit() {
+	public JLabel getTfTotalProfit() {
 		return tfTotalProfit;
 	}
-	public void setTfTotalProfit(JTextField tfTotalProfit) {
+	public void setTfTotalProfit(JLabel tfTotalProfit) {
 		this.tfTotalProfit = tfTotalProfit;
 	}
-
 	public void tfClear() {
 		tflCntOrder.setText(null);
 		tfTotalOrder.setText(null);

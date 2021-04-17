@@ -126,8 +126,8 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return String.format("%s %s %s %s", procode, proname, proprice == 0 ? "" : proprice,
-				stock == 0 ? "" : stock);
+		return String.format("%s %s %s %s %s", procode, proname, proprice == 0 ? "" : proprice,
+				stock == 0 ? "" : stock, prodpic == null ? "" : prodpic);
 	}
 
 }

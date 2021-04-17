@@ -16,8 +16,11 @@ public interface ProductDao {
 	Product selectProductByProCode(Product product);
 	
 //////////////////////////// 구매용
-	int updateProduct(Product product);
+	int buyProduct(Product product);
 	
 //////////////////////////// 제품 검색용
 	List<Product> selectProduct();
+	
+/////////////////////////// 제품 수정용
+	int modiProduct(Product product);
 }

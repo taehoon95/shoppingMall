@@ -31,7 +31,11 @@ public class productService {
 	public List<Product> showProd(){
 		return dao.selectProduct();
 	}
-
+	////////////////////////////////////// 제품 수정
+	public void modiProduct(Product product) {
+		dao.modiProduct(product);
+	}
+	
 	public List<Sale> selectProductByProInfo(Product prod){
 		return sDao.selectProductByProInfo(prod);
 	}

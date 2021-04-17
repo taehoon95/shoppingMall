@@ -183,7 +183,9 @@ select * from sale;
 
 update customer set cusname ='오', birth ='2020-04-20', callno = '01047854825',sex ='2'where cusno = 12011;
 
+select * from product;
 
+update product set proname = '고구마', prodpic = '고구마.png', stock = 500 where procode = 'PA';
 
 
 

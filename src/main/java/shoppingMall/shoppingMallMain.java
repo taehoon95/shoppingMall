@@ -121,7 +121,7 @@ public class shoppingMallMain extends JFrame implements ActionListener {
 			if (e.getSource() == btnLogin) {
 				actionPerformedBtnAdd(e);
 			}	
-		}catch(InvaildCheckException e1) {
+		}catch(InvaildCheckException | NumberFormatException e1) {
 			JOptionPane.showMessageDialog(null, "아이디 나 비밀번호를 입력해주세요","로그인 오류", JOptionPane.CANCEL_OPTION);
 		}
 	}

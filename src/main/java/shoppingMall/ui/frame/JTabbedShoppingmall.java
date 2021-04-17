@@ -28,7 +28,9 @@ import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.cusframe.CustomerManagerUI;
+import shoppingMall.ui.cusframe.ProductInfoUI;
 import shoppingMall.ui.cuspanel.CustomerInfoTablePanel;
+import shoppingMall.ui.cuspanel.procutBuyTablePanel;
 import shoppingMall.ui.panel.detail.DetailMidPanel;
 import shoppingMall.ui.panel.detail.DtailBottomPanel;
 import shoppingMall.ui.panel.detail.DtailTopPanel;
@@ -38,7 +40,6 @@ import shoppingMall.ui.panel.main.MainTopPanel;
 import shoppingMall.ui.panel.product.ProductBottomPanel;
 import shoppingMall.ui.panel.product.ProductMidPanel;
 import shoppingMall.ui.panel.product.ProductTopPanel;
-import shoppingMall.ui.cuspanel.procutBuyTablePanel;
 
 @SuppressWarnings("serial")
 public class JTabbedShoppingmall extends JFrame implements ActionListener {
@@ -200,14 +201,12 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 				System.out.println(product.getProcode());
 				pProdInfoTable.loadData();
 			} else if (e.getActionCommand() == "수정") {
-
-				Customer customer = pCusTable.getItem();
-
-				CustomerManagerUI frame = new CustomerManagerUI();
-				frame.getpItems().setCusItem(customer);
-
+				Product product = pProdInfoTable.getItem();
+				Product prod = productService.selectProductByProcode(product);
+				ProductInfoUI frame = new ProductInfoUI();
+				frame.setDetailItem(prod);
 				frame.setVisible(true);
-				frame.setTable(pCusTable);
+				frame.setTable(pProdInfoTable);
 
 			}
 		}
