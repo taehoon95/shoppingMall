@@ -13,6 +13,15 @@ public class Product {
 
 	
 	
+	public Product(String procode, String proname, int stock, String prodpic) {
+		this.procode = procode;
+		this.proname = proname;
+		this.stock = stock;
+		this.prodpic = prodpic;
+	}
+
+
+
 	public Product(String procode, String proname, int stock) {
 		this.procode = procode;
 		this.proname = proname;
@@ -38,12 +47,16 @@ public class Product {
 		this.salePrice = salePrice;
 	}
 	
-	public Product(String procode, String proname, int stock, String prodpic) {
+
+	public Product(String procode, String proname, int proprice, int stock, String prodpic) {
 		this.procode = procode;
 		this.proname = proname;
+		this.proprice = proprice;
 		this.stock = stock;
 		this.prodpic = prodpic;
 	}
+
+
 
 	public String getProdpic() {
 		return prodpic;

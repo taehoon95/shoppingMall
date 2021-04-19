@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -39,7 +40,6 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 	private JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
 
 	public productInfoDetailPanel() {
-
 		initialize();
 		loadPic(null);
 	}
@@ -136,6 +136,7 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 		tfProdCode.setText(prod.getProcode());
 		tfProdname.setText(prod.getProname());
 		tfProdStock.setText(prod.getStock()+"");
+		System.out.println(prod);
 		lblPic.setIcon(new ImageIcon(imgPath + prod.getProdpic()));
 	}
 	
@@ -143,8 +144,12 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 		String procode = tfProdCode.getText();
 		String proname = tfProdname.getText();
 		int stock = Integer.parseInt(tfProdStock.getText());
-		String prodpic = lblPic.getName();
-		return new Product(procode, proname, stock, prodpic);
+		Icon prodpic = lblPic.getIcon();
+
+		String modiPic = prodpic + "";
+		modiPic.lastIndexOf("\\");
+		String upPic = modiPic.substring(modiPic.lastIndexOf("\\"));
+		return new Product(procode, proname, stock, upPic);
 	}
 	
 }

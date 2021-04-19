@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -27,10 +28,9 @@ import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
-import shoppingMall.ui.cusframe.CustomerManagerUI;
 import shoppingMall.ui.cusframe.ProductInfoUI;
 import shoppingMall.ui.cuspanel.CustomerInfoTablePanel;
-import shoppingMall.ui.cuspanel.procutBuyTablePanel;
+import shoppingMall.ui.cuspanel.procutInfoTablePanel;
 import shoppingMall.ui.panel.detail.DetailMidPanel;
 import shoppingMall.ui.panel.detail.DtailBottomPanel;
 import shoppingMall.ui.panel.detail.DtailTopPanel;
@@ -164,18 +164,36 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 		JPopupMenu CusPopupMenu = createCusPopupMenu();
 		pCusTable.setPopupMenu(CusPopupMenu);
 		pCus.add(pCusTable);
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		pCusTable.add(panel_1, BorderLayout.NORTH);
+		
+		btnAddCus = new JButton("회원 추가");
+		btnAddCus.addActionListener(this);
+		btnAddCus.setBackground(Color.GREEN);
+		panel_1.add(btnAddCus);
 
 		pProd = new JPanel();
 		tabbedPane.addTab("제품관리", null, pProd, null);
 		pProd.setLayout(new BoxLayout(pProd, BoxLayout.Y_AXIS));
 
-		pProdInfoTable = new procutBuyTablePanel();
+		pProdInfoTable = new procutInfoTablePanel();
 		pProdInfoTable.loadData();
 
 		JPopupMenu popupProdMenu = createProdPopupMenu();
 		pProdInfoTable.setPopupMenu(popupProdMenu);
 
 		pProd.add(pProdInfoTable);
+		
+		panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		pProdInfoTable.add(panel, BorderLayout.NORTH);
+		
+		btnAdd = new JButton("제품 추가");
+		btnAdd.addActionListener(this);
+		btnAdd.setBackground(Color.GREEN);
+		panel.add(btnAdd);
 	}
 ///////////////// 제품 수정, 삭제
 	private JPopupMenu createProdPopupMenu() {
@@ -239,12 +257,13 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 
 				Customer customer = pCusTable.getItem();
 
-				CustomerManagerUI frame = new CustomerManagerUI();
-				frame.getpItems().setCusItem(customer);
-
+				JoinMembershipManager frame = new JoinMembershipManager();
+				frame.setTitle("회원 수정");
+				frame.getBtnAdd().setText("수정");
+				frame.getpMid().setCusItem(customer);
 				frame.setVisible(true);
 				frame.setTable(pCusTable);
-
+				
 			}
 		}
 	};
@@ -303,7 +322,11 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 	private JPanel pCus;
 	private CustomerInfoTablePanel pCusTable;
 	private JPanel pProd;
-	private procutBuyTablePanel pProdInfoTable;
+	private procutInfoTablePanel pProdInfoTable;
+	private JPanel panel;
+	private JButton btnAdd;
+	private JPanel panel_1;
+	private JButton btnAddCus;
 
 //////////////////
 ////////////////// 검색할 날짜 받아오기
@@ -317,6 +340,12 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 
 ///////////////// 액션 이벤트
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAddCus) {
+			actionPerformedBtnAddCus(e);
+		}
+		if (e.getSource() == btnAdd) {
+			actionPerformedBtnAdd(e);
+		}
 		if (e.getSource() == pDetailBtns.getBtnAllSerach()) {
 			actionPerformedPDetailBtnsBtnAllSerach(e);
 		}
@@ -552,4 +581,18 @@ public class JTabbedShoppingmall extends JFrame implements ActionListener {
 
 	}
 
+	protected void actionPerformedBtnAdd(ActionEvent e) {
+		ProductInfoUI frame = new ProductInfoUI();
+		frame.setVisible(true);
+		frame.getBtnUpdateProd().setText("추가");
+		frame.setTable(pProdInfoTable);
+	}
+
+	protected void actionPerformedBtnAddCus(ActionEvent e) {
+		JoinMembershipManager frame = new JoinMembershipManager();
+		frame.setTitle("회원 추가");
+		frame.getBtnAdd().setText("추가");
+		frame.setVisible(true);
+		frame.setTable(pCusTable);
+	}
 }

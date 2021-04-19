@@ -23,6 +23,19 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public int insertProduct(Product product) {
+		String sql = "insert into product (procode, proname, proprice, stock, prodPic)\r\n" + 
+				"     values (?,?,?,?,?)";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, product.getProcode());
+			pstmt.setString(2, product.getProname());
+			pstmt.setInt(3, product.getProprice());
+			pstmt.setInt(4, product.getStock());
+			pstmt.setString(5, product.getProdpic());
+			return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -138,13 +151,14 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public int modiProduct(Product product) {
-		String sql = "update product set proname = ?, prodpic = ?, stock = ? where procode = ?";
+		String sql = "update product set proname = ?, prodpic = ?, proprice = ?, stock = ? where procode = ?";
 		try(Connection con = JdbcConn.getConnection();
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setString(1, product.getProname());
 			pstmt.setString(2, product.getProdpic());
-			pstmt.setString(3, product.getStock()+"");
-			pstmt.setString(4, product.getProcode());
+			pstmt.setInt(3, product.getProprice());
+			pstmt.setInt(4, product.getStock());
+			pstmt.setString(5, product.getProcode());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

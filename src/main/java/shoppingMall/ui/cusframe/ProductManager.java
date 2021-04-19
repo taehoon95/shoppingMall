@@ -96,7 +96,6 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 			}else {
 				frame = new ProductDetailUI();
 				frame.setDetailItem(prodDetail);
-				frame.prohibitionBtn();
 			}
 			
 			frame.setVisible(true);
@@ -148,7 +147,6 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 	protected void mouseClickedPMidTable(MouseEvent e) {
 		Product prod = pMid.getItem();
 		Product prodDetail = service.selectProductByProcode(prod);
-//		pTop.prohibitionBtn();
 		pTop.setItem(prodDetail);
 	}
 	protected void actionPerformedBtnLogout(ActionEvent e) {

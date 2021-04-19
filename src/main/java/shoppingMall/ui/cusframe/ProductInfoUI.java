@@ -1,21 +1,22 @@
 package shoppingMall.ui.cusframe;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import shoppingMall.dto.Product;
+import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
-import shoppingMall.ui.cuspanel.procutBuyTablePanel;
+import shoppingMall.ui.cuspanel.procutInfoTablePanel;
 import shoppingMall.ui.cuspanel.productInfoPanel;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.security.Provider.Service;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class ProductInfoUI extends JFrame implements ActionListener {
@@ -23,7 +24,7 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private productInfoPanel pInfo;
 	private JButton btnCancelProd;
-	private procutBuyTablePanel table;
+	private procutInfoTablePanel table;
 	private JButton btnUpdateProd;
 	private productService pService;
 	
@@ -69,11 +70,15 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 //		pInfo.prohibitionBtn();
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnUpdateProd) {
-			actionPerformedBtnUpdateProd(e);
-		}
 		if (e.getSource() == btnCancelProd) {
 			actionPerformedBtnDelProd(e);
+		}
+		try {
+			if (e.getSource() == btnUpdateProd) {
+				actionPerformedBtnUpdateProd(e);
+			}
+		}catch (InvaildCheckException e1) {
+			JOptionPane.showMessageDialog(null, "공란존재","오류",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	protected void actionPerformedBtnDelProd(ActionEvent e) {
@@ -81,14 +86,29 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 	}
 	
 	protected void actionPerformedBtnUpdateProd(ActionEvent e) {
-		Product modiProd = pInfo.getProd();
-		System.out.println(modiProd);
-		pService.modiProduct(modiProd);
-		table.loadData();
+		if(btnUpdateProd.getText().equals("수정")) {
+			Product modiProd = pInfo.getProd();
+			pService.modiProduct(modiProd);
+			table.loadData();
+			dispose();
+		}else {
+			Product prod = pInfo.getProd();
+			pService.addProduct(prod);
+			table.loadData();
+			dispose();
+		}
+		
 	}
 	
-	public void setTable(procutBuyTablePanel table) {
+	public void setTable(procutInfoTablePanel table) {
 		this.table = table;
 	}
+	public JButton getBtnUpdateProd() {
+		return btnUpdateProd;
+	}
+	public void setBtnUpdateProd(JButton btnUpdateProd) {
+		this.btnUpdateProd = btnUpdateProd;
+	}
+	
 	
 }

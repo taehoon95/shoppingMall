@@ -185,12 +185,13 @@ update customer set cusname ='오', birth ='2020-04-20', callno = '01047854825',
 
 select * from product;
 
-update product set proname = '고구마', prodpic = '고구마.png', stock = 500 where procode = 'PA';
+update product set proname = '세탁기', prodpic = '세탁기.png', proprice = 30000, stock = 500 where procode = 'PC';
+
+update product set proname = ?, prodpic = ?, proprice = ?,stock = ? where procode = ?;
 
 
-
-
-
+select * from customer;
+update customer set cusname ='오', birth ='2020-04-20',passno = password(1235) ,callno = '01047854825',sex ='2'where cusno = 12011;
 
 
 

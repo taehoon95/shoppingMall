@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -20,6 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import shoppingMall.dto.Product;
+import shoppingMall.exception.InvaildCheckException;
+
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
@@ -37,6 +40,8 @@ public class productInfoPanel extends JPanel implements ActionListener {
 	private String imgPath = System.getProperty("user.dir") + File.separator + "images" + File.separator;
 	private File imgFile;
 	private JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+	private JLabel lblProdPrice;
+	private JTextField tfProdPrice;
 
 	public productInfoPanel() {
 
@@ -101,6 +106,15 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		tfProdname.setFont(new Font("굴림", Font.BOLD, 15));
 		pRight.add(tfProdname);
 		
+		lblProdPrice = new JLabel("\uB2E8\uAC00");
+		lblProdPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		pRight.add(lblProdPrice);
+		
+		tfProdPrice = new JTextField();
+		tfProdPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		tfProdPrice.setFont(new Font("굴림", Font.BOLD, 15));
+		pRight.add(tfProdPrice);
+		
 		JLabel lblProdStock = new JLabel("남은 수량");
 		pRight.add(lblProdStock);
 		lblProdStock.setHorizontalAlignment(SwingConstants.CENTER);
@@ -136,21 +150,40 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		tfProdCode.setText(prod.getProcode());
 		tfProdname.setText(prod.getProname());
 		tfProdStock.setText(prod.getStock()+"");
+		tfProdPrice.setText(prod.getProprice()+"");
 		lblPic.setIcon(new ImageIcon(imgPath + prod.getProdpic()));
+		System.out.println(imgPath + prod.getProdpic());
 	}
 	
 	public Product getProd() {
+		validCheck();
 		String procode = tfProdCode.getText();
 		String proname = tfProdname.getText();
 		int stock = Integer.parseInt(tfProdStock.getText());
-		String prodpic = lblPic.getName();
-		return new Product(procode, proname, stock, prodpic);
+		int proprice = Integer.parseInt((tfProdPrice.getText()));
+		Icon prodpic = lblPic.getIcon();
+
+		String modiPic = prodpic + "";
+		modiPic.lastIndexOf("\\");
+		String upPic = modiPic.substring(modiPic.lastIndexOf("\\"));
+		return new Product(procode, proname, proprice, stock, upPic);
 	}
 	
+	private void validCheck() {
+		if(tfProdCode.getText().equals("") ||
+		   tfProdname.getText().equals("") ||
+		   tfProdPrice.getText().equals("") ||
+		   tfProdStock.getText().equals("")) {
+			throw new InvaildCheckException();
+		}
+		
+	}
+
 	public void tfClear() {
 		tfProdCode.setText("");
 		tfProdname.setText("");
 		tfProdStock.setText("");
+		tfProdPrice.setText("");
 		lblPic.setIcon(new ImageIcon(imgPath + "/smlie.jpg"));
 	}
 }

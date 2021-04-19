@@ -3,6 +3,7 @@ package shoppingMall.ui.panel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.OptionalInt;
@@ -52,7 +53,7 @@ public class JoinItemPanel extends JPanel {
 	
 	private void initialize() {
 		setBackground(Color.WHITE);
-		setBorder(new TitledBorder(new EmptyBorder(20, 0, 20, 0), "회원가입", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		setBorder(new TitledBorder(new EmptyBorder(20, 0, 20, 0), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setLayout(new GridLayout(0, 2, 0, 20));
 		
 		JLabel lblCusno = new JLabel("아이디(회원번호)");
@@ -152,13 +153,34 @@ public class JoinItemPanel extends JPanel {
 		
 		String passno = String.valueOf(pfPass1.getPassword());
 		
-		SimpleDateFormat birthDate = new SimpleDateFormat("yyyy.MM.dd");
+		SimpleDateFormat birthDate = new SimpleDateFormat("yyyy-MM-dd");
 		String birth = birthDate.format(dcBirth.getDate());
 		
 		String callno = tfCall.getText().trim();
 		int sex = rdbtnFemale.isSelected()?2:1;
 		return new Customer(cusno, passno,cusname, birth, callno, sex);
 	}
+	
+	public void setCusItem(Customer customer) {
+		Date d = null;
+		try {
+			d = new SimpleDateFormat("yyyy-MM-dd").parse(customer.getBirth());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		lblCusId.setText(customer.getCusno()+"");
+		tfCusname.setText(customer.getCusname());
+		tfCall.setText(customer.getCallno());
+		if(customer.getSex() == 1) {
+			rdbtnmale.setSelected(true);
+		}else {
+			rdbtnFemale.setSelected(true);
+		}
+		
+		dcBirth.setDate(d);
+		
+	}
+	
 	private void validCheck() {
 		if(lblCusId.getText().equals("") || tfCusname.getText().equals("")||
 				dcBirth.getDate() == null || tfCall.getText().equals("") || tfCall.getText().length() != 11 ||

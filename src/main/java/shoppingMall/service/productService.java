@@ -49,7 +49,10 @@ public class productService {
 	public Product selectProductByProcode(Product prod) {
 		return dao.selectProductByProCode(prod);
 	}
-	
+	// 제품 추가
+	public void addProduct(Product product) {
+		dao.insertProduct(product);
+	}
 	////////////////// 구매
 	
 	public int buyProductTransaction(Sale sale,Product product) {
