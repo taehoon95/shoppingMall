@@ -62,14 +62,14 @@ public class ProductManager extends JPanel implements ActionListener {
 			}
 		}catch (InvaildCheckException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "오류", JOptionPane.WARNING_MESSAGE);
-		} catch (NullPointerException e1) {
-			pProdTable.selectList(nullList);
-			pProdTotal.tfClear();
 		}
 	}
 	protected void actionPerformedPProdBtnsBtnSearch(ActionEvent e) {
 		Product prodInfo = (Product) pProdBtns.getCmbProduct().getSelectedItem();
 		List<Sale> productByproInfoList = productService.selectProductByProInfo(prodInfo);
+		if(productByproInfoList == null) {
+			productByproInfoList = nullList;
+		}
 		pProdTable.selectList(productByproInfoList);
 
 		int totalProfit = productByproInfoList.parallelStream().mapToInt(Sale::getProfit).sum();

@@ -87,11 +87,7 @@ public class DetailManager extends JPanel implements ActionListener {
 			}
 		} catch (InvaildCheckException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "오류", JOptionPane.WARNING_MESSAGE);
-		} // catch (NullPointerException e1) {
-/////////////////// 아무값도 검색 되지 않을때
-//			pDetailTable.selectList(nullList);
-//			pDetailTotal.tfClear();
-//		}
+		}
 
 		if (e.getSource() == pDetailBtns.getBtnAllSerach()) {
 			actionPerformedPDetailBtnsBtnAllSerach(e);
@@ -122,6 +118,9 @@ public class DetailManager extends JPanel implements ActionListener {
 
 	public void searchProd() {
 		searchListByProd = saleService.selectProductByProInfo(prodSearch);
+		if(searchListByProd == null) {
+			searchListByProd = nullList;
+		}
 		pDetailTable.selectList(searchListByProd);
 	}
 
@@ -188,6 +187,9 @@ public class DetailManager extends JPanel implements ActionListener {
 /////////  디테일 두개 같이 검색
 	private void selectListByCusAndProd() {
 		searchListByCusAndProd = saleService.selectDetailByProdAndCus(customerSearch, prodSearch);
+		if(searchListByCusAndProd == null) {
+			searchListByCusAndProd = nullList;
+		}
 		pDetailTable.selectList(searchListByCusAndProd);
 
 		setDataCntOrderByCusAndProd();

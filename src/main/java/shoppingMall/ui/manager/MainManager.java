@@ -69,16 +69,15 @@ public class MainManager extends JPanel implements ActionListener {
 			}
 		}catch (InvaildCheckException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "오류", JOptionPane.WARNING_MESSAGE);
-		} catch (NullPointerException e1) {
-///////////////// 아무값도 검색 되지 않을때
-		pMainTable.selectList(nullList);
-		pMainTotal.tfClear();
-	} 
+		}
 		
 	}
 	protected void actionPerformedPMainBtnsBtnSearch(ActionEvent e) {
 		Sale searchByDate = searchDate();
 		saleList = saleService.selectMainByDate(searchByDate);
+		if(saleList == null) {
+			saleList = nullList;
+		}
 		pMainTable.selectList(saleList);
 		setDataTotalSalesByDate();
 		setDataTotalOrderByDate();
