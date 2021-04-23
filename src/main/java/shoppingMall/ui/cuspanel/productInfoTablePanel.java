@@ -51,11 +51,11 @@ public class productInfoTablePanel extends AbstractCustomTablePanel<Product> {
 
 	public Product getItem() {
 		int row = table.getSelectedRow();
-		String proCode = (String) table.getValueAt(row, 0);
-
 		if (row == -1) {
 			throw new NotSelectedExeption();
 		}
+		
+		String proCode = (String) table.getValueAt(row, 0);
 
 		return list.get(list.indexOf(new Product(proCode)));
 	}

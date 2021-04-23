@@ -59,7 +59,7 @@ public class UpdateDetailManagerPanel extends JPanel {
 		lblOrderNoText.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblOrderNoText);
 		
-		JLabel lblCusname = new JLabel("\uD68C\uC6D0");
+		JLabel lblCusname = new JLabel("회원");
 		lblCusname.setOpaque(true);
 		lblCusname.setBackground(Color.WHITE);
 		lblCusname.setHorizontalAlignment(SwingConstants.CENTER);

@@ -12,6 +12,7 @@ import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.exception.NotSelectedExeption;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
@@ -75,18 +76,18 @@ public class DetailManager extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		try {
 			if (e.getSource() == pDetailBtns.getBtnProductSearch()) {
-				if(pDetailBtns.getCmbProductSearch().getSelectedIndex() != -1 &&
-						pDetailBtns.getCmbCusSearch().getSelectedIndex() != -1) {
+				if (pDetailBtns.getCmbProductSearch().getSelectedIndex() != -1
+						&& pDetailBtns.getCmbCusSearch().getSelectedIndex() != -1) {
 					actionPerformedPTopBtnlblCusAndProdSearch(e);
-				}else if(pDetailBtns.getCmbProductSearch().getSelectedIndex() != -1) {
+				} else if (pDetailBtns.getCmbProductSearch().getSelectedIndex() != -1) {
 					actionPerformedPDetailBtnsBtnProductSearch(e);
-				}else if(pDetailBtns.getCmbCusSearch().getSelectedIndex() != -1) {
+				} else if (pDetailBtns.getCmbCusSearch().getSelectedIndex() != -1) {
 					actionPerformedPDetailBtnsBtnlblCusSearch(e);
 				}
 			}
 		} catch (InvaildCheckException e1) {
 			JOptionPane.showMessageDialog(null, e1.getMessage(), "오류", JOptionPane.WARNING_MESSAGE);
-		} //catch (NullPointerException e1) {
+		} // catch (NullPointerException e1) {
 /////////////////// 아무값도 검색 되지 않을때
 //			pDetailTable.selectList(nullList);
 //			pDetailTotal.tfClear();
@@ -157,7 +158,7 @@ public class DetailManager extends JPanel implements ActionListener {
 
 	public void searchCustomer() {
 		searchListByCus = saleService.selectDetailByCutomer(customerSearch);
-		if(searchListByCus == null) {
+		if (searchListByCus == null) {
 			List<Sale> nullList = new ArrayList<>();
 			searchListByCus = nullList;
 		}
@@ -231,24 +232,26 @@ public class DetailManager extends JPanel implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
-			if (e.getActionCommand() == "삭제") {
-				Sale sale = pDetailTable.getItem();
-				saleService.delSale(sale);
-				pDetailTable.loadData();
-			} else if (e.getActionCommand() == "수정") {
-
-				UpdateDetailManager frame = new UpdateDetailManager();
-				Customer cus = pDetailTable.getCusItem();
-				Product prod = pDetailTable.getProdItem();
-				Sale sale = pDetailTable.getItem();
-				try {
-					frame.getpUpdateDetailItem().setUpdateTf(cus, prod, sale);
-				} catch (ParseException e1) {
-					e1.printStackTrace();
+			try {
+				if (e.getActionCommand() == "삭제") {
+					Sale sale = pDetailTable.getItem();
+					saleService.delSale(sale);
+					pDetailTable.loadData();
+				} else if (e.getActionCommand() == "수정") {
+					UpdateDetailManager frame = new UpdateDetailManager();
+					Customer cus = pDetailTable.getCusItem();
+					Product prod = pDetailTable.getProdItem();
+					Sale sale = pDetailTable.getItem();
+					try {
+						frame.getpUpdateDetailItem().setUpdateTf(cus, prod, sale);
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+					frame.setVisible(true);
+					frame.setTable(pDetailTable);
 				}
-				frame.setVisible(true);
-				frame.setTable(pDetailTable);
+			} catch (NotSelectedExeption e1) {
+				JOptionPane.showMessageDialog(null, "목록을 선택하세요.", "오류", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	};
