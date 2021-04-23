@@ -16,6 +16,7 @@ import shoppingMall.exception.NotSelectedExeption;
 import shoppingMall.service.customerService;
 import shoppingMall.ui.cuspanel.CustomerInfoTablePanel;
 import shoppingMall.ui.frame.JoinMembershipManager;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class CusInfoManager extends JPanel implements ActionListener {
@@ -34,15 +35,18 @@ public class CusInfoManager extends JPanel implements ActionListener {
 		setLayout(new BorderLayout(0, 0));
 
 		pCusTable = new CustomerInfoTablePanel();
+		pCusTable.setBackground(Color.WHITE);
 		pCusTable.loadData();
 		JPopupMenu CusPopupMenu = createCusPopupMenu();
 		pCusTable.setPopupMenu(CusPopupMenu);
 		add(pCusTable, BorderLayout.CENTER);
 
 		pCusBtn = new JPanel();
+		pCusBtn.setBackground(Color.WHITE);
 		add(pCusBtn, BorderLayout.NORTH);
 
 		btnCusAdd = new JButton("추가");
+		btnCusAdd.setBackground(Color.GREEN);
 		btnCusAdd.addActionListener(this);
 		pCusBtn.add(btnCusAdd);
 	}

@@ -15,6 +15,7 @@ import shoppingMall.ui.cuspanel.productInfoTablePanel;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class ProductInfoManager extends JPanel implements ActionListener {
@@ -40,9 +41,11 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 		pProdInfoTable.setPopupMenu(popupProdMenu);
 
 		pProdInfoBtn = new JPanel();
+		pProdInfoBtn.setBackground(Color.WHITE);
 		add(pProdInfoBtn, BorderLayout.NORTH);
 
 		btnAdd = new JButton("추가");
+		btnAdd.setBackground(Color.GREEN);
 		btnAdd.addActionListener(this);
 		pProdInfoBtn.add(btnAdd);
 
