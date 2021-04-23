@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
-import shoppingMall.service.customerService;
-import shoppingMall.service.productService;
 import shoppingMall.ui.manager.CusInfoManager;
 import shoppingMall.ui.manager.DetailManager;
 import shoppingMall.ui.manager.MainManager;
@@ -21,9 +19,6 @@ public class JTabbedShoppingmall extends JFrame {
 
 	private JPanel contentPane;
 
-	private productService productService;
-	private customerService customerService;
-
 	private JTabbedPane tabbedPane;
 	private MainManager pMain;
 	private ProductManager pProduct;
@@ -33,8 +28,6 @@ public class JTabbedShoppingmall extends JFrame {
 	private CusInfoManager pCustomerInfo;
 
 	public JTabbedShoppingmall() {
-		productService = new productService();
-		customerService = new customerService();
 		initialize();
 	}
 

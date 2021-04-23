@@ -96,7 +96,6 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		Sale sale = pUpdateDetailItem.getUpdateTf();
 		saleService.modiDetailInfo(sale);
 		
-		JTabbedShoppingmall frame = new JTabbedShoppingmall();
 		table.loadData();
 		dispose();
 	}

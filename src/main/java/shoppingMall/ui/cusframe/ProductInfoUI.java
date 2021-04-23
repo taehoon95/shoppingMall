@@ -100,9 +100,7 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 		
 	}
 	
-	public void setTable(productInfoTablePanel table) {
-		this.table = table;
-	}
+	
 	public JButton getBtnUpdateProd() {
 		return btnUpdateProd;
 	}
@@ -113,5 +111,7 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 		return pInfo;
 	}
 	
-	
+	public void setTable(productInfoTablePanel table) {
+		this.table = table;
+	}
 }
