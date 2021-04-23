@@ -16,7 +16,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 
 @SuppressWarnings("serial")
-public class DtailBottomPanel extends JPanel {
+public class DetailBottomPanel extends JPanel {
 	private JLabel tflCntOrder;
 	private JLabel tfTotalOrder;
 	private JLabel tfTotalSales;
@@ -26,7 +26,7 @@ public class DtailBottomPanel extends JPanel {
 	
 	private DecimalFormat df = new DecimalFormat("0,000");
 	
-	public DtailBottomPanel() {
+	public DetailBottomPanel() {
 		service = new saleService();
 		initialize();
 		setDataCntOrder();

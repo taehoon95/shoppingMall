@@ -8,9 +8,9 @@ import shoppingMall.service.productService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
 @SuppressWarnings("serial")
-public class procutBuyTablePanel extends AbstractCustomTablePanel<Product> {
+public class productInfoTablePanel extends AbstractCustomTablePanel<Product> {
 
-	public procutBuyTablePanel() {
+	public productInfoTablePanel() {
 		initialize();
 	}
 
@@ -41,7 +41,7 @@ public class procutBuyTablePanel extends AbstractCustomTablePanel<Product> {
 
 	@Override
 	public Object[] toArray(Product t) {
-		return new Object[] { t.getProcode(), t.getProname(), t.getSalePrice(), t.getStock() };
+		return new Object[] { t.getProcode(), t.getProname(), t.getProprice(), t.getStock() };
 	}
 
 	@Override

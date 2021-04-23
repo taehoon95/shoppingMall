@@ -19,7 +19,7 @@ import shoppingMall.shoppingMallMain;
 import shoppingMall.dto.Product;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
-import shoppingMall.ui.cuspanel.procutBuyTablePanel;
+import shoppingMall.ui.cuspanel.productBuyTablePanel;
 import shoppingMall.ui.cuspanel.productInfoDetailPanel;
 
 @SuppressWarnings("serial")
@@ -42,7 +42,7 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
-		pMid = new procutBuyTablePanel();
+		pMid = new productBuyTablePanel();
 		pMid.getTable().addMouseListener(this);
 		tableLoadData();
 		contentPane.add(pMid, BorderLayout.CENTER);
@@ -102,7 +102,7 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 		}
 	};
 	
-	private procutBuyTablePanel pMid;	
+	private productBuyTablePanel pMid;	
 	private JButton btnBuy;
 	private productInfoDetailPanel pTop;
 	private JButton btnLogout;
@@ -144,11 +144,13 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 	}
 	public void mouseReleased(MouseEvent e) {
 	}
+	
 	protected void mouseClickedPMidTable(MouseEvent e) {
 		Product prod = pMid.getItem();
 		Product prodDetail = service.selectProductByProcode(prod);
 		pTop.setItem(prodDetail);
 	}
+	
 	protected void actionPerformedBtnLogout(ActionEvent e) {
 		int res = JOptionPane.showConfirmDialog(null, "로그아웃 하시겠습니까?",
 				"로그아웃",

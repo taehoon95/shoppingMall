@@ -106,7 +106,7 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		tfProdname.setFont(new Font("굴림", Font.BOLD, 15));
 		pRight.add(tfProdname);
 		
-		lblProdPrice = new JLabel("\uB2E8\uAC00");
+		lblProdPrice = new JLabel("단가");
 		lblProdPrice.setHorizontalAlignment(SwingConstants.CENTER);
 		pRight.add(lblProdPrice);
 		
@@ -125,6 +125,10 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		pRight.add(tfProdStock);
 	}
 
+
+	public JTextField getTfProdCode() {
+		return tfProdCode;
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnUpdate) {
@@ -152,7 +156,6 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		tfProdStock.setText(prod.getStock()+"");
 		tfProdPrice.setText(prod.getProprice()+"");
 		lblPic.setIcon(new ImageIcon(imgPath + prod.getProdpic()));
-		System.out.println(imgPath + prod.getProdpic());
 	}
 	
 	public Product getProd() {

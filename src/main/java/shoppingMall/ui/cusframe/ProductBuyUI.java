@@ -16,7 +16,7 @@ import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
-import shoppingMall.ui.cuspanel.procutBuyTablePanel;
+import shoppingMall.ui.cuspanel.productBuyTablePanel;
 import shoppingMall.ui.cuspanel.productBuyCusInfoPanel;
 
 @SuppressWarnings("serial")
@@ -29,7 +29,7 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 	private JButton btnCancel;
 	private productService pService;
 	
-	private procutBuyTablePanel table;
+	private productBuyTablePanel table;
 	
 	public ProductBuyUI() {
 		initialize();
@@ -102,7 +102,7 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 		pTop.clearTf();
 	}
 	
-	public void setTable(procutBuyTablePanel table) {
+	public void setTable(productBuyTablePanel table) {
 		this.table = table;
 	}
 	

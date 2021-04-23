@@ -21,7 +21,6 @@ import shoppingMall.service.customerService;
 import shoppingMall.ui.cusframe.ProductManager;
 import shoppingMall.ui.frame.JTabbedShoppingmall;
 import shoppingMall.ui.frame.JoinMembershipManager;
-import shoppingMall.ui.frame.MainManager;
 import shoppingMall.ui.panel.loginPanel;
 
 @SuppressWarnings("serial")

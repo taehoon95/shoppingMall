@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 import shoppingMall.dto.Product;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.productService;
-import shoppingMall.ui.cuspanel.procutInfoTablePanel;
+import shoppingMall.ui.cuspanel.productInfoTablePanel;
 import shoppingMall.ui.cuspanel.productInfoPanel;
 
 @SuppressWarnings("serial")
@@ -24,7 +24,7 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private productInfoPanel pInfo;
 	private JButton btnCancelProd;
-	private procutInfoTablePanel table;
+	private productInfoTablePanel table;
 	private JButton btnUpdateProd;
 	private productService pService;
 	
@@ -100,7 +100,7 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 		
 	}
 	
-	public void setTable(procutInfoTablePanel table) {
+	public void setTable(productInfoTablePanel table) {
 		this.table = table;
 	}
 	public JButton getBtnUpdateProd() {
@@ -108,6 +108,9 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 	}
 	public void setBtnUpdateProd(JButton btnUpdateProd) {
 		this.btnUpdateProd = btnUpdateProd;
+	}
+	public productInfoPanel getpInfo() {
+		return pInfo;
 	}
 	
 	

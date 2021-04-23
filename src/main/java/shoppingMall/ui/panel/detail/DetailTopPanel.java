@@ -25,21 +25,18 @@ import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 
-public class DtailTopPanel extends JPanel implements ActionListener, ItemListener {
+public class DetailTopPanel extends JPanel implements ActionListener, ItemListener {
 	private JComboBox cmbProductSearch;
 	private JButton btnProductSearch;
 	private JComboBox cmbCusSearch;
-	private JButton btnlblCusSearch;
 
 	private productService pService;
 	private customerService cService;
 	private JButton btnCancel;
 	private JButton btnAllSerach;
 
-	public DtailTopPanel() {
-
+	public DetailTopPanel() {
 		initialize();
-		
 	}
 
 	private void initialize() {
@@ -89,18 +86,9 @@ public class DtailTopPanel extends JPanel implements ActionListener, ItemListene
 		cmbCusSearch.addItemListener(this);
 		
 		pRight.add(cmbCusSearch);
-
-		btnlblCusSearch = new JButton("검색");
-		btnlblCusSearch.setEnabled(false);
-		
-		btnlblCusSearch.setFont(new Font("굴림", Font.BOLD, 12));
-		btnlblCusSearch.setBackground(Color.GREEN);
-		pRight.add(btnlblCusSearch);
 		
 		
 	}
-
-	
 	
 	public void setCmbProductSearch(JComboBox cmbProductSearch) {
 		this.cmbProductSearch = cmbProductSearch;
@@ -149,10 +137,6 @@ public class DtailTopPanel extends JPanel implements ActionListener, ItemListene
 		return btnProductSearch;
 	}
 
-	public JButton getBtnlblCusSearch() {	
-		return btnlblCusSearch;
-	}
-	
 	private void vaildCheck() {
 		if(cmbCusSearch.getSelectedItem() == null && cmbProductSearch.getSelectedItem() == null) {  
 			throw new InvaildCheckException();
@@ -181,18 +165,13 @@ public class DtailTopPanel extends JPanel implements ActionListener, ItemListene
 		btnWarning();
 	}
 
-
 ////////////////////////////// 검색창을 둘다 못쓰게 함	
 	public void btnWarning() {
 		btnProductSearch.setEnabled(false);
-		btnlblCusSearch.setEnabled(false);
 	}
 
 	public void itemStateChanged(ItemEvent e) {
-		if (e.getSource() == cmbCusSearch) {
-			itemStateChangedCmbCusSearch(e);
-		}
-		if (e.getSource() == cmbProductSearch) {
+		if (e.getSource() == cmbProductSearch || e.getSource() == cmbCusSearch) {
 			itemStateChangedCmbProductSearch(e);
 		}
 	}
@@ -204,9 +183,4 @@ public class DtailTopPanel extends JPanel implements ActionListener, ItemListene
 		}
 	}
 	
-	protected void itemStateChangedCmbCusSearch(ItemEvent e) {
-		if(e.getStateChange() == ItemEvent.SELECTED) {
-			btnlblCusSearch.setEnabled(true);
-		}
-	}
 }

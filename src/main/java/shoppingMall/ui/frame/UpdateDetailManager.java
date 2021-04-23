@@ -73,8 +73,6 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		this.pUpdateDetailItem = pUpdateDetailItem;
 	}
 	
-
-
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == btnCancel) {
@@ -99,8 +97,6 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		saleService.modiDetailInfo(sale);
 		
 		JTabbedShoppingmall frame = new JTabbedShoppingmall();
-		frame.detailLodeData();
-		frame.tabSelected();
 		table.loadData();
 		dispose();
 	}

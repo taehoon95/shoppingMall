@@ -39,7 +39,6 @@ public class UpdateDetailManagerPanel extends JPanel {
 	private JLabel lblOrderNoText;
 	private JLabel lblOrderNo;
 	
-	
 	public UpdateDetailManagerPanel() {
 
 		initialize();
