@@ -1,13 +1,17 @@
 package shoppingMall.ui.manager;
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import java.awt.BorderLayout;
-import shoppingMall.ui.panel.detail.DetailTopPanel;
-import shoppingMall.ui.panel.detail.DetailMidPanel;
 import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
@@ -18,20 +22,14 @@ import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.frame.UpdateDetailManager;
 import shoppingMall.ui.panel.detail.DetailBottomPanel;
-import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.ActionEvent;
+import shoppingMall.ui.panel.detail.DetailMidPanel;
+import shoppingMall.ui.panel.detail.DetailTopPanel;
 
 @SuppressWarnings("serial")
 public class DetailManager extends JPanel implements ActionListener {
 	private DetailTopPanel pDetailBtns;
 	private DetailMidPanel pDetailTable;
 	private DetailBottomPanel pDetailTotal;
-
-	private DecimalFormat df = new DecimalFormat("#,###");
 
 	private saleService saleService;
 	private productService productService;
@@ -96,27 +94,21 @@ public class DetailManager extends JPanel implements ActionListener {
 
 	protected void actionPerformedPDetailBtnsBtnAllSerach(ActionEvent e) {
 		pDetailTable.loadData();
-		pDetailTotal.setDataCntOrder();
-		pDetailTotal.setDataTotalOrder();
-		pDetailTotal.setDataTotalProfit();
-		pDetailTotal.setDataTotalSales();
+		pDetailTotal.setTotalDataDetail(saleService.showDetail());
 		pDetailBtns.tfClear();
+		pDetailBtns.btnWarning();
 	}
 
 	protected void actionPerformedPDetailBtnsBtnProductSearch(ActionEvent e) {
 		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
 		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
-		searchProd();
-
+		loadTableProd();
+		
 		// 총 주문 건수, 총 주문 수량, 총 판매액, 총 이익금액
-
-		setDataCntOrderByProd();
-		setDataTotalOrderByProd();
-		setDataTotalSalesByProd();
-		setDataTotalProfitByProd();
+		pDetailTotal.setTotalDataDetail(searchListByProd);
 	}
 
-	public void searchProd() {
+	public void loadTableProd() {
 		searchListByProd = saleService.selectProductByProInfo(prodSearch);
 		if(searchListByProd == null) {
 			searchListByProd = nullList;
@@ -124,38 +116,15 @@ public class DetailManager extends JPanel implements ActionListener {
 		pDetailTable.selectList(searchListByProd);
 	}
 
-	// 제품코드로 검색할때 총주문량 ,판매량 , 주문건수, 이익금액
-	private void setDataTotalProfitByProd() {
-		int totalProfit = searchListByProd.parallelStream().mapToInt(Sale::getProfit).sum();
-		pDetailTotal.getTfTotalProfit().setText(df.format(totalProfit));
-	}
-
-	private void setDataTotalSalesByProd() {
-		int totalSales = searchListByProd.parallelStream().mapToInt(Sale::getSales).sum();
-		pDetailTotal.getTfTotalSales().setText(df.format(totalSales));
-	}
-
-	private void setDataTotalOrderByProd() {
-		int totalOrder = searchListByProd.parallelStream().mapToInt(Sale::getSaleamount).sum();
-		pDetailTotal.getTfTotalOrder().setText(totalOrder + "");
-	}
-
-	private void setDataCntOrderByProd() {
-		pDetailTotal.getTflCntOrder().setText(searchListByProd.size() + "");
-	}
-
 	protected void actionPerformedPDetailBtnsBtnlblCusSearch(ActionEvent e) {
 		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
 		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
-		searchCustomer();
-
-		setDataCntOrderByCus();
-		setDataTotalOrderByCus();
-		setDataTotalSalesByCus();
-		setDataTotalProfitByCus();
+		loadTableCustomer();
+		
+		pDetailTotal.setTotalDataDetail(searchListByCus);
 	}
 
-	public void searchCustomer() {
+	public void loadTableCustomer() {
 		searchListByCus = saleService.selectDetailByCutomer(customerSearch);
 		if (searchListByCus == null) {
 			List<Sale> nullList = new ArrayList<>();
@@ -164,26 +133,13 @@ public class DetailManager extends JPanel implements ActionListener {
 		pDetailTable.selectList(searchListByCus);
 	}
 
-	// 회원코드로 검색할때 총주문량 ,판매량 , 주문건수, 이익금액
-	private void setDataTotalProfitByCus() {
-		int totalProfit = searchListByCus.parallelStream().mapToInt(Sale::getProfit).sum();
-		pDetailTotal.getTfTotalProfit().setText(df.format(totalProfit));
+////두개 검색
+	private void actionPerformedPTopBtnlblCusAndProdSearch(ActionEvent e) {
+		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
+		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
+		selectListByCusAndProd();
 	}
-
-	private void setDataTotalSalesByCus() {
-		int totalSales = searchListByCus.parallelStream().mapToInt(Sale::getSales).sum();
-		pDetailTotal.getTfTotalSales().setText(df.format(totalSales));
-	}
-
-	private void setDataTotalOrderByCus() {
-		int totalOrder = searchListByCus.parallelStream().mapToInt(Sale::getSaleamount).sum();
-		pDetailTotal.getTfTotalOrder().setText(totalOrder + "");
-	}
-
-	private void setDataCntOrderByCus() {
-		pDetailTotal.getTflCntOrder().setText(searchListByCus.size() + "");
-	}
-
+	
 /////////  디테일 두개 같이 검색
 	private void selectListByCusAndProd() {
 		searchListByCusAndProd = saleService.selectDetailByProdAndCus(customerSearch, prodSearch);
@@ -192,41 +148,7 @@ public class DetailManager extends JPanel implements ActionListener {
 		}
 		pDetailTable.selectList(searchListByCusAndProd);
 
-		setDataCntOrderByCusAndProd();
-		setDataTotalOrderByCusAndProd();
-		setDataTotalProfitByCusAndProd();
-		setDataTotalSalesByCusAndProd();
-	}
-
-////두개 검색
-	private void actionPerformedPTopBtnlblCusAndProdSearch(ActionEvent e) {
-		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
-		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
-		selectListByCusAndProd();
-	}
-
-///////   디테일 두개 같이 검색 될때 총판매량 ,총이익량,총주문량,총 주문건수
-	private void setDataTotalSalesByCusAndProd() {
-		int totalSalesByCusAndProd = searchListByCusAndProd.parallelStream().mapToInt(Sale::getSales).sum();
-		pDetailTotal.getTfTotalSales().setText(totalSalesByCusAndProd + "");
-
-	}
-
-	private void setDataTotalProfitByCusAndProd() {
-		int TotalProfitByCusAndProd = searchListByCusAndProd.parallelStream().mapToInt(Sale::getProfit).sum();
-		pDetailTotal.getTfTotalProfit().setText(TotalProfitByCusAndProd + "");
-
-	}
-
-	private void setDataTotalOrderByCusAndProd() {
-		int TotalOrderByCusAndProd = searchListByCusAndProd.parallelStream().mapToInt(Sale::getSaleamount).sum();
-		pDetailTotal.getTfTotalOrder().setText(TotalOrderByCusAndProd + "");
-
-	}
-
-	private void setDataCntOrderByCusAndProd() {
-		pDetailTotal.getTflCntOrder().setText(searchListByCusAndProd.size() + "");
-
+		pDetailTotal.setTotalDataDetail(searchListByCusAndProd);
 	}
 
 /////////////////// 팝업메뉴 추가,삭제,수정

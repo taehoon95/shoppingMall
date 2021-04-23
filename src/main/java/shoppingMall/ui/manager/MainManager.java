@@ -24,8 +24,6 @@ public class MainManager extends JPanel implements ActionListener {
 	private MainMidPanel pMainTable;
 	private MainBottomPanel pMainTotal;
 	
-	private DecimalFormat df = new DecimalFormat("0,000");
-	
 	private saleService saleService;
 	
 	private List<Sale> nullList = new ArrayList<>();
@@ -75,26 +73,21 @@ public class MainManager extends JPanel implements ActionListener {
 	protected void actionPerformedPMainBtnsBtnSearch(ActionEvent e) {
 		Sale searchByDate = searchDate();
 		saleList = saleService.selectMainByDate(searchByDate);
+		
 		if(saleList == null) {
 			saleList = nullList;
 		}
+		
 		pMainTable.selectList(saleList);
-		setDataTotalSalesByDate();
-		setDataTotalOrderByDate();
+		
+		pMainTotal.setDataTotalMain(saleList);
+		
 	}
 	protected void actionPerformedPMainBtnsBtnAllsearch(ActionEvent e) {
 		pMainTable.loadData();
 		pMainBtns.tfClear();
-		pMainTotal.setDataTotalOrder();
-		pMainTotal.setDataTotalSales();
-	}
-	public void setDataTotalSalesByDate() {
-		int totalSales = saleList.parallelStream().mapToInt(Sale::getSales).sum();
-		pMainTotal.getTfTotalSales().setText(df.format(totalSales));
+		saleList = saleService.showMain();
+		pMainTotal.setDataTotalMain(saleList);
 	}
 
-	public void setDataTotalOrderByDate() {
-		int totalOrder = saleList.parallelStream().mapToInt(Sale::getSaleamount).sum();
-		pMainTotal.getTfTotalOrder().setText(totalOrder + "");
-	}
 }

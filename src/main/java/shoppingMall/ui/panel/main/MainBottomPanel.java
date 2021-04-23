@@ -8,24 +8,24 @@ import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 
+@SuppressWarnings("serial")
 public class MainBottomPanel extends JPanel {
 	private JLabel tfTotalOrder;
 	private JLabel tfTotalSales;
 	private saleService service;
 
+	private List<Sale> saleList;
+	
 	private DecimalFormat df = new DecimalFormat("#,###");
 
 	public MainBottomPanel() {
 		service = new saleService();
 		initialize();
-		setDataTotalOrder();
-		setDataTotalSales();
 	}
 
 	public JLabel getTfTotalOrder() {
@@ -44,15 +44,11 @@ public class MainBottomPanel extends JPanel {
 		this.tfTotalSales = tfTotalSales;
 	}
 
-	public void setDataTotalSales() {
-		List<Sale> saleList = service.showMain();
-		int totalSales = saleList.parallelStream().mapToInt(Sale::getSales).sum();
+	public void setDataTotalMain(List<Sale> list) {
+		int totalSales = list.parallelStream().mapToInt(Sale::getSales).sum();
 		tfTotalSales.setText(df.format(totalSales));
-	}
-
-	public void setDataTotalOrder() {
-		List<Sale> saleList = service.showMain();
-		int totalOrder = saleList.parallelStream().mapToInt(Sale::getSaleamount).sum();
+		
+		int totalOrder = list.parallelStream().mapToInt(Sale::getSaleamount).sum();
 		tfTotalOrder.setText(df.format(totalOrder));
 	}
 
@@ -84,6 +80,8 @@ public class MainBottomPanel extends JPanel {
 		tfTotalSales.setFont(new Font("굴림", Font.BOLD, 15));
 		tfTotalSales.setHorizontalAlignment(SwingConstants.TRAILING);
 		add(tfTotalSales);
+		saleList = service.showMain();
+		setDataTotalMain(saleList);
 	}
 
 	public void tfClear() {

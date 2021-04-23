@@ -14,50 +14,43 @@ import javax.swing.SwingConstants;
 import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 
+@SuppressWarnings("serial")
 public class ProductBottomPanel extends JPanel {
 	private JLabel tfTotalOrder;
 	private JLabel tfTotalProfit;
 	private saleService service;
 	
-	private DecimalFormat df = new DecimalFormat("0,000");
+	private List<Sale> saleList;
+	
+	private DecimalFormat df = new DecimalFormat("#,###");
 	
 	public ProductBottomPanel() {
 		service = new saleService();
 		initialize();
-		setDataTotalOrder();
-		setDataTotalProfit();
+		
 	}
-
 
 	public JLabel getTfTotalOrder() {
 		return tfTotalOrder;
 	}
 
-
 	public void setTfTotalOrder(JLabel tfTotalOrder) {
 		this.tfTotalOrder = tfTotalOrder;
 	}
-
 
 	public JLabel getTfTotalProfit() {
 		return tfTotalProfit;
 	}
 
-
 	public void setTfTotalProfit(JLabel tfTotalProfit) {
 		this.tfTotalProfit = tfTotalProfit;
 	}
 
-
-	public void setDataTotalProfit() {
-		List<Sale> saleList = service.showProduct();
-		int totalProfit = saleList.parallelStream().mapToInt(Sale::getProfit).sum();
+	public void setDataTotalProd(List<Sale> list) {
+		int totalProfit = list.parallelStream().mapToInt(Sale::getProfit).sum();
 		tfTotalProfit.setText(df.format(totalProfit));
-	}
-
-	public void setDataTotalOrder() {
-		List<Sale> saleList = service.showProduct();
-		int totalOrder = saleList.parallelStream().mapToInt(Sale::getSaleamount).sum();
+		
+		int totalOrder = list.parallelStream().mapToInt(Sale::getSaleamount).sum();
 		tfTotalOrder.setText(totalOrder + "");
 	}
 
@@ -89,6 +82,8 @@ public class ProductBottomPanel extends JPanel {
 		tfTotalProfit.setFont(new Font("굴림", Font.BOLD, 15));
 		tfTotalProfit.setHorizontalAlignment(SwingConstants.TRAILING);
 		add(tfTotalProfit);
+		saleList = service.showProduct();
+		setDataTotalProd(saleList);
 	}
 
 	public void tfClear() {

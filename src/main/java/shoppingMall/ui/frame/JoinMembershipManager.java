@@ -113,7 +113,6 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 			pMid.setCusItem(newCustomer);
 			service.modiCustomer(newCustomer);
 		}
-		table.loadData();
 		dispose();
 	}
 
