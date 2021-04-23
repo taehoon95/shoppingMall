@@ -31,7 +31,6 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 	private JLabel tfProdStock;
 	private JPanel pLeft;
 	private JPanel pRight;
-	private JButton btnUpdate;
 	
 	// 제품 사진 넣기
 	private JLabel lblPic;
@@ -72,11 +71,6 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 		lblPic.setPreferredSize(new Dimension(210, 180));
 		pLeft.add(lblPic);
 		
-		btnUpdate = new JButton("수정");
-		btnUpdate.addActionListener(this);
-		btnUpdate.setBackground(Color.GREEN);
-		pLeft.add(btnUpdate);
-		
 		pRight = new JPanel();
 		pRight.setBorder(new EmptyBorder(15, 0, 10, 10));
 		pRight.setBackground(Color.WHITE);
@@ -113,30 +107,12 @@ public class productInfoDetailPanel extends JPanel implements ActionListener {
 
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnUpdate) {
-			actionPerformedBtnUpdate(e);
-		}
-	}
-	
-	protected void actionPerformedBtnUpdate(ActionEvent e) {
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG & GIF & PNG image", "jpg","gif","png");
-		chooser.setFileFilter(filter);
-		int res = chooser.showOpenDialog(null);
-		if(res != JFileChooser.APPROVE_OPTION) {
-			JOptionPane.showMessageDialog(null, "파일을 선택하지 않았습니다.", "경고", JOptionPane.WARNING_MESSAGE);
-			return;
-		}else {
-			imgFile = chooser.getSelectedFile();
-			lblPic.setIcon(new ImageIcon(imgFile.getPath()));
-			
-		}
 	}
 	
 	public void setItem(Product prod) {
 		tfProdCode.setText(prod.getProcode());
 		tfProdname.setText(prod.getProname());
 		tfProdStock.setText(prod.getStock()+"");
-		System.out.println(prod);
 		lblPic.setIcon(new ImageIcon(imgPath + prod.getProdpic()));
 	}
 	
