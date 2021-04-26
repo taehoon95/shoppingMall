@@ -73,11 +73,11 @@ public class ProductTopPanel extends JPanel implements ActionListener {
 		btnSearch.setBackground(Color.GREEN);
 		btnSearch.setFont(new Font("굴림", Font.PLAIN, 12));
 		
-		btnAll = new JButton("↺");
+		btnAll = new JButton("초기화");
 		btnAll.addActionListener(this);
 		btnAll.setFont(new Font("굴림", Font.PLAIN, 12));
 		btnAll.setBackground(Color.GREEN);
-		btnAll.setBounds(122, 12, 63, 25);
+		btnAll.setBounds(116, 12, 78, 25);
 		pBottomRight.add(btnAll);
 		
 		button_1 = new JButton("취소");

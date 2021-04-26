@@ -53,7 +53,7 @@ public class MainTopPanel extends JPanel implements ActionListener  {
 		pTop.add(pTopRight);
 		pTopRight.setLayout(null);
 		
-		btnAllsearch = new JButton("\uC804\uCCB4\uC870\uD68C");
+		btnAllsearch = new JButton("초기화");
 		btnAllsearch.setBackground(Color.GREEN);
 		btnAllsearch.setFont(new Font("굴림", Font.PLAIN, 12));
 		btnAllsearch.setBounds(12, 30, 105, 23);
