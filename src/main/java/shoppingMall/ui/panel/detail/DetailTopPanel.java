@@ -33,7 +33,7 @@ public class DetailTopPanel extends JPanel implements ActionListener, ItemListen
 	private productService pService;
 	private customerService cService;
 	private JButton btnCancel;
-	private JButton btnAllSerach;
+	private JButton btnAllsearch;
 
 	public DetailTopPanel() {
 		initialize();
@@ -53,10 +53,10 @@ public class DetailTopPanel extends JPanel implements ActionListener, ItemListen
 		btnCancel.setBackground(Color.GREEN);
 		pLeft.add(btnCancel);
 		
-		btnAllSerach = new JButton("전체 조회");
-		btnAllSerach.addActionListener(this);
-		btnAllSerach.setBackground(Color.GREEN);
-		pLeft.add(btnAllSerach);
+		btnAllsearch = new JButton("↺");
+		btnAllsearch.addActionListener(this);
+		btnAllsearch.setBackground(Color.GREEN);
+		pLeft.add(btnAllsearch);
 
 		JPanel pRight = new JPanel();
 		pRight.setBorder(new EmptyBorder(0, 0, 0, 20));
@@ -126,11 +126,11 @@ public class DetailTopPanel extends JPanel implements ActionListener, ItemListen
 	}
 
 	public JButton getBtnAllSerach() {
-		return btnAllSerach;
+		return btnAllsearch;
 	}
 
 	public void setBtnAllSerach(JButton btnAllSerach) {
-		this.btnAllSerach = btnAllSerach;
+		this.btnAllsearch = btnAllSerach;
 	}
 	
 	public JButton getBtnProductSearch() {	

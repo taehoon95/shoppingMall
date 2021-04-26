@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 import shoppingMall.dto.Customer;
 import shoppingMall.exception.NotSelectedExeption;
+import shoppingMall.exception.sqlException;
 import shoppingMall.service.customerService;
 import shoppingMall.ui.cuspanel.CustomerInfoTablePanel;
 import shoppingMall.ui.frame.JoinMembershipManager;
@@ -87,6 +88,8 @@ public class CusInfoManager extends JPanel implements ActionListener {
 				}
 			}catch (NotSelectedExeption e1) {
 				JOptionPane.showMessageDialog(null, "목록을 선택하세요.","오류",JOptionPane.ERROR_MESSAGE);
+			}catch (sqlException e1) {
+				JOptionPane.showMessageDialog(null, "배송중입니다.","오류",JOptionPane.ERROR_MESSAGE);
 			}
 			
 		}

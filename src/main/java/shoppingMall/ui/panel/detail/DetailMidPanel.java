@@ -3,6 +3,7 @@ package shoppingMall.ui.panel.detail;
 import java.util.List;
 
 import javax.swing.SwingConstants;
+import javax.swing.text.DefaultEditorKit.CutAction;
 
 import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
@@ -18,22 +19,24 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 	public DetailMidPanel() {
 	}
 	private saleService saleService;
-	private productService prodService;
 	private customerService cusService;
+	private productService prodService;
 	
 	private List<Product> prodList;
 	private List<Customer> cusList;
 	
 	@Override
-	public void initList() {
+	public List<Sale> initList() {
 		saleService = new saleService();
 		list = saleService.showDetail();
 		
-		prodService = new productService();
-		prodList = prodService.showProInfo();
-		
 		cusService = new customerService();
 		cusList = cusService.showCustomer();
+		
+		prodService = new productService();
+		prodList = prodService.showProd();
+		
+		return list;
 	}
 
 	@Override
@@ -70,15 +73,14 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 	public Customer getCusItem() {
 		int row = table.getSelectedRow();
 		String serCus = (String) table.getValueAt(row, 4);
-		
 		int startCus = serCus.indexOf("(");
 		int lastCus = serCus.indexOf(")");
 		
 		int cusCode = Integer.parseInt(serCus.substring(startCus+1, lastCus));
-		
 		if (row == -1) {
 			throw new NotSelectedExeption();
 		}
+		
 		return cusList.get(cusList.indexOf(new Customer(cusCode)));
 	}
 

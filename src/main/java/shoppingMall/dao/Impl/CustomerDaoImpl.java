@@ -7,9 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import shoppingMall.dao.CustomerDao;
 import shoppingMall.database.JdbcConn;
 import shoppingMall.dto.Customer;
+import shoppingMall.exception.sqlException;
 
 public class CustomerDaoImpl implements CustomerDao {
 
@@ -52,9 +55,8 @@ public class CustomerDaoImpl implements CustomerDao {
 			pstmt.setInt(6, customer.getCusno());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new sqlException();
 		}
-		return 0;
 	}
 
 	@Override
@@ -64,10 +66,9 @@ public class CustomerDaoImpl implements CustomerDao {
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setInt(1, customer);
 			return pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}  catch (SQLException e) {
+			throw new sqlException();
 		}
-		return 0;
 	}
 
 	@Override

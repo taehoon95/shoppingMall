@@ -77,11 +77,9 @@ public class MainManager extends JPanel implements ActionListener {
 		if(saleList == null) {
 			saleList = nullList;
 		}
-		
 		pMainTable.selectList(saleList);
 		
 		pMainTotal.setDataTotalMain(saleList);
-		
 	}
 	protected void actionPerformedPMainBtnsBtnAllsearch(ActionEvent e) {
 		pMainTable.loadData();

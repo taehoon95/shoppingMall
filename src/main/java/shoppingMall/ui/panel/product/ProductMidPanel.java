@@ -1,5 +1,7 @@
 package shoppingMall.ui.panel.product;
 
+import java.util.List;
+
 import javax.swing.SwingConstants;
 
 import shoppingMall.dto.Sale;
@@ -11,9 +13,10 @@ public class ProductMidPanel extends AbstractCustomTablePanel<Sale> {
 	private saleService service;
 
 	@Override
-	public void initList() {
+	public List<Sale> initList() {
 		service = new saleService();
 		list = service.showProduct();
+		return list;
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -126,6 +128,7 @@ public class DetailManager extends JPanel implements ActionListener {
 
 	public void loadTableCustomer() {
 		searchListByCus = saleService.selectDetailByCutomer(customerSearch);
+		
 		if (searchListByCus == null) {
 			List<Sale> nullList = new ArrayList<>();
 			searchListByCus = nullList;
@@ -161,17 +164,21 @@ public class DetailManager extends JPanel implements ActionListener {
 					Sale sale = pDetailTable.getItem();
 					saleService.delSale(sale);
 					pDetailTable.loadData();
+					pDetailTotal.setTotalDataDetail(pDetailTable.initList());
 				} else if (e.getActionCommand() == "수정") {
 					UpdateDetailManager frame = new UpdateDetailManager();
+					frame.setVisible(true);
 					Customer cus = pDetailTable.getCusItem();
 					Product prod = pDetailTable.getProdItem();
 					Sale sale = pDetailTable.getItem();
+					
 					try {
 						frame.getpUpdateDetailItem().setUpdateTf(cus, prod, sale);
 					} catch (ParseException e1) {
 						e1.printStackTrace();
 					}
 					frame.setVisible(true);
+					frame.setTotal(pDetailTotal);
 					frame.setTable(pDetailTable);
 				}
 			} catch (NotSelectedExeption e1) {

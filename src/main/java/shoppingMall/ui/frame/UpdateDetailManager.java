@@ -19,6 +19,7 @@ import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.panel.UpdateDetailManagerPanel;
+import shoppingMall.ui.panel.detail.DetailBottomPanel;
 import shoppingMall.ui.panel.detail.DetailMidPanel;
 
 @SuppressWarnings("serial")
@@ -34,6 +35,7 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 	private saleService saleService = new saleService();
 	
 	private DetailMidPanel table;
+	private DetailBottomPanel pDetailTotal;
 	
 	public UpdateDetailManager() {
 		initialize();
@@ -97,6 +99,7 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		saleService.modiDetailInfo(sale);
 		
 		table.loadData();
+		pDetailTotal.setTotalDataDetail(table.initList());
 		dispose();
 	}
 	
@@ -104,5 +107,8 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 		this.table = table;
 	}
 	
+	public void setTotal(DetailBottomPanel pDetailTotal) {
+		this.pDetailTotal = pDetailTotal;
+	}
 	
 }

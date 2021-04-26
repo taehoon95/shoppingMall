@@ -1,13 +1,11 @@
 package shoppingMall.ui.panel.main;
 
 import java.awt.Color;
+import java.util.List;
 
 import javax.swing.SwingConstants;
 
-import shoppingMall.dto.Customer;
-import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
-import shoppingMall.exception.NotSelectedExeption;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
@@ -22,9 +20,10 @@ public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
 	private saleService service;
 
 	@Override
-	public void initList() {
+	public List<Sale> initList() {
 		service = new saleService();
 		list = service.showMain();
+		return list;
 	}
 
 	@Override

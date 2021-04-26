@@ -109,6 +109,14 @@ public class UpdateDetailManagerPanel extends JPanel {
 		cmbProd.setSelectedItem(prod);
 		tftfSaleAmount.setText(sale.getSaleamount()+"");
 	}
+	public void setUpdateTf(Product prod,Sale sale) throws ParseException{
+		Date date = tdf.parse(sale.getDate());
+		
+		lblOrderNoText.setText(sale.getOrderno()+"");
+		dCOrderdate.setDate(date);
+		cmbProd.setSelectedItem(prod);
+		tftfSaleAmount.setText(sale.getSaleamount()+"");
+	}
 
 
 	public void tfClear() {

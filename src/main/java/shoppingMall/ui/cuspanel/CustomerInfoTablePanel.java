@@ -1,5 +1,7 @@
 package shoppingMall.ui.cuspanel;
 
+import java.util.List;
+
 import javax.swing.SwingConstants;
 
 import shoppingMall.dto.Customer;
@@ -17,9 +19,10 @@ public class CustomerInfoTablePanel extends AbstractCustomTablePanel<Customer> {
 	private customerService service;
 
 	@Override
-	public void initList() {
+	public List<Customer> initList() {
 		service = new customerService();
 		list = service.showCustomers();
+		return list;
 	}
 
 	@Override
