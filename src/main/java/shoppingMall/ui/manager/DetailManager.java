@@ -19,6 +19,7 @@ import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.exception.NotSelectedExeption;
+import shoppingMall.exception.noCountException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
@@ -167,17 +168,22 @@ public class DetailManager extends JPanel implements ActionListener {
 					pDetailTotal.setTotalDataDetail(pDetailTable.initList());
 				} else if (e.getActionCommand() == "수정") {
 					UpdateDetailManager frame = new UpdateDetailManager();
-					frame.setVisible(true);
-					Customer cus = pDetailTable.getCusItem();
-					Product prod = pDetailTable.getProdItem();
-					Sale sale = pDetailTable.getItem();
+					
+					Product prod = null;
+					Customer cus = null;
+					Sale sale = null;
 					
 					try {
+						cus = pDetailTable.getCusItem();
+						prod = pDetailTable.getProdItem();
+						sale = pDetailTable.getItem();
 						frame.getpUpdateDetailItem().setUpdateTf(cus, prod, sale);
-					} catch (ParseException e1) {
-						e1.printStackTrace();
+						frame.setVisible(true);
+					}catch (IndexOutOfBoundsException | ParseException e1) {
+						JOptionPane.showMessageDialog(null, "목록을 선택해주세요", "오류", JOptionPane.WARNING_MESSAGE);
+					}catch (noCountException e1) {
+						JOptionPane.showMessageDialog(null, "주문수량을 1이상 입력해주세요", "오류", JOptionPane.WARNING_MESSAGE);
 					}
-					frame.setVisible(true);
 					frame.setTotal(pDetailTotal);
 					frame.setTable(pDetailTable);
 				}

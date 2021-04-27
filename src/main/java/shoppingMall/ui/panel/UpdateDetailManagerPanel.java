@@ -22,6 +22,7 @@ import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
 import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.exception.noCountException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 
@@ -109,15 +110,6 @@ public class UpdateDetailManagerPanel extends JPanel {
 		cmbProd.setSelectedItem(prod);
 		tftfSaleAmount.setText(sale.getSaleamount()+"");
 	}
-	public void setUpdateTf(Product prod,Sale sale) throws ParseException{
-		Date date = tdf.parse(sale.getDate());
-		
-		lblOrderNoText.setText(sale.getOrderno()+"");
-		dCOrderdate.setDate(date);
-		cmbProd.setSelectedItem(prod);
-		tftfSaleAmount.setText(sale.getSaleamount()+"");
-	}
-
 
 	public void tfClear() {
 		dCOrderdate.setDate(null);
@@ -146,7 +138,9 @@ public class UpdateDetailManagerPanel extends JPanel {
 		int orderno = Integer.parseInt(lblOrderNoText.getText());
 		String date = tdf.format(dCOrderdate.getDate());
 		int saleamount = Integer.parseInt(tftfSaleAmount.getText());
-		
+		if(saleamount == 0) {
+			throw new noCountException();
+		}
 		String procode = cmbProd.getSelectedItem()+"";
 		
 		String seachCusno = cmbCus.getSelectedItem()+"";

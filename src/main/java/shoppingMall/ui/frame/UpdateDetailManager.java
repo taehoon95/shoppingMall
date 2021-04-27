@@ -5,16 +5,15 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
 import shoppingMall.dto.Sale;
 import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.exception.noCountException;
 import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
@@ -85,8 +84,12 @@ public class UpdateDetailManager extends JFrame implements ActionListener {
 			if (e.getSource() == btnUpdate) {
 				actionPerformedBtnUpdate(e);
 			}	
-		}catch (NullPointerException | InvaildCheckException | NumberFormatException e1) {
-			JOptionPane.showMessageDialog(null, "공란이나 형식을 맞춰 입력해주세요","수정 오류",JOptionPane.ERROR_MESSAGE);
+		}catch (InvaildCheckException e1) {
+			JOptionPane.showMessageDialog(null, "공란 존재","수정 오류",JOptionPane.ERROR_MESSAGE);
+		}catch(NumberFormatException e1){
+			JOptionPane.showMessageDialog(null, "형식을 맞춰 입력해주세요","수정 오류",JOptionPane.ERROR_MESSAGE);
+		}catch (noCountException e1) {
+			JOptionPane.showMessageDialog(null, "주문수량을 1이상 입력해주세요","수정 오류",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	protected void actionPerformedBtnCancel(ActionEvent e) {

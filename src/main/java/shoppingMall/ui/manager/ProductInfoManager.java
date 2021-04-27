@@ -79,6 +79,7 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 					Product product = pProdInfoTable.getItem();
 					Product prod = service.selectProductByProcode(product);
 					ProductInfoUI frame = new ProductInfoUI();
+					frame.setTitle("제품 수정");
 					frame.getpInfo().getTfProdCode().setEditable(false);
 					frame.setDetailItem(prod);
 					frame.setVisible(true);
@@ -101,6 +102,7 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
 		ProductInfoUI frame = new ProductInfoUI();
+		frame.setTitle("제품 추가");
 		frame.setVisible(true);
 		frame.getBtnUpdateProd().setText("추가");
 
