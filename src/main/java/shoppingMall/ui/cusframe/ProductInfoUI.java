@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import shoppingMall.dto.Product;
 import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.exception.sqlException;
 import shoppingMall.service.productService;
 import shoppingMall.ui.cuspanel.productInfoTablePanel;
 import shoppingMall.ui.cuspanel.productInfoPanel;
@@ -79,6 +80,8 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 			}
 		}catch (InvaildCheckException e1) {
 			JOptionPane.showMessageDialog(null, "공란존재","오류",JOptionPane.ERROR_MESSAGE);
+		}catch(sqlException e1) {
+			JOptionPane.showMessageDialog(null, "제품코드 중복", "오류", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	protected void actionPerformedBtnDelProd(ActionEvent e) {

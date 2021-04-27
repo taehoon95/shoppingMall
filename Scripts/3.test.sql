@@ -193,7 +193,7 @@ update product set proname = ?, prodpic = ?, proprice = ?,stock = ? where procod
 select * from customer;
 update customer set cusname ='오', birth ='2020-04-20',passno = password(1235) ,callno = '01047854825',sex ='2'where cusno = 12011;
 
-
+select cusno from customer where cusno = ?;
 
 
 

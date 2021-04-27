@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -14,6 +15,9 @@ import shoppingMall.shoppingMallMain;
 import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
+import shoppingMall.exception.InvaildCheckException;
+import shoppingMall.exception.sqlException;
+import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.cuspanel.productBuyTablePanel;
@@ -28,6 +32,7 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 	private JButton btnBuy;
 	private JButton btnCancel;
 	private productService pService;
+	private customerService cService;
 	
 	private productBuyTablePanel table;
 	
@@ -71,11 +76,18 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 		if (e.getSource() == btnCancel) {
 			actionPerformedBtnCancel(e);
 		}
-		if (e.getSource() == btnBuy) {
-			actionPerformedBtnBuy(e);
-		}
+		
 		if (e.getSource() == btnExit) {
 			actionPerformedBtnNewButton_2(e);
+		}
+		try {
+			if (e.getSource() == btnBuy) {
+				actionPerformedBtnBuy(e);
+			}
+		}catch (sqlException e1) {
+			JOptionPane.showMessageDialog(null, "존재하지않는 회원 번호입니다.","오류",JOptionPane.ERROR_MESSAGE);
+		}catch (InvaildCheckException eq) {
+			JOptionPane.showMessageDialog(null, "공란 존재","오류",JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	protected void actionPerformedBtnNewButton_2(ActionEvent e) {
@@ -89,9 +101,16 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 	
 	protected void actionPerformedBtnBuy(ActionEvent e) {
 		pService = new productService();
+		cService = new customerService();
+		
 		Sale sale = pTop.getBuyProd();
 		Product product = pService.selectProductByProcode(sale.getProcode());
 		
+		int cusno = Integer.parseInt(pTop.getTfCusno().getText());
+		Customer cus = cService.showCustomerByNo(new Customer(cusno));
+		if(cus == null) {
+			throw new sqlException();
+		}
 		pService.buyProductTransaction(sale, product);
 		ProductManager frame = new ProductManager();
 		frame.tableLoadData();

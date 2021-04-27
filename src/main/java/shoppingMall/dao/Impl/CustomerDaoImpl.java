@@ -91,7 +91,7 @@ public class CustomerDaoImpl implements CustomerDao {
 		return null;
 	}
 
-	private Customer getCustomer(ResultSet rs) throws SQLException {
+	private Customer getCustomer(ResultSet rs){
 		
 		int cusno = 0;
 		String cusname = null;
@@ -101,11 +101,13 @@ public class CustomerDaoImpl implements CustomerDao {
 
 		try {
 			cusno = rs.getInt("cusno");
-			cusname = rs.getString("cusname");
+		}catch(SQLException e) {}
+		try {cusname = rs.getString("cusname");
 			birth = rs.getString("birth");
 			callno = rs.getString("callno");
 			sex = rs.getInt("sex");
-		}catch(SQLException e) {}
+		}catch (SQLException e) {
+		}
 		
 		return new Customer(cusno, cusname, birth, callno, sex);
 	}
@@ -135,10 +137,12 @@ public class CustomerDaoImpl implements CustomerDao {
 				PreparedStatement pstmt = con.prepareStatement(sql)){
 			pstmt.setInt(1, customer.getCusno());
 			try(ResultSet rs = pstmt.executeQuery()){
-				return getCustomer(rs);
+				if(rs.next()) {
+					return getCustomer(rs);	
+				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new sqlException();
 		}
 		return null;
 	}

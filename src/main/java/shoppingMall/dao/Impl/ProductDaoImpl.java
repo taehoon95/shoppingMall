@@ -10,6 +10,7 @@ import java.util.List;
 import shoppingMall.dao.ProductDao;
 import shoppingMall.database.JdbcConn;
 import shoppingMall.dto.Product;
+import shoppingMall.exception.sqlException;
 
 public class ProductDaoImpl implements ProductDao {
 	
@@ -34,9 +35,8 @@ public class ProductDaoImpl implements ProductDao {
 			pstmt.setString(5, product.getProdpic());
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new sqlException();
 		}
-		return 0;
 	}
 
 	@Override
@@ -60,9 +60,8 @@ public class ProductDaoImpl implements ProductDao {
 			pstmt.setString(1, product);
 			return pstmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new sqlException();
 		}
-		return 0;
 	}
 
 	@Override

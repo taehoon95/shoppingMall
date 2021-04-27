@@ -54,16 +54,7 @@ public class saleDaoTest {
 		}
 	}
 
-	@Test
-	public void test04SelectByDate() {
-		System.out.println("testDate");
-		Sale sale = new Sale("2012.03.24");
-		List<Sale> list = dao.selectMainByDate(sale);
-		Assert.assertNotNull(list);
-		for(Sale s : list) {
-			System.out.println(s);
-		}
-	}
+	
 	
 	@Test
 	public void test05Insert() {
@@ -74,21 +65,6 @@ public class saleDaoTest {
 		System.out.println(dao.selectDetailInfo());
 	}
 	
-	@Test
-	public void test06Update() {
-		System.out.println("testUpdate");
-		Sale modiSale = new Sale("2021.03.14", new Customer(12003), new Product("PA"),8);
-		int res = dao.updateSale(modiSale);
-		Assert.assertEquals(1, res);
-		System.out.println(dao.selectDetailInfo());
-	}
 	
-	@Test
-	public void test07Delete() {
-		System.out.println("testDelete");
-		Sale delSale = new Sale("2021.03.14", new Customer(12003), new Product("PA"));
-		int res = dao.deleteSale(delSale);
-		Assert.assertEquals(1, res);
-		System.out.println(delSale);
-	}
+
 }

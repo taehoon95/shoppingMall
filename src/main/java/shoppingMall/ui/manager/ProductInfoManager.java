@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 
 import shoppingMall.dto.Product;
 import shoppingMall.exception.NotSelectedExeption;
+import shoppingMall.exception.sqlException;
 import shoppingMall.service.productService;
 import shoppingMall.ui.cusframe.ProductInfoUI;
 import shoppingMall.ui.cuspanel.productInfoTablePanel;
@@ -85,6 +86,8 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 				}
 			} catch (NotSelectedExeption e1) {
 				JOptionPane.showMessageDialog(null, "목록을 선택하세요.", "오류", JOptionPane.ERROR_MESSAGE);
+			} catch (sqlException e1) {
+				JOptionPane.showMessageDialog(null, "판매중인 상품입니다", "오류", JOptionPane.ERROR_MESSAGE);
 			}
 
 		}

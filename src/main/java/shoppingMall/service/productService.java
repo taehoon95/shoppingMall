@@ -56,6 +56,7 @@ public class productService {
 	////////////////// 구매
 	
 	public int buyProductTransaction(Sale sale,Product product) {
+		
 		String saleInsert = "insert into sale (date,cusno ,procode ,saleamount) values (?,?,?,?)";
 		String prodUpdate = "update product set stock = ? where procode = ?";
 		
