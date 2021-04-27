@@ -108,10 +108,12 @@ public class JoinMembershipManager extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "감사드립니다. 가입 완료 되었습니다.", "회원가입완료", JOptionPane.PLAIN_MESSAGE);
 		} else if (btnAdd.getText().equals("추가")) {
 			service.insertCustomer(newCustomer);
+			table.loadData();
 		} else if (btnAdd.getText().equals("수정")) {
 			
 			pMid.setCusItem(newCustomer);
 			service.modiCustomer(newCustomer);
+			table.loadData();
 		}
 		dispose();
 	}
