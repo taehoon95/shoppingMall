@@ -85,6 +85,7 @@ public class ProductBuyUI extends JFrame implements ActionListener {
 				actionPerformedBtnBuy(e);
 			}
 		}catch (sqlException e1) {
+			pTop.clearTf();
 			JOptionPane.showMessageDialog(null, "존재하지않는 회원 번호입니다.","오류",JOptionPane.ERROR_MESSAGE);
 		}catch (InvaildCheckException eq) {
 			JOptionPane.showMessageDialog(null, "공란 존재","오류",JOptionPane.ERROR_MESSAGE);
