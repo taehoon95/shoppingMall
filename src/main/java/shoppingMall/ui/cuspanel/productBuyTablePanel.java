@@ -1,5 +1,6 @@
 package shoppingMall.ui.cuspanel;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.SwingConstants;
@@ -11,7 +12,8 @@ import shoppingMall.ui.list.AbstractCustomTablePanel;
 
 @SuppressWarnings("serial")
 public class productBuyTablePanel extends AbstractCustomTablePanel<Product> {
-
+	private DecimalFormat df = new DecimalFormat("#,###");
+	
 	public productBuyTablePanel() {
 		initialize();
 	}
@@ -44,7 +46,8 @@ public class productBuyTablePanel extends AbstractCustomTablePanel<Product> {
 
 	@Override
 	public Object[] toArray(Product t) {
-		return new Object[] { t.getProcode(), t.getProname(), t.getSalePrice(), t.getStock() };
+		return new Object[] { t.getProcode(), t.getProname(), 
+				df.format(t.getSalePrice()), t.getStock()};
 	}
 
 	@Override

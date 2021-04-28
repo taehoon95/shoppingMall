@@ -1,5 +1,6 @@
 package shoppingMall.ui.panel.detail;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.SwingConstants;
@@ -24,6 +25,8 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 	
 	private List<Product> prodList;
 	private List<Customer> cusList;
+	
+	private DecimalFormat df = new DecimalFormat("#,###");
 	
 	@Override
 	public List<Sale> initList() {
@@ -57,10 +60,10 @@ public class DetailMidPanel extends AbstractCustomTablePanel<Sale> {
 				t.getProcode().getProcode(),
 				t.getProcode().getProname(),
 				String.format("%s(%s)", t.getCusno().getCusname(),t.getCusno().getCusno()),
-				t.getSaleamount(),
-				t.getProcode().getProprice(),
-				t.getSales(),
-				t.getProfit()
+				df.format(t.getSaleamount()),
+				df.format(t.getProcode().getProprice()),
+				df.format(t.getSales()),
+				df.format(t.getProfit())
 				
 		};
 	}

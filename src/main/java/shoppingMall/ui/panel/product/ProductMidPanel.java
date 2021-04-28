@@ -1,5 +1,6 @@
 package shoppingMall.ui.panel.product;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.SwingConstants;
@@ -8,10 +9,12 @@ import shoppingMall.dto.Sale;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
+@SuppressWarnings("serial")
 public class ProductMidPanel extends AbstractCustomTablePanel<Sale> {
 
 	private saleService service;
-
+	private DecimalFormat df = new DecimalFormat("#,###");
+	
 	@Override
 	public List<Sale> initList() {
 		service = new saleService();
@@ -37,10 +40,10 @@ public class ProductMidPanel extends AbstractCustomTablePanel<Sale> {
 				t.getDate(),
 				t.getProcode().getProcode(),
 				t.getProcode().getProname(),
-				t.getSaleamount(),
-				t.getProcode().getProprice(),
-				t.getSales(),
-				t.getProfit()
+				df.format(t.getSaleamount()),
+				df.format(t.getProcode().getProprice()),
+				df.format(t.getSales()),
+				df.format(t.getProfit())
 				};
 	}
 

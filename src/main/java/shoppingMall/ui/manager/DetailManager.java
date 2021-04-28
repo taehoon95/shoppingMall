@@ -104,7 +104,6 @@ public class DetailManager extends JPanel implements ActionListener {
 
 	protected void actionPerformedPDetailBtnsBtnProductSearch(ActionEvent e) {
 		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
-		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
 		loadTableProd();
 		
 		// 총 주문 건수, 총 주문 수량, 총 판매액, 총 이익금액

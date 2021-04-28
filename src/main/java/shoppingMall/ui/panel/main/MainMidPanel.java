@@ -1,6 +1,7 @@
 package shoppingMall.ui.panel.main;
 
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.SwingConstants;
@@ -10,6 +11,8 @@ import shoppingMall.service.saleService;
 import shoppingMall.ui.list.AbstractCustomTablePanel;
 
 public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
+	private DecimalFormat df = new DecimalFormat("#,###");
+	
 	public MainMidPanel() {
 		initialize();
 	}
@@ -46,7 +49,8 @@ public class MainMidPanel extends AbstractCustomTablePanel<Sale> {
 				t.getCusno().getCusname(),
 				t.getCusno().getCallno(),
 				t.getProcode().getProcode(),
-				t.getSaleamount(), t.getSales()
+				df.format(t.getSaleamount()),
+				df.format(t.getSales())
 				};
 	}
 

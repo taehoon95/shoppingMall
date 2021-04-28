@@ -8,6 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+
+import shoppingMall.graph.profitPanel;
 import shoppingMall.ui.manager.CusInfoManager;
 import shoppingMall.ui.manager.DetailManager;
 import shoppingMall.ui.manager.MainManager;
@@ -26,7 +30,7 @@ public class JTabbedShoppingmall extends JFrame {
 
 	private ProductInfoManager pProductInfo;
 	private CusInfoManager pCustomerInfo;
-
+	private profitPanel panel = new profitPanel();
 	public JTabbedShoppingmall() {
 		initialize();
 	}
@@ -58,6 +62,10 @@ public class JTabbedShoppingmall extends JFrame {
 
 		pCustomerInfo = new CusInfoManager();
 		tabbedPane.addTab("회원 관리", null, pCustomerInfo, null);
+		
+		JFreeChart chart = panel.getChart();
+		ChartPanel donpanel = new ChartPanel(chart);
+		tabbedPane.addTab("이익금액 차트", donpanel);
 	}
 	
 }

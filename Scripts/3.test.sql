@@ -197,9 +197,9 @@ select cusno from customer where cusno = ?;
 
 
 
+select `date`,procode,proname,proprice,saleamount,sales,profit from vw_all;
 
-
-
+select `date`,procode,proname,proprice,saleamount,sales,profit from vw_all where procode = "PA";
 
 
 
