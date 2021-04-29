@@ -14,6 +14,7 @@ import shoppingMall.dao.Impl.CustomerDaoImpl;
 import shoppingMall.dao.Impl.ProductDaoImpl;
 import shoppingMall.dao.Impl.SaleDaoImpl;
 import shoppingMall.database.JdbcConn;
+import shoppingMall.dto.Category;
 import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
@@ -22,6 +23,11 @@ import shoppingMall.ui.cusframe.ProductManager;
 public class productService {
 	private ProductDao dao = ProductDaoImpl.getInstance();
 	private SaleDao sDao = SaleDaoImpl.getInstance();
+	
+	/////////////////////////////////////// 제품 추가시 카테고리 코드로 검색
+	public List<Product> showLikeCategoryCode(Category code){
+		return dao.selectLikeprocode(code);
+	}
 	
 	/////////////////////////////////////// 제품정보별 조회
 	public List<Product> showProInfo(){

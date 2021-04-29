@@ -2,6 +2,7 @@ package shoppingMall.graph;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -23,6 +24,7 @@ import org.jfree.ui.TextAnchor;
 
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
+import shoppingMall.exception.noCountException;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 
@@ -44,6 +46,9 @@ public class profitPanel extends JPanel{
 		List<Product> pList = pService.showProd();
 		for (Product p : pList) {
 			sList = sService.selectProductByProInfo(p);
+			if(sList == null) {
+				sList = new ArrayList<Sale>();
+			}
 			int totalProfit = sList.parallelStream().mapToInt(Sale::getProfit).sum();
 			dataset.setValue(totalProfit,"제품", p.getProname());
 		}

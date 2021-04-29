@@ -9,6 +9,7 @@ import java.util.List;
 
 import shoppingMall.dao.ProductDao;
 import shoppingMall.database.JdbcConn;
+import shoppingMall.dto.Category;
 import shoppingMall.dto.Product;
 import shoppingMall.exception.sqlException;
 
@@ -163,6 +164,27 @@ public class ProductDaoImpl implements ProductDao {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public List<Product> selectLikeprocode(Category code) {
+		String sql = "select procode from product where procode like ?";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+			pstmt.setString(1, code.getCategoryCode()+'%');
+			try(ResultSet rs = pstmt.executeQuery()){
+				if(rs.next()) {
+					List<Product> list = new ArrayList<Product>();
+					do {
+						list.add(getProduct(rs));
+					}while(rs.next());
+					return list;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 

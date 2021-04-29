@@ -19,7 +19,14 @@ import shoppingMall.service.customerService;
 public class loginPanel extends JPanel implements ActionListener {
 	private JTextField tfCusno;
 	private JPasswordField tfPass;
+	private String loginId;
 	
+	public String getLoginId() {
+		return loginId;
+	}
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
+	}
 	public loginPanel() {
 
 		initialize();
@@ -58,6 +65,9 @@ public class loginPanel extends JPanel implements ActionListener {
 		if(tfCusno.getText().equals("") || tfPass.getPassword().equals("")) {
 			throw new InvaildCheckException();
 		}
+	}
+	public JTextField getTfCusno() {
+		return tfCusno;
 	}
 	
 	

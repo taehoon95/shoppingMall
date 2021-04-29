@@ -44,6 +44,15 @@ public class UpdateDetailManagerPanel extends JPanel {
 
 		initialize();
 	}
+	
+	public JLabel getLblOrderNoText() {
+		return lblOrderNoText;
+	}
+
+	public JLabel getLblOrderNo() {
+		return lblOrderNo;
+	}
+
 	private void initialize() {
 		setLayout(new GridLayout(0, 2, 0, 0));
 		
@@ -141,11 +150,9 @@ public class UpdateDetailManagerPanel extends JPanel {
 		if(saleamount == 0) {
 			throw new noCountException();
 		}
-		String procode = cmbProd.getSelectedItem()+"";
-		
-		String seachCusno = cmbCus.getSelectedItem()+"";
-		int cusno = Integer.parseInt(seachCusno.substring(0, 5));
-		return new Sale(date, orderno,new Customer(cusno),new Product(procode.substring(0, 2)), saleamount);
+		Product procode = (Product) cmbProd.getSelectedItem();
+		Customer seachCusno = (Customer) cmbCus.getSelectedItem();
+		return new Sale(date, orderno, seachCusno, procode, saleamount);
 	}
 	private void vaildCheck() {
 		if(dCOrderdate.getDate().equals(null) ||

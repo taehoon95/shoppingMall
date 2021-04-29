@@ -27,7 +27,7 @@ import shoppingMall.service.productService;
 
 @SuppressWarnings("serial")
 public class productBuyCusInfoPanel extends JPanel implements ChangeListener {
-	private JTextField tfCusno;
+	private JLabel tfCusno;
 
 	private SimpleDateFormat searchDateFormat = new SimpleDateFormat("yyyy.MM.dd");
 	private JLabel lblProcode;
@@ -104,10 +104,9 @@ public class productBuyCusInfoPanel extends JPanel implements ChangeListener {
 		lblCusno.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_3.add(lblCusno);
 
-		tfCusno = new JTextField();
+		tfCusno = new JLabel();
 		tfCusno.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel_3.add(tfCusno);
-		tfCusno.setColumns(10);
 	}
 
 	public Sale getBuyProd() {
@@ -125,13 +124,15 @@ public class productBuyCusInfoPanel extends JPanel implements ChangeListener {
 		}
 	}
 
-	public JTextField getTfCusno() {
+
+	public JLabel getTfCusno() {
 		return tfCusno;
 	}
 
 	// 제품 선택하고 구입하기 버튼 누르면 자동으로 제품코드와 이름 설정
-	public void setBuyProd(Product prod) {
+	public void setBuyProd(Product prod,String id) {
 		this.prod = prod;
+		tfCusno.setText(id);
 		lblProcode.setText(prod.getProcode());
 		lblProname.setText(prod.getProname());
 	}

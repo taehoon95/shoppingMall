@@ -8,22 +8,30 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import shoppingMall.dto.Category;
+import shoppingMall.dto.Customer;
 import shoppingMall.dto.Product;
 import shoppingMall.exception.InvaildCheckException;
-
-import javax.swing.JTextField;
+import shoppingMall.service.categoryService;
+import shoppingMall.service.productService;
 
 @SuppressWarnings("serial")
 public class productInfoPanel extends JPanel implements ActionListener {
@@ -42,9 +50,15 @@ public class productInfoPanel extends JPanel implements ActionListener {
 	private JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
 	private JLabel lblProdPrice;
 	private JTextField tfProdPrice;
+	private JLabel lblCategory;
+	private JComboBox cmbCategory;
 
+	private categoryService cateService;
+	private productService pService;
+	
 	public productInfoPanel() {
-
+		cateService = new categoryService();
+		pService = new productService();
 		initialize();
 		loadPic(null);
 	}
@@ -87,6 +101,15 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		pRight.setBackground(Color.WHITE);
 		add(pRight);
 		pRight.setLayout(new GridLayout(0, 2, 0, 30));
+		
+		lblCategory = new JLabel("상품카테고리");
+		lblCategory.setHorizontalAlignment(SwingConstants.CENTER);
+		pRight.add(lblCategory);
+		
+		cmbCategory = new JComboBox();
+		cmbCategory.addActionListener(this);
+		cmbCategory.setFont(new Font("굴림", Font.BOLD, 15));
+		pRight.add(cmbCategory);
 		
 		JLabel lblProdcode = new JLabel("상품번호");
 		pRight.add(lblProdcode);
@@ -131,6 +154,9 @@ public class productInfoPanel extends JPanel implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == cmbCategory) {
+			actionPerformedCmbCategory(e);
+		}
 		if (e.getSource() == btnUpdate) {
 			actionPerformedBtnUpdate(e);
 		}
@@ -188,5 +214,30 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		tfProdStock.setText("");
 		tfProdPrice.setText("");
 		lblPic.setIcon(new ImageIcon(imgPath + "/smlie.jpg"));
+	}
+	
+	public void setCateService(categoryService service) {
+		
+		List<Category> cateList = cateService.showCategory();
+		DefaultComboBoxModel cmbModel = new DefaultComboBoxModel<Category>(new Vector<>(cateList));
+		cmbCategory.setModel(cmbModel);
+		cmbCategory.setSelectedIndex(-1);
+	}
+	protected void actionPerformedCmbCategory(ActionEvent e) {
+		String code = cmbCategory.getSelectedItem()+"";
+		List<Product> cateList = pService.showLikeCategoryCode(new Category(code.substring(0, 2)));
+		if(cateList == null) {
+			cateList = new ArrayList<Product>();
+		}
+		String categorySize = cateList.size()+1+"";
+		String categoryCode = code.substring(0, 2);
+		String addCategory = categoryCode+"-"+categorySize;
+		
+		if(addCategory.equals("nu-1")){
+			addCategory = "";
+		} 
+		
+		tfProdCode.setText(addCategory);
+		
 	}
 }

@@ -105,14 +105,14 @@ public class DetailManager extends JPanel implements ActionListener {
 	protected void actionPerformedPDetailBtnsBtnProductSearch(ActionEvent e) {
 		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
 		loadTableProd();
-		
+
 		// 총 주문 건수, 총 주문 수량, 총 판매액, 총 이익금액
 		pDetailTotal.setTotalDataDetail(searchListByProd);
 	}
 
 	public void loadTableProd() {
 		searchListByProd = saleService.selectProductByProInfo(prodSearch);
-		if(searchListByProd == null) {
+		if (searchListByProd == null) {
 			searchListByProd = nullList;
 		}
 		pDetailTable.selectList(searchListByProd);
@@ -122,13 +122,13 @@ public class DetailManager extends JPanel implements ActionListener {
 		prodSearch = (Product) pDetailBtns.getCmbProductSearch().getSelectedItem();
 		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
 		loadTableCustomer();
-		
+
 		pDetailTotal.setTotalDataDetail(searchListByCus);
 	}
 
 	public void loadTableCustomer() {
 		searchListByCus = saleService.selectDetailByCutomer(customerSearch);
-		
+
 		if (searchListByCus == null) {
 			List<Sale> nullList = new ArrayList<>();
 			searchListByCus = nullList;
@@ -142,11 +142,11 @@ public class DetailManager extends JPanel implements ActionListener {
 		customerSearch = (Customer) pDetailBtns.getCmbCusSearch().getSelectedItem();
 		selectListByCusAndProd();
 	}
-	
+
 /////////  디테일 두개 같이 검색
 	private void selectListByCusAndProd() {
 		searchListByCusAndProd = saleService.selectDetailByProdAndCus(customerSearch, prodSearch);
-		if(searchListByCusAndProd == null) {
+		if (searchListByCusAndProd == null) {
 			searchListByCusAndProd = nullList;
 		}
 		pDetailTable.selectList(searchListByCusAndProd);
@@ -167,20 +167,23 @@ public class DetailManager extends JPanel implements ActionListener {
 					pDetailTotal.setTotalDataDetail(pDetailTable.initList());
 				} else if (e.getActionCommand() == "수정") {
 					UpdateDetailManager frame = new UpdateDetailManager();
-					
+
 					Product prod = null;
 					Customer cus = null;
 					Sale sale = null;
-					
+
 					try {
 						cus = pDetailTable.getCusItem();
 						prod = pDetailTable.getProdItem();
 						sale = pDetailTable.getItem();
 						frame.getpUpdateDetailItem().setUpdateTf(cus, prod, sale);
+
+//						frame.getpUpdateDetailItem().getLblOrderNo().remove(1);
+
 						frame.setVisible(true);
-					}catch (IndexOutOfBoundsException | ParseException e1) {
+					} catch (IndexOutOfBoundsException | ParseException e1) {
 						JOptionPane.showMessageDialog(null, "목록을 선택해주세요", "오류", JOptionPane.WARNING_MESSAGE);
-					}catch (noCountException e1) {
+					} catch (noCountException e1) {
 						JOptionPane.showMessageDialog(null, "주문수량을 1이상 입력해주세요", "오류", JOptionPane.WARNING_MESSAGE);
 					}
 					frame.setTotal(pDetailTotal);

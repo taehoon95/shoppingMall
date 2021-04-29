@@ -15,9 +15,10 @@ import javax.swing.border.EmptyBorder;
 import shoppingMall.dto.Product;
 import shoppingMall.exception.InvaildCheckException;
 import shoppingMall.exception.sqlException;
+import shoppingMall.service.categoryService;
 import shoppingMall.service.productService;
-import shoppingMall.ui.cuspanel.productInfoTablePanel;
 import shoppingMall.ui.cuspanel.productInfoPanel;
+import shoppingMall.ui.cuspanel.productInfoTablePanel;
 
 @SuppressWarnings("serial")
 public class ProductInfoUI extends JFrame implements ActionListener {
@@ -28,15 +29,17 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 	private productInfoTablePanel table;
 	private JButton btnUpdateProd;
 	private productService pService;
+	private categoryService caService;
 	
 	public ProductInfoUI() {
 		pService = new productService();
+		caService = new categoryService(); 
 		initialize();
 	}
 	private void initialize() {
 		setTitle("제품상세정보");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 575, 346);
+		setBounds(100, 100, 611, 368);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,6 +63,8 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 		btnCancelProd.addActionListener(this);
 		btnCancelProd.setBackground(Color.GREEN);
 		panel.add(btnCancelProd);
+		
+		pInfo.setCateService(caService);
 	}
 
 	
@@ -70,6 +75,7 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 	public void prohibitionBtn() {
 //		pInfo.prohibitionBtn();
 	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnCancelProd) {
 			actionPerformedBtnDelProd(e);
@@ -84,6 +90,7 @@ public class ProductInfoUI extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(null, "제품코드 중복", "오류", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
 	protected void actionPerformedBtnDelProd(ActionEvent e) {
 		pInfo.tfClear();
 	}

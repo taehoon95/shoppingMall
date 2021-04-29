@@ -1,11 +1,15 @@
 package shoppingMall.ui.manager;
 
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 
 import shoppingMall.dto.Product;
 import shoppingMall.exception.NotSelectedExeption;
@@ -13,10 +17,6 @@ import shoppingMall.exception.sqlException;
 import shoppingMall.service.productService;
 import shoppingMall.ui.cusframe.ProductInfoUI;
 import shoppingMall.ui.cuspanel.productInfoTablePanel;
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class ProductInfoManager extends JPanel implements ActionListener {
@@ -101,6 +101,7 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 	}
 
 	protected void actionPerformedBtnAdd(ActionEvent e) {
+		
 		ProductInfoUI frame = new ProductInfoUI();
 		frame.setTitle("제품 추가");
 		frame.setVisible(true);

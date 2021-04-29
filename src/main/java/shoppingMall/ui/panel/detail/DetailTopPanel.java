@@ -90,13 +90,6 @@ public class DetailTopPanel extends JPanel implements ActionListener, ItemListen
 		
 	}
 	
-	public void setCmbProductSearch(JComboBox cmbProductSearch) {
-		this.cmbProductSearch = cmbProductSearch;
-	}
-
-	public void setCmbCusSearch(JComboBox cmbCusSearch) {
-		this.cmbCusSearch = cmbCusSearch;
-	}
 
 	public void setProdService(productService service) {
 		this.pService = service;
@@ -110,8 +103,6 @@ public class DetailTopPanel extends JPanel implements ActionListener, ItemListen
 	}
 
 	public void setCusService(customerService service) {
-		this.cService = service;
-
 		service = new customerService();
 
 		List<Customer> cusList = service.showCustomer();
@@ -153,6 +144,15 @@ public class DetailTopPanel extends JPanel implements ActionListener, ItemListen
 		return cmbCusSearch;
 	}
 
+	public void setCmbProductSearch(JComboBox cmbProductSearch) {
+		this.cmbProductSearch = cmbProductSearch;
+	}
+
+	public void setCmbCusSearch(JComboBox cmbCusSearch) {
+		this.cmbCusSearch = cmbCusSearch;
+	}
+
+	
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnCancel) {

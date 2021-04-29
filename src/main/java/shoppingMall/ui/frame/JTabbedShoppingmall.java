@@ -16,7 +16,6 @@ import shoppingMall.ui.manager.CusInfoManager;
 import shoppingMall.ui.manager.DetailManager;
 import shoppingMall.ui.manager.MainManager;
 import shoppingMall.ui.manager.ProductInfoManager;
-import shoppingMall.ui.manager.ProductManager;
 
 @SuppressWarnings("serial")
 public class JTabbedShoppingmall extends JFrame {
@@ -25,7 +24,6 @@ public class JTabbedShoppingmall extends JFrame {
 
 	private JTabbedPane tabbedPane;
 	private MainManager pMain;
-	private ProductManager pProduct;
 	private DetailManager pDetail;
 
 	private ProductInfoManager pProductInfo;
@@ -50,9 +48,6 @@ public class JTabbedShoppingmall extends JFrame {
 
 		pMain = new MainManager();
 		tabbedPane.addTab("메인화면", null, pMain, null);
-
-		pProduct = new ProductManager();
-		tabbedPane.addTab("제품별 조회", null, pProduct, null);
 
 		pDetail = new DetailManager();
 		tabbedPane.addTab("상세 조회", null, pDetail, null);

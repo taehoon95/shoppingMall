@@ -201,8 +201,18 @@ select `date`,procode,proname,proprice,saleamount,sales,profit from vw_all;
 
 select `date`,procode,proname,proprice,saleamount,sales,profit from vw_all where procode = "PA";
 
+-- 카테고리
+select categorycode,categoryname from category;
 
+select procode from product where procode like 'HA%';
+select procode from product where procode like ?;
 
+update category set categoryname = '스포츠/레저' where categorycode = 'VE';
+
+-- 판매관리 업데이트 
+
+select orderno,`date`,procode,saleamount,cusno from sale;
+update sale set date = '2021-01-01', procode = 'AC-1', saleamount = 22, cusno = 12002 where orderno = 1;
 
 
 

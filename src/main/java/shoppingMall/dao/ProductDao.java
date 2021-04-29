@@ -2,6 +2,7 @@ package shoppingMall.dao;
 
 import java.util.List;
 
+import shoppingMall.dto.Category;
 import shoppingMall.dto.Product;
 
 public interface ProductDao {
@@ -23,4 +24,7 @@ public interface ProductDao {
 	
 /////////////////////////// 제품 수정용
 	int modiProduct(Product product);
+	
+/////////////////////////// 제품 추가 할때 코드 검색용
+	List<Product> selectLikeprocode(Category code);
 }

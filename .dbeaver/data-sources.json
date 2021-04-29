@@ -17,18 +17,18 @@
 				"auth-model": "native"
 			}
 		},
-		"mysql5-178400c1af0-23d28f86a582e494": {
+		"mysql5-179186bfbb8-75ab4fa70872ad7e": {
 			"provider": "mysql",
 			"driver": "mysql5",
-			"name": "shopping(user_shopping)",
+			"name": "user_shoppingmall_lth",
 			"save-password": true,
 			"show-system-objects": true,
 			"read-only": false,
 			"configuration": {
 				"host": "localhost",
 				"port": "3306",
-				"database": "shopping",
-				"url": "jdbc:mysql://localhost:3306/shopping",
+				"database": "shoppingmall_lth",
+				"url": "jdbc:mysql://localhost:3306/shoppingmall_lth",
 				"home": "C:\\Program Files\\MySQL\\MySQL Server 5.7",
 				"type": "dev",
 				"auth-model": "native",

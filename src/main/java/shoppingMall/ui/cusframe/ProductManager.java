@@ -27,7 +27,14 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 
 	private JPanel contentPane;
 	private productService service;
+	private String id;
 	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public ProductManager() {
 		service = new productService();
 		initialize();
@@ -121,10 +128,11 @@ public class ProductManager extends JFrame implements ActionListener, MouseListe
 	}
 	protected void actionPerformedBtnBuy(ActionEvent e) {
 		// 제품 선택하고 구입하기 버튼 누르면 자동으로 제품코드와 이름 설정
+		System.out.println(id);
 		Product selectProd = pMid.getItem();
 		Product select = service.selectProductByProcode(selectProd);
 		ProductBuyUI frame = new ProductBuyUI();
-		frame.setProd(select);
+		frame.setProd(select,id);
 		frame.setVisible(true);
 		frame.setTable(pMid);
 		if(select.getStock() < 0) {
