@@ -13,8 +13,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import shoppingMall.dto.Customer;
+import shoppingMall.dto.Manager;
 import shoppingMall.exception.InvaildCheckException;
-import shoppingMall.service.customerService;
 
 public class loginPanel extends JPanel implements ActionListener {
 	private JTextField tfCusno;
@@ -59,6 +59,12 @@ public class loginPanel extends JPanel implements ActionListener {
 		int cusno = Integer.parseInt(tfCusno.getText());
 		String passno = String.valueOf(tfPass.getPassword());
 		return new Customer(cusno, passno);
+	}
+	
+	public Manager loginManager() {
+		String managerId = tfCusno.getText();
+		String managerPass = String.valueOf(tfPass.getPassword());
+		return new Manager(managerId, managerPass);
 	}
 	
 	private void validCheck() {

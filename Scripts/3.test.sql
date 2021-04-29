@@ -10,7 +10,7 @@ select * from sale;
 
 -- Main 화면 형식 sql문
 create view vw_all
-as;
+as
 select orderno ,date_format(date, "%Y.%m.%d") as date ,
 	   c.cusNo,
 	   c.passno,
@@ -204,15 +204,22 @@ select `date`,procode,proname,proprice,saleamount,sales,profit from vw_all where
 -- 카테고리
 select categorycode,categoryname from category;
 
+delete from category where categorycode = 'cm';
+
 select procode from product where procode like 'HA%';
 select procode from product where procode like ?;
 
-update category set categoryname = '스포츠/레저' where categorycode = 'VE';
-
+update category set categoryname = '스포츠/레저' where categorycode = 'CM';
+insert into category (categoryCode, categoryName)  
+				    values ("CM","캠핑");
 -- 판매관리 업데이트 
 
 select orderno,`date`,procode,saleamount,cusno from sale;
 update sale set date = '2021-01-01', procode = 'AC-1', saleamount = 22, cusno = 12002 where orderno = 1;
 
+-- 
 
+insert into manager (managerid, passno)
+	 values (950304,password(123));
 
+select * from manager;

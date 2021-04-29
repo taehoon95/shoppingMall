@@ -17,6 +17,7 @@ import shoppingMall.exception.sqlException;
 import shoppingMall.service.productService;
 import shoppingMall.ui.cusframe.ProductInfoUI;
 import shoppingMall.ui.cuspanel.productInfoTablePanel;
+import shoppingMall.ui.manager.product_category.categoryManager;
 
 @SuppressWarnings("serial")
 public class ProductInfoManager extends JPanel implements ActionListener {
@@ -45,10 +46,15 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 		pProdInfoBtn.setBackground(Color.WHITE);
 		add(pProdInfoBtn, BorderLayout.NORTH);
 
-		btnAdd = new JButton("추가");
+		btnAdd = new JButton("\uC81C\uD488 \uCD94\uAC00");
 		btnAdd.setBackground(Color.GREEN);
 		btnAdd.addActionListener(this);
 		pProdInfoBtn.add(btnAdd);
+		
+		btnNewButton = new JButton("\uCE74\uD14C\uACE0\uB9AC \uCD94\uAC00");
+		btnNewButton.addActionListener(this);
+		btnNewButton.setBackground(Color.GREEN);
+		pProdInfoBtn.add(btnNewButton);
 
 	}
 
@@ -57,11 +63,14 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 
 		JMenuItem modiItem = new JMenuItem("수정");
 		JMenuItem delItem = new JMenuItem("삭제");
+		JMenuItem profitChart = new JMenuItem("이익금액차트");
+		JMenuItem amountChart = new JMenuItem("판매량차트");
 		modiItem.addActionListener(popupProdMenuListner);
 		delItem.addActionListener(popupProdMenuListner);
 
 		popMenu.add(delItem);
 		popMenu.add(modiItem);
+		
 		return popMenu;
 	}
 
@@ -90,11 +99,15 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 			} catch (sqlException e1) {
 				JOptionPane.showMessageDialog(null, "판매중인 상품입니다", "오류", JOptionPane.ERROR_MESSAGE);
 			}
-
+			
 		}
 	};
+	private JButton btnNewButton;
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNewButton) {
+			actionPerformedBtnNewButton(e);
+		}
 		if (e.getSource() == btnAdd) {
 			actionPerformedBtnAdd(e);
 		}
@@ -104,9 +117,15 @@ public class ProductInfoManager extends JPanel implements ActionListener {
 		
 		ProductInfoUI frame = new ProductInfoUI();
 		frame.setTitle("제품 추가");
+		frame.getpInfo().getpRight().add(frame.getpInfo().getLblCategory());
+		frame.getpInfo().getpRight().add(frame.getpInfo().getCmbCategory());
 		frame.setVisible(true);
 		frame.getBtnUpdateProd().setText("추가");
 
 		frame.setTable(pProdInfoTable);
+	}
+	protected void actionPerformedBtnNewButton(ActionEvent e) {
+		categoryManager frame = new categoryManager();
+		frame.setVisible(true);
 	}
 }

@@ -8,4 +8,7 @@ public interface CategoryDao {
 	
 	List<Category> selectCategory();
 	
+	int insertCategory(Category category);
+	int deleteCategory(String code);
+	int updateCategory(Category category);
 }

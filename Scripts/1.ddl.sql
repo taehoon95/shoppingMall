@@ -66,12 +66,23 @@ CREATE TABLE shoppingMall_LTH.category (
 )
 COMMENT '카테고리';
 
--- 카테고리
-ALTER TABLE shoppingMall_LTH.category
-	ADD CONSTRAINT PK_category -- 카테고리 기본키
+-- 관리자
+CREATE TABLE shoppingMall_LTH.manager (
+	managerno INT         NOT NULL COMMENT '번호', -- 번호
+	managerid VARCHAR(50) NOT NULL COMMENT 'id', -- id
+	passno    CHAR(41)    NOT NULL COMMENT '비밀번호' -- 비밀번호
+)
+COMMENT '관리자';
+
+-- 관리자
+ALTER TABLE shoppingMall_LTH.manager
+	ADD CONSTRAINT PK_manager -- 관리자 기본키
 		PRIMARY KEY (
-			categorycode -- 카테고리코드
+			managerno -- 번호
 		);
+
+ALTER TABLE shoppingMall_LTH.manager
+	MODIFY COLUMN managerno INT NOT NULL AUTO_INCREMENT COMMENT '번호';
 
 -- 판매내역
 ALTER TABLE shoppingMall_LTH.sale

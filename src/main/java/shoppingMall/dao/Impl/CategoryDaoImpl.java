@@ -59,6 +59,50 @@ public class CategoryDaoImpl implements CategoryDao {
 		return null;
 	}
 
+	@Override
+	public int insertCategory(Category category) {
+		String sql = " insert into category (categoryCode, categoryName) " 
+				   + " values (?,?)";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+				pstmt.setString(1, category.getCategoryCode());
+				pstmt.setString(2, category.getCategoryName());
+				return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int deleteCategory(String code) {
+		String sql = "delete from category where categoryCode = ? ";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+				pstmt.setString(1, code);
+				return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
+	@Override
+	public int updateCategory(Category category) {
+		String sql = " update category "
+				       + "set categoryname = ? " 
+				    + " where categorycode = ? ";
+		try(Connection con = JdbcConn.getConnection();
+				PreparedStatement pstmt = con.prepareStatement(sql)){
+				pstmt.setString(1, category.getCategoryName());
+				pstmt.setString(2, category.getCategoryCode());
+				return pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+
 	
 
 }

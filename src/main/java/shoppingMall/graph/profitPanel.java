@@ -24,7 +24,6 @@ import org.jfree.ui.TextAnchor;
 
 import shoppingMall.dto.Product;
 import shoppingMall.dto.Sale;
-import shoppingMall.exception.noCountException;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 
@@ -32,15 +31,19 @@ import shoppingMall.service.saleService;
 public class profitPanel extends JPanel{
 	public profitPanel() {
 	}
+	
 
 	private saleService sService;
 	private productService pService;
 	private List<Sale> sList;
-
-	public JFreeChart getChart() {
+	private int total;
+	private boolean a;
+	
+	public JFreeChart getChart(boolean a) {
 
 		sService = new saleService();
 		pService = new productService();
+		
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		List<Product> pList = pService.showProd();
@@ -49,8 +52,14 @@ public class profitPanel extends JPanel{
 			if(sList == null) {
 				sList = new ArrayList<Sale>();
 			}
-			int totalProfit = sList.parallelStream().mapToInt(Sale::getProfit).sum();
-			dataset.setValue(totalProfit,"제품", p.getProname());
+			if(a == true) {
+				total = sList.parallelStream().mapToInt(Sale::getSaleamount).sum();
+			}else {
+				total = sList.parallelStream().mapToInt(Sale::getProfit).sum();
+			}
+			
+			setChartData(dataset, p, total);
+			
 		}
 
 		// 렌더링 생성
@@ -100,4 +109,8 @@ public class profitPanel extends JPanel{
 		return chart;
 	}
 
+	public void setChartData(DefaultCategoryDataset dataset, Product p, int totalAmount) {
+		dataset.setValue(totalAmount,"제품", p.getProname());
+	}
+	
 }

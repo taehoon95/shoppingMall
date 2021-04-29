@@ -104,12 +104,12 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		
 		lblCategory = new JLabel("상품카테고리");
 		lblCategory.setHorizontalAlignment(SwingConstants.CENTER);
-		pRight.add(lblCategory);
+//		pRight.add(lblCategory);
 		
 		cmbCategory = new JComboBox();
 		cmbCategory.addActionListener(this);
 		cmbCategory.setFont(new Font("굴림", Font.BOLD, 15));
-		pRight.add(cmbCategory);
+//		pRight.add(cmbCategory);
 		
 		JLabel lblProdcode = new JLabel("상품번호");
 		pRight.add(lblProdcode);
@@ -148,9 +148,23 @@ public class productInfoPanel extends JPanel implements ActionListener {
 		pRight.add(tfProdStock);
 	}
 
+	
+
+	public JPanel getpRight() {
+		return pRight;
+	}
 
 	public JTextField getTfProdCode() {
 		return tfProdCode;
+	}
+
+	
+	public JLabel getLblCategory() {
+		return lblCategory;
+	}
+
+	public JComboBox getCmbCategory() {
+		return cmbCategory;
 	}
 
 	public void actionPerformed(ActionEvent e) {

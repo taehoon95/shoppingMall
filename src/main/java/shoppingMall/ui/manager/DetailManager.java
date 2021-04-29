@@ -24,6 +24,7 @@ import shoppingMall.service.customerService;
 import shoppingMall.service.productService;
 import shoppingMall.service.saleService;
 import shoppingMall.ui.frame.UpdateDetailManager;
+import shoppingMall.ui.frame.chartFrame;
 import shoppingMall.ui.panel.detail.DetailBottomPanel;
 import shoppingMall.ui.panel.detail.DetailMidPanel;
 import shoppingMall.ui.panel.detail.DetailTopPanel;
@@ -177,9 +178,6 @@ public class DetailManager extends JPanel implements ActionListener {
 						prod = pDetailTable.getProdItem();
 						sale = pDetailTable.getItem();
 						frame.getpUpdateDetailItem().setUpdateTf(cus, prod, sale);
-
-//						frame.getpUpdateDetailItem().getLblOrderNo().remove(1);
-
 						frame.setVisible(true);
 					} catch (IndexOutOfBoundsException | ParseException e1) {
 						JOptionPane.showMessageDialog(null, "목록을 선택해주세요", "오류", JOptionPane.WARNING_MESSAGE);
@@ -192,6 +190,16 @@ public class DetailManager extends JPanel implements ActionListener {
 			} catch (NotSelectedExeption e1) {
 				JOptionPane.showMessageDialog(null, "목록을 선택하세요.", "오류", JOptionPane.ERROR_MESSAGE);
 			}
+			if(e.getActionCommand() == "이익금액차트") {
+				chartFrame frame = new chartFrame(false);
+				frame.setTitle("이익금액차트");
+				frame.setVisible(true);
+			}
+			if(e.getActionCommand() == "판매량차트") {
+				chartFrame frame = new chartFrame(true);
+				frame.setTitle("판매량차트");
+				frame.setVisible(true);
+			}
 		}
 	};
 
@@ -200,12 +208,18 @@ public class DetailManager extends JPanel implements ActionListener {
 
 		JMenuItem delSale = new JMenuItem("삭제");
 		JMenuItem upSale = new JMenuItem("수정");
-
+		JMenuItem profitChart = new JMenuItem("이익금액차트");
+		JMenuItem amountChart = new JMenuItem("판매량차트");
+		
 		delSale.addActionListener(popupMenuListner);
 		upSale.addActionListener(popupMenuListner);
+		profitChart.addActionListener(popupMenuListner);
+		amountChart.addActionListener(popupMenuListner);
 
 		popMenu.add(delSale);
 		popMenu.add(upSale);
+		popMenu.add(profitChart);
+		popMenu.add(amountChart);
 		return popMenu;
 	}
 }

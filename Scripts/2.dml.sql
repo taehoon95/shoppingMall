@@ -18,18 +18,26 @@ insert into customer (cusno, passno, cusname, birth, callno, sex)
      	    (12010,password(123),'최홍석','1990.04.05','01032146547',1);
 
 select * from customer;
-
+desc product;
 insert into product (procode, proname, proprice, stock, prodPic)
-     values ('FU-1','책상',10000,100, '학교책상의자.png'),
+     values ('AC-1','시계',6000,10, '시계.png'),
+     		('FU-1','책상',10000,100, '학교책상의자.png'),
      	    ('HA-1','냉장고',36000,40, '냉장고.png'),
      	    ('HA-2','세탁기',22000,80, '세탁기.png'),
      	    ('VE-1','킥보드',30000,100, '킥보드.png'),
      	    ('VE-2','자전거',90000,60, '자전거.png'),
-     	    ('AC-1','시계',6000,10, '시계.png'),
      	    ('HA-3','TV',8000,50, 'TV.png'),
      	    ('HG-1','마스크',3000,100, 'mask.png');
      	    
 select * from product;
+
+insert into category (categoryCode, categoryName)
+	 values ('AC','악세서리'), 
+	 		('FU','가구'),
+	 		('HA','가전제품'),
+	 		('HG','생활용품'),
+	 		('VE','탈것');
+
 
 insert into sale (date, cusno, procode, saleamount)
 	 values ('2021.01.24','12003','FU-1',2),
@@ -48,33 +56,11 @@ insert into sale (date, cusno, procode, saleamount)
 	        ('2021.03.05','12010','VE-1',1),
 	        ('2021.03.14','12010','HA-1',5),
 	        ('2021.03.15','12003','VE-2',7);
-
+desc manager ;
+insert into manager (managerid, passno)
+	 values ('manager',password(123));      
 	       
-	     
-insert into category (categoryCode, categoryName)
-	 values ('FU','가구'),
-	 		('AC','악세서리'),
-	 		('HA','가전제품'),
-	 		('HG','생활용품'),
-	 		('VE','탈것');
+select * from manager;	       
 	 
-	 
-create view vw_all
-as
-select orderno ,date_format(date, "%Y.%m.%d") as date ,
-	   c.cusNo,
-	   c.passno,
-	   c.cusName,
-	   callNo,
-	   p.procode,
-	   p.proname,
-	   p.proprice,
-	   saleamount,
-	   proPrice*saleamount*1.1 as sales,
-	   p.proprice*saleamount*1.1 - p.proPrice*saleamount as profit 
-  from sale s join product p on s.procode = p.procode join customer c on s.cusNo = c.cusNo
-  order by date, c.cusNo;
-	       
-	       
 select date_format(date, "%Y.%m.%d") from sale; 
 

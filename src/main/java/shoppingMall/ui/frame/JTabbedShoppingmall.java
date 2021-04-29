@@ -16,6 +16,9 @@ import shoppingMall.ui.manager.CusInfoManager;
 import shoppingMall.ui.manager.DetailManager;
 import shoppingMall.ui.manager.MainManager;
 import shoppingMall.ui.manager.ProductInfoManager;
+import javax.swing.border.TitledBorder;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
 
 @SuppressWarnings("serial")
 public class JTabbedShoppingmall extends JFrame {
@@ -29,6 +32,11 @@ public class JTabbedShoppingmall extends JFrame {
 	private ProductInfoManager pProductInfo;
 	private CusInfoManager pCustomerInfo;
 	private profitPanel panel = new profitPanel();
+	private ChartPanel donpanel;
+	
+	private JFreeChart chart;
+	private JFreeChart chart2;
+	
 	public JTabbedShoppingmall() {
 		initialize();
 	}
@@ -58,9 +66,8 @@ public class JTabbedShoppingmall extends JFrame {
 		pCustomerInfo = new CusInfoManager();
 		tabbedPane.addTab("회원 관리", null, pCustomerInfo, null);
 		
-		JFreeChart chart = panel.getChart();
-		ChartPanel donpanel = new ChartPanel(chart);
-		tabbedPane.addTab("이익금액 차트", donpanel);
+		chart = panel.getChart(true);
+		
+		chart2 = panel.getChart(false);
 	}
-	
 }

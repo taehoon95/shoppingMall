@@ -12,4 +12,16 @@ public class categoryService {
 	public List<Category> showCategory(){
 		return dao.selectCategory();
 	}
+	
+	public void addCategory(Category category) {
+		dao.insertCategory(category);
+	}
+	
+	public void removeCategory(String code) {
+		dao.deleteCategory(code);
+	}
+	
+	public void modiCategory(Category category) {
+		dao.updateCategory(category);
+	}
 }
